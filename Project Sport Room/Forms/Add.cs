@@ -1,0 +1,139 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Project_Sport_Room.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Project_Sport_Room
+{
+    public partial class Add : Form
+    {
+        public Add()
+        {
+            InitializeComponent();
+        }
+
+        private async void Add_Load(object sender, EventArgs e)
+        {
+           await UpdateUI();
+        }
+        private async Task UpdateUI()
+        {
+            try
+            {
+                using (var db = new SportRoomContext())
+                {
+                    var totalTypes = await db.Equipments.CountAsync();
+                    totalEquipmentTypes.Text = totalTypes.ToString();
+
+                    var total_category = await db.Categories.CountAsync();
+                    totalCategory.Text = total_category.ToString();
+
+                    var total_suppliers = await db.Suppliers.CountAsync();
+                    totalSuppliers.Text = total_suppliers.ToString();
+
+                    // --------- Category Combobox ------------------------------------
+                    var Categories = await db.Categories.Select(cat => new { cat.Id, cat.CategoryName }).ToListAsync();
+
+                    categoryCombobox.DisplayMember = "CategoryName";
+                    categoryCombobox.ValueMember = "Id";
+                    categoryCombobox.DataSource = Categories;
+                }
+            }
+            catch { }
+        }
+        private async void addSupplierBtn1_Click(object sender, EventArgs e)
+        {
+            // VALIDATION: Prevent empty supplier fields
+            if (string.IsNullOrWhiteSpace(supplierName.Text) || string.IsNullOrWhiteSpace(supplierPhoneNumber.Text))
+            {
+                MessageBox.Show("Please enter both the Supplier Name and Phone Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 1. Create the C# object
+            Supplier newSupplier = new Supplier() { Name = supplierName.Text, PhoneNumber = supplierPhoneNumber.Text };
+
+            // 2. Open the database connection
+            using (var db = new SportRoomContext())
+            {
+                // 3. Tell EF Core to track the new item
+                await db.Suppliers.AddAsync(newSupplier);
+
+                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                await db.SaveChangesAsync();
+                await UpdateUI();
+            }
+
+            MessageBox.Show("New Supplier added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void addNewCategorybtn_Click(object sender, EventArgs e)
+        {
+            // VALIDATION: Prevent empty category names
+            if (string.IsNullOrWhiteSpace(categoryName.Text))
+            {
+                MessageBox.Show("Please enter a Category Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 1. Create the C# object
+            Category newCategory = new Category() { CategoryName = categoryName.Text };
+
+            // 2. Open the database connection
+            using (var db = new SportRoomContext())
+            {
+                // 3. Tell EF Core to track the new item
+                await db.Categories.AddAsync(newCategory);
+
+                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                await db.SaveChangesAsync();
+                await UpdateUI();
+            }
+
+            MessageBox.Show("New Category added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void addNewEquipmentbtn_Click(object sender, EventArgs e)
+        {
+            // VALIDATION: Prevent empty equipment names and missing categories
+            if (string.IsNullOrWhiteSpace(equipmentName.Text))
+            {
+                MessageBox.Show("Please enter an Equipment Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (categoryCombobox.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a Category from the dropdown list.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 1. Create the C# object
+            Equipment newEquipment = new Equipment()
+            {
+                Name = equipmentName.Text,
+                CategoryId = (string)categoryCombobox.SelectedValue
+            };
+
+            // 2. Open the database connection
+            using (var db = new SportRoomContext())
+            {
+                // 3. Tell EF Core to track the new item
+                await db.Equipments.AddAsync(newEquipment);
+
+                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                await db.SaveChangesAsync();
+                await UpdateUI();
+            }
+
+            MessageBox.Show("New Equipment added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+}
