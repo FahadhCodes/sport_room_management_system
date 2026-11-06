@@ -50,17 +50,11 @@
             groupBox1 = new GroupBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
-            menuStrip1 = new MenuStrip();
-            addNewToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            supplierToolStripMenuItem1 = new ToolStripMenuItem();
-            equipmentToolStripMenuItem1 = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
-            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // sqliteCommand1
@@ -90,7 +84,7 @@
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 7, 0, 0);
-            label1.Size = new Size(156, 34);
+            label1.Size = new Size(156, 36);
             label1.TabIndex = 17;
             label1.Text = "Supplier Id";
             label1.TextAlign = ContentAlignment.TopRight;
@@ -99,12 +93,13 @@
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -121,11 +116,12 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.Location = new Point(3, 112);
+            dataGridView1.GridColor = Color.Brown;
+            dataGridView1.Location = new Point(3, 119);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(972, 301);
+            dataGridView1.Size = new Size(972, 321);
             dataGridView1.TabIndex = 18;
             // 
             // Equipment_Id
@@ -159,10 +155,10 @@
             label3.AutoSize = true;
             label3.Dock = DockStyle.Fill;
             label3.Font = new Font("Montserrat", 9F);
-            label3.Location = new Point(3, 34);
+            label3.Location = new Point(3, 36);
             label3.Name = "label3";
             label3.Padding = new Padding(0, 7, 0, 0);
-            label3.Size = new Size(156, 34);
+            label3.Size = new Size(156, 36);
             label3.TabIndex = 20;
             label3.Text = "Category";
             label3.TextAlign = ContentAlignment.TopRight;
@@ -172,7 +168,7 @@
             categoryCombobox.Dock = DockStyle.Fill;
             categoryCombobox.Font = new Font("Montserrat", 9F);
             categoryCombobox.FormattingEnabled = true;
-            categoryCombobox.Location = new Point(165, 37);
+            categoryCombobox.Location = new Point(165, 39);
             categoryCombobox.Name = "categoryCombobox";
             categoryCombobox.Size = new Size(288, 29);
             categoryCombobox.TabIndex = 19;
@@ -181,7 +177,7 @@
             // 
             supplyBtn.Dock = DockStyle.Right;
             supplyBtn.Font = new Font("Montserrat", 9F);
-            supplyBtn.Location = new Point(825, 419);
+            supplyBtn.Location = new Point(825, 446);
             supplyBtn.Name = "supplyBtn";
             supplyBtn.Size = new Size(150, 32);
             supplyBtn.TabIndex = 24;
@@ -214,7 +210,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Size = new Size(972, 103);
+            tableLayoutPanel1.Size = new Size(972, 110);
             tableLayoutPanel1.TabIndex = 25;
             // 
             // supplierPhoneLabel
@@ -224,9 +220,9 @@
             supplierPhoneLabel.Font = new Font("Montserrat", 9F);
             supplierPhoneLabel.Location = new Point(811, 0);
             supplierPhoneLabel.Name = "supplierPhoneLabel";
-            supplierPhoneLabel.Size = new Size(158, 34);
+            supplierPhoneLabel.Size = new Size(158, 36);
             supplierPhoneLabel.TabIndex = 28;
-            supplierPhoneLabel.Text = "[Phone_number]";
+            supplierPhoneLabel.Text = "0";
             supplierPhoneLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // supplierNameLabel
@@ -237,7 +233,7 @@
             supplierNameLabel.ForeColor = Color.Brown;
             supplierNameLabel.Location = new Point(680, 0);
             supplierNameLabel.Name = "supplierNameLabel";
-            supplierNameLabel.Size = new Size(125, 34);
+            supplierNameLabel.Size = new Size(125, 36);
             supplierNameLabel.TabIndex = 27;
             supplierNameLabel.Text = "Name";
             supplierNameLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -247,21 +243,21 @@
             Date.AutoSize = true;
             Date.Dock = DockStyle.Fill;
             Date.Font = new Font("Montserrat", 9F);
-            Date.Location = new Point(3, 68);
+            Date.Location = new Point(3, 72);
             Date.Name = "Date";
             Date.Padding = new Padding(0, 7, 0, 0);
-            Date.Size = new Size(156, 35);
+            Date.Size = new Size(156, 38);
             Date.TabIndex = 29;
             Date.Text = "Date";
             Date.TextAlign = ContentAlignment.TopRight;
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy  |   hh:mm tt";
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy      hh:mm tt";
             dateTimePicker1.Dock = DockStyle.Fill;
             dateTimePicker1.Font = new Font("Montserrat", 9F);
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(165, 71);
+            dateTimePicker1.Location = new Point(165, 75);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(288, 26);
             dateTimePicker1.TabIndex = 30;
@@ -271,9 +267,9 @@
             // 
             enterBtn.Dock = DockStyle.Fill;
             enterBtn.Font = new Font("Montserrat", 9F);
-            enterBtn.Location = new Point(811, 71);
+            enterBtn.Location = new Point(811, 75);
             enterBtn.Name = "enterBtn";
-            enterBtn.Size = new Size(158, 29);
+            enterBtn.Size = new Size(158, 32);
             enterBtn.TabIndex = 31;
             enterBtn.Text = "Enter";
             enterBtn.UseVisualStyleBackColor = true;
@@ -284,9 +280,9 @@
             groupBox1.Controls.Add(tableLayoutPanel2);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(3, 30);
+            groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(984, 479);
+            groupBox1.Size = new Size(984, 506);
             groupBox1.TabIndex = 26;
             groupBox1.TabStop = false;
             groupBox1.Text = "New Intake";
@@ -305,60 +301,22 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 26.2019234F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 73.79808F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
-            tableLayoutPanel2.Size = new Size(978, 454);
+            tableLayoutPanel2.Size = new Size(978, 481);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 1;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Controls.Add(groupBox1, 0, 1);
-            tableLayoutPanel3.Controls.Add(menuStrip1, 0, 0);
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(groupBox1, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(0, 0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 5.2734375F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 94.72656F));
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel3.Size = new Size(990, 512);
             tableLayoutPanel3.TabIndex = 27;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { addNewToolStripMenuItem, editToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(990, 27);
-            menuStrip1.TabIndex = 27;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // addNewToolStripMenuItem
-            // 
-            addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            addNewToolStripMenuItem.Size = new Size(53, 23);
-            addNewToolStripMenuItem.Text = "New";
-            addNewToolStripMenuItem.Click += addNewToolStripMenuItem_Click;
-            // 
-            // editToolStripMenuItem
-            // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supplierToolStripMenuItem1, equipmentToolStripMenuItem1 });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(49, 23);
-            editToolStripMenuItem.Text = "Edit";
-            // 
-            // supplierToolStripMenuItem1
-            // 
-            supplierToolStripMenuItem1.Name = "supplierToolStripMenuItem1";
-            supplierToolStripMenuItem1.Size = new Size(164, 26);
-            supplierToolStripMenuItem1.Text = "Supplier";
-            supplierToolStripMenuItem1.Click += supplierToolStripMenuItem1_Click;
-            // 
-            // equipmentToolStripMenuItem1
-            // 
-            equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
-            equipmentToolStripMenuItem1.Size = new Size(164, 26);
-            equipmentToolStripMenuItem1.Text = "Equipment";
             // 
             // addNewIntake
             // 
@@ -366,7 +324,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(990, 512);
             Controls.Add(tableLayoutPanel3);
-            MainMenuStrip = menuStrip1;
             Name = "addNewIntake";
             Text = "New Intake";
             Load += addNewIntake_Load;
@@ -376,9 +333,6 @@
             groupBox1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -396,11 +350,6 @@
         private Label supplierPhoneLabel;
         private Label supplierNameLabel;
         private TableLayoutPanel tableLayoutPanel3;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem addNewToolStripMenuItem;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem supplierToolStripMenuItem1;
-        private ToolStripMenuItem equipmentToolStripMenuItem1;
         private DataGridViewTextBoxColumn Equipment_Id;
         private DataGridViewTextBoxColumn Equipment_Name;
         private DataGridViewTextBoxColumn Qty_healthy;

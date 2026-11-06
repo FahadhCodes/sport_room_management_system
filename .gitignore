@@ -1,11 +1,45 @@
 ## Visual Studio / .NET ignores
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
 .vs/
 *.user
-*.suo
 *.userosscache
+*.suo
+*.userprefs
 *.sln.docstates
-TestResults/
+*.sln.ide/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Test & QA Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.coverage
+*.coveragexml
+
+## Database Journal & Temporary Files
 *.db-shm
 *.db-wal
+*.db-journal
+
+## Local Scratch & Temporary Files
+scratch/
+.idea/
+.vscode/
+*.swp
+*~
+
+## OS generated files
+.DS_Store
+Thumbs.db

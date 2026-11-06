@@ -9,14 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Project_Sport_Room
 {
     public partial class manageBorrower : Form
     {
-        private SportRoomContext _db;
-        private string _initialBorrowerId;
+        private string? _initialBorrowerId;
 
         // Constructor 1: Required for the Visual Studio Designer to render
         public manageBorrower()
@@ -37,58 +35,62 @@ namespace Project_Sport_Room
 
         private async void manageBorrower_Load(object sender, EventArgs e)
         {
-            _db = new SportRoomContext();
-
-            // 1. Setup Role Dropdown
-            roleComboBox.Items.Clear();
-            roleComboBox.Items.AddRange(new string[] { "Student", "Staff" });
-
-            // 2. Load Departments
-            var depts = await _db.Departments.ToListAsync();
-            department.DisplayMember = "Name";
-            department.ValueMember = "Id";
-            department.DataSource = depts;
-
-            // 3. Load Borrowers into Name Combobox
-            // Replace your existing "var borrowers = ..." block in manageBorrower_Load with this:
-
-            // Pull all borrowers, group them by exact name, and pick the first ID for each unique name
-            var allBorrowers = await _db.Borrowers.ToListAsync();
-            var uniqueBorrowers = allBorrowers
-                .GroupBy(b => b.Name)
-                .Select(g => g.First())
-                .OrderBy(b => b.Name)
-                .ToList();
-
-            nameCombobox.DisplayMember = "Name";
-            nameCombobox.ValueMember = "BorrowerId";
-            nameCombobox.DataSource = uniqueBorrowers;
-
-            // 4. Set Initial Selection
-            if (!string.IsNullOrEmpty(_initialBorrowerId))
+            try
             {
-                nameCombobox.SelectedValue = _initialBorrowerId;
-            }
-            else
-            {
-                // Fallback: Get the borrower with the most recent receipt
-                var latestBorrowerId = await _db.BorrowReceipts
-                    .OrderByDescending(r => r.IssuedDate)
-                    .Select(r => r.BorrowerId)
-                    .FirstOrDefaultAsync();
+                // 1. Setup Role Dropdown
+                roleComboBox.Items.Clear();
+                roleComboBox.Items.AddRange(new string[] { "Student", "Staff" });
 
-                if (latestBorrowerId != null)
+                using (var db = new SportRoomContext())
+            {
+                // 2. Load Departments
+                var depts = await db.Departments.ToListAsync();
+                department.DisplayMember = "Name";
+                department.ValueMember = "Id";
+                department.DataSource = depts;
+
+                // 3. Load Borrowers into Name Combobox
+                var allBorrowers = await db.Borrowers.ToListAsync();
+                var uniqueBorrowers = allBorrowers
+                    .GroupBy(b => b.Name)
+                    .Select(g => g.First())
+                    .OrderBy(b => b.Name)
+                    .ToList();
+
+                nameCombobox.DisplayMember = "Name";
+                nameCombobox.ValueMember = "BorrowerId";
+                nameCombobox.DataSource = uniqueBorrowers;
+
+                // 4. Set Initial Selection
+                if (!string.IsNullOrEmpty(_initialBorrowerId))
                 {
-                    nameCombobox.SelectedValue = latestBorrowerId;
+                    nameCombobox.SelectedValue = _initialBorrowerId;
+                }
+                else
+                {
+                    var latestBorrowerId = await db.BorrowReceipts
+                        .OrderByDescending(r => r.IssuedDate)
+                        .Select(r => r.BorrowerId)
+                        .FirstOrDefaultAsync();
+
+                    if (latestBorrowerId != null)
+                    {
+                        nameCombobox.SelectedValue = latestBorrowerId;
+                    }
                 }
             }
 
             // Attach selection events dynamically so they don't fire prematurely
-            nameCombobox.SelectedIndexChanged += NameCombobox_SelectedIndexChanged;
-            borrowalsTb.SelectionChanged += BorrowalsTb_SelectionChanged;
+                nameCombobox.SelectedIndexChanged += NameCombobox_SelectedIndexChanged;
+                borrowalsTb.SelectionChanged += BorrowalsTb_SelectionChanged;
 
-            // Force load the first selected profile
-            await LoadBorrowerProfile();
+                // Force load the first selected profile
+                await LoadBorrowerProfile();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error initializing borrower management: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void NameCombobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,46 +101,66 @@ namespace Project_Sport_Room
         private async Task LoadBorrowerProfile()
         {
             if (nameCombobox.SelectedValue == null) return;
-            string bId = nameCombobox.SelectedValue.ToString();
+            string bId = nameCombobox.SelectedValue.ToString()!;
 
-            var b = await _db.Borrowers.FindAsync(bId);
-            if (b != null)
+            try
             {
-                email.Text = b.Email;
-                phoneNumber.Text = b.PhoneNumber;
-                roleComboBox.Text = b.Role;
-                department.SelectedValue = b.DepartmentId;
+                using (var db = new SportRoomContext())
+            {
+                var b = await db.Borrowers.FindAsync(bId);
+                if (b != null)
+                {
+                    email.Text = b.Email;
+                    phoneNumber.Text = b.PhoneNumber;
+                    roleComboBox.Text = b.Role;
+                    department.SelectedValue = b.DepartmentId;
 
-                await LoadReceipts(bId);
+                    await LoadReceipts(bId);
+                }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading borrower profile: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private async Task LoadReceipts(string borrowerId)
         {
-            var receipts = await _db.BorrowReceipts
-                .Include(r => r.BorrowedCombinations)
-                .Where(r => r.BorrowerId == borrowerId)
-                .Select(r => new ReceiptGridItem
+            try
+            {
+                using (var db = new SportRoomContext())
+            {
+                var receipts = await db.BorrowReceipts
+                    .Include(r => r.BorrowedCombinations)
+                    .Where(r => r.BorrowerId == borrowerId)
+                    .Select(r => new ReceiptGridItem
+                    {
+                        ReceiptId = r.ReceiptId,
+                        Qty = r.BorrowedCombinations.Sum(c => c.Qty),
+                        IssuedDate = r.IssuedDate,
+                        DueDate = r.DueDate,
+                        ReturnedDate = r.ReturnedDate,
+                        Status = r.Status
+                    }).ToListAsync();
+
+                borrowalsTb.AutoGenerateColumns = false;
+                borrowalsTb.DataSource = receipts;
+
+                if (borrowalsTb.Rows.Count > 0)
                 {
-                    ReceiptId = r.ReceiptId,
-                    Qty = r.BorrowedCombinations.Sum(c => c.Qty),
-                    IssuedDate = r.IssuedDate,
-                    DueDate = r.DueDate,
-                    ReturnedDate = r.ReturnedDate,
-                    Status = r.Status
-                }).ToListAsync();
-
-            borrowalsTb.AutoGenerateColumns = false;
-            borrowalsTb.DataSource = receipts;
-
-            if (borrowalsTb.Rows.Count > 0)
-            {
-                borrowalsTb.Rows[0].Selected = true;
-                await LoadEquipments(receipts[0].ReceiptId);
+                    borrowalsTb.Rows[0].Selected = true;
+                    await LoadEquipments(receipts[0].ReceiptId);
+                }
+                else
+                {
+                    borrwedEquipmentTB.DataSource = null;
+                }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                borrwedEquipmentTB.DataSource = null;
+                MessageBox.Show($"Error loading receipts: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -146,7 +168,7 @@ namespace Project_Sport_Room
         {
             if (borrowalsTb.CurrentRow == null) return;
 
-            string receiptId = borrowalsTb.CurrentRow.Cells["ReceiptId"].Value?.ToString();
+            string? receiptId = borrowalsTb.CurrentRow.Cells["ReceiptId"].Value?.ToString();
             if (!string.IsNullOrEmpty(receiptId))
             {
                 await LoadEquipments(receiptId);
@@ -155,91 +177,200 @@ namespace Project_Sport_Room
 
         private async Task LoadEquipments(string receiptId)
         {
-            var equipments = await _db.BorrowedCombinations
-                .Include(c => c.Equipment)
-                .ThenInclude(e => e.Category)
-                .Where(c => c.ReceiptId == receiptId)
-                .Select(c => new EquipmentGridItem
-                {
-                    CombinationId = c.CombinationId, // Hidden ID required for updates
-                    eqId = c.EquipmentId,
-                    EquipmentName = c.Equipment.Name,
-                    category = c.Equipment.Category.CategoryName,
-                    quantity = c.Qty,
-                    BrokenQty = c.BrokenQty
-                }).ToListAsync();
+            try
+            {
+                using (var db = new SportRoomContext())
+            {
+                var equipments = await db.BorrowedCombinations
+                    .Include(c => c.Equipment)
+                    .ThenInclude(e => e.Category)
+                    .Where(c => c.ReceiptId == receiptId)
+                    .Select(c => new EquipmentGridItem
+                    {
+                        CombinationId = c.CombinationId,
+                        eqId = c.EquipmentId,
+                        EquipmentName = c.Equipment != null ? c.Equipment.Name : "N/A",
+                        category = c.Equipment != null && c.Equipment.Category != null ? c.Equipment.Category.CategoryName : "N/A",
+                        quantity = c.Qty,
+                        BrokenQty = c.BrokenQty
+                    }).ToListAsync();
 
-            borrwedEquipmentTB.AutoGenerateColumns = false;
-            borrwedEquipmentTB.DataSource = equipments;
+                borrwedEquipmentTB.AutoGenerateColumns = false;
+                borrwedEquipmentTB.DataSource = equipments;
 
-            // Lock the read-only columns dynamically
-            if (borrwedEquipmentTB.Columns.Contains("eqId")) borrwedEquipmentTB.Columns["eqId"].ReadOnly = true;
-            if (borrwedEquipmentTB.Columns.Contains("EquipmentName")) borrwedEquipmentTB.Columns["EquipmentName"].ReadOnly = true;
-            if (borrwedEquipmentTB.Columns.Contains("category")) borrwedEquipmentTB.Columns["category"].ReadOnly = true;
+                if (borrwedEquipmentTB.Columns.Contains("eqId")) borrwedEquipmentTB.Columns["eqId"].ReadOnly = true;
+                if (borrwedEquipmentTB.Columns.Contains("EquipmentName")) borrwedEquipmentTB.Columns["EquipmentName"].ReadOnly = true;
+                if (borrwedEquipmentTB.Columns.Contains("category")) borrwedEquipmentTB.Columns["category"].ReadOnly = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading borrowed equipments: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void updateBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                // 0. CRITICAL FIX: Force the grids to save whatever cell the user is currently typing in
                 borrowalsTb.EndEdit();
                 borrwedEquipmentTB.EndEdit();
 
-                // 1. Update Borrower Info
-                string bId = nameCombobox.SelectedValue?.ToString();
-                if (bId != null)
+                using (var db = new SportRoomContext())
                 {
-                    var borrower = await _db.Borrowers.FindAsync(bId);
-                    if (borrower != null)
+                    // 1. Update Borrower Info
+                    string? bId = nameCombobox.SelectedValue?.ToString();
+                    if (!string.IsNullOrEmpty(bId))
                     {
-                        borrower.Email = email.Text;
-                        borrower.PhoneNumber = phoneNumber.Text;
-                        borrower.Role = roleComboBox.Text;
-                        borrower.DepartmentId = department.SelectedValue?.ToString();
-                    }
-                }
-
-                // 2. Safely Update Receipts by reading directly from the bound Data Source list
-                var receiptsList = borrowalsTb.DataSource as List<ReceiptGridItem>;
-                if (receiptsList != null)
-                {
-                    foreach (var item in receiptsList)
-                    {
-                        if (string.IsNullOrEmpty(item.ReceiptId)) continue;
-
-                        var dbReceipt = await _db.BorrowReceipts.FindAsync(item.ReceiptId);
-                        if (dbReceipt != null)
+                        var borrower = await db.Borrowers.FindAsync(bId);
+                        if (borrower != null)
                         {
-                            dbReceipt.IssuedDate = item.IssuedDate;
-                            dbReceipt.DueDate = item.DueDate;
-                            dbReceipt.ReturnedDate = item.ReturnedDate;
-                            dbReceipt.UpdateStatus();
+                            borrower.Email = email.Text;
+                            borrower.PhoneNumber = phoneNumber.Text;
+                            borrower.Role = roleComboBox.Text;
+                            if (department.SelectedValue != null)
+                            {
+                                borrower.DepartmentId = department.SelectedValue.ToString()!;
+                            }
                         }
                     }
-                }
 
-                // 3. Safely Update Equipments by reading directly from the bound Data Source list
-                var equipmentsList = borrwedEquipmentTB.DataSource as List<EquipmentGridItem>;
-                if (equipmentsList != null)
-                {
-                    foreach (var item in equipmentsList)
+                    // 2. Safely Update Receipts with Stock Adjustment
+                    var receiptsList = borrowalsTb.DataSource as List<ReceiptGridItem>;
+                    if (receiptsList != null)
                     {
-                        if (string.IsNullOrEmpty(item.CombinationId)) continue;
-
-                        var dbCombo = await _db.BorrowedCombinations.FindAsync(item.CombinationId);
-                        if (dbCombo != null)
+                        foreach (var item in receiptsList)
                         {
-                            dbCombo.Qty = item.quantity;
-                            dbCombo.BrokenQty = item.BrokenQty;
+                            if (string.IsNullOrEmpty(item.ReceiptId)) continue;
+
+                            var dbReceipt = await db.BorrowReceipts
+                                .Include(r => r.BorrowedCombinations)
+                                .FirstOrDefaultAsync(r => r.ReceiptId == item.ReceiptId);
+
+                            if (dbReceipt != null)
+                            {
+                                DateTime? oldReturned = dbReceipt.ReturnedDate;
+                                DateTime? newReturned = item.ReturnedDate;
+
+                                dbReceipt.IssuedDate = item.IssuedDate;
+                                dbReceipt.DueDate = item.DueDate;
+                                dbReceipt.ReturnedDate = newReturned;
+                                dbReceipt.UpdateStatus();
+
+                                // Stock synchronization when return status transitions
+                                if (oldReturned == null && newReturned != null)
+                                {
+                                    // Loan returned -> Restock inventory
+                                    foreach (var combo in dbReceipt.BorrowedCombinations)
+                                    {
+                                        var eq = await db.Equipments.FindAsync(combo.EquipmentId);
+                                        int broken = Math.Max(0, combo.BrokenQty);
+                                        int healthy = Math.Max(0, combo.Qty - broken);
+                                        if (eq != null)
+                                        {
+                                            eq.Quantity += healthy;
+                                            eq.BrokenQty += broken;
+                                        }
+                                        combo.ReturnedQuantity = combo.Qty;
+                                    }
+                                }
+                                else if (oldReturned != null && newReturned == null)
+                                {
+                                    // Return canceled -> Deduct from inventory
+                                    foreach (var combo in dbReceipt.BorrowedCombinations)
+                                    {
+                                        var eq = await db.Equipments.FindAsync(combo.EquipmentId);
+                                        int broken = Math.Max(0, combo.BrokenQty);
+                                        int healthy = Math.Max(0, combo.Qty - broken);
+                                        if (eq != null)
+                                        {
+                                            eq.Quantity = Math.Max(0, eq.Quantity - healthy);
+                                            eq.BrokenQty = Math.Max(0, eq.BrokenQty - broken);
+                                        }
+                                        combo.ReturnedQuantity = 0;
+                                    }
+                                }
+                            }
                         }
                     }
+
+                    // 3. Safely Update Equipments
+                    var equipmentsList = borrwedEquipmentTB.DataSource as List<EquipmentGridItem>;
+                    if (equipmentsList != null)
+                    {
+                        foreach (var item in equipmentsList)
+                        {
+                            if (string.IsNullOrEmpty(item.CombinationId)) continue;
+
+                            if (item.quantity <= 0)
+                            {
+                                MessageBox.Show($"Equipment '{item.EquipmentName}': Quantity must be greater than zero.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            if (item.BrokenQty < 0)
+                            {
+                                MessageBox.Show($"Equipment '{item.EquipmentName}': Broken Quantity cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            if (item.BrokenQty > item.quantity)
+                            {
+                                MessageBox.Show($"Equipment '{item.EquipmentName}': Broken Quantity ({item.BrokenQty}) cannot exceed total quantity ({item.quantity}).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var dbCombo = await db.BorrowedCombinations
+                                .Include(c => c.BorrowReceipt)
+                                .FirstOrDefaultAsync(c => c.CombinationId == item.CombinationId);
+
+                            if (dbCombo != null)
+                            {
+                                int oldQty = dbCombo.Qty;
+                                int oldBroken = dbCombo.BrokenQty;
+                                int newQty = item.quantity;
+                                int newBroken = item.BrokenQty;
+
+                                var eq = await db.Equipments.FindAsync(dbCombo.EquipmentId);
+
+                                // If the parent receipt is currently ACTIVE (not returned yet)
+                                if (dbCombo.BorrowReceipt.ReturnedDate == null)
+                                {
+                                    int qtyDiff = newQty - oldQty;
+                                    if (eq != null && qtyDiff != 0)
+                                    {
+                                        if (qtyDiff > 0 && qtyDiff > eq.Quantity)
+                                        {
+                                            MessageBox.Show($"Cannot increase borrowed quantity for '{eq.Name}' by {qtyDiff}. Only {eq.Quantity} available in stock.", "Insufficient Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        eq.Quantity = Math.Max(0, eq.Quantity - qtyDiff);
+                                    }
+                                }
+                                // If the parent receipt was ALREADY RETURNED
+                                else
+                                {
+                                    int oldHealthy = Math.Max(0, oldQty - oldBroken);
+                                    int newHealthy = Math.Max(0, newQty - newBroken);
+                                    int healthyDiff = newHealthy - oldHealthy;
+                                    int brokenDiff = newBroken - oldBroken;
+
+                                    if (eq != null)
+                                    {
+                                        eq.Quantity = Math.Max(0, eq.Quantity + healthyDiff);
+                                        eq.BrokenQty = Math.Max(0, eq.BrokenQty + brokenDiff);
+                                    }
+                                    dbCombo.ReturnedQuantity = newQty;
+                                }
+
+                                dbCombo.Qty = newQty;
+                                dbCombo.BrokenQty = newBroken;
+                            }
+                        }
+                    }
+
+                    await db.SaveChangesAsync();
                 }
 
-                // 4. Save and Refresh
-                await _db.SaveChangesAsync();
                 MessageBox.Show("All borrower information updated successfully!", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 await LoadBorrowerProfile();
             }
             catch (Exception ex)
@@ -247,30 +378,24 @@ namespace Project_Sport_Room
                 MessageBox.Show($"Error saving updates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            _db?.Dispose();
-            base.OnFormClosed(e);
-        }
     }
 
     public class ReceiptGridItem
     {
-        public string ReceiptId { get; set; }
+        public string ReceiptId { get; set; } = "";
         public int Qty { get; set; }
         public DateTime IssuedDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? ReturnedDate { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
     }
 
     public class EquipmentGridItem
     {
-        public string CombinationId { get; set; }
-        public string eqId { get; set; }
-        public string EquipmentName { get; set; }
-        public string category { get; set; }
+        public string CombinationId { get; set; } = "";
+        public string eqId { get; set; } = "";
+        public string EquipmentName { get; set; } = "";
+        public string category { get; set; } = "";
         public int quantity { get; set; }
         public int BrokenQty { get; set; }
     }

@@ -26,7 +26,9 @@ namespace Project_Sport_Room
         {
             if (this.Visible)
             {
-                using (var db = new SportRoomContext())
+                try
+                {
+                    using (var db = new SportRoomContext())
                 {
                     // 1. Total Types of Equipment (Count of unique rows)
                     var totalTypes = await db.Equipments.CountAsync();
@@ -57,12 +59,19 @@ namespace Project_Sport_Room
 
                     await changeTableBasedOnConstrints("", "");
                 }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading inventory summary: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         public async Task changeTableBasedOnConstrints(string constrintsTypex, string searchString)
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 var query = db.Equipments.AsQueryable();
 
@@ -102,6 +111,11 @@ namespace Project_Sport_Room
                     EquipmentDataTable.Columns["Qty_damaged"].DataPropertyName = "Qty_damaged";
 
                 EquipmentDataTable.DataSource = tableData;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading equipment data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

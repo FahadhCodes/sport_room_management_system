@@ -46,7 +46,10 @@ namespace Project_Sport_Room
                     categoryCombobox.DataSource = Categories;
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading catalog data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async void addSupplierBtn1_Click(object sender, EventArgs e)
         {
@@ -60,18 +63,25 @@ namespace Project_Sport_Room
             // 1. Create the C# object
             Supplier newSupplier = new Supplier() { Name = supplierName.Text, PhoneNumber = supplierPhoneNumber.Text };
 
-            // 2. Open the database connection
-            using (var db = new SportRoomContext())
+            try
             {
-                // 3. Tell EF Core to track the new item
-                await db.Suppliers.AddAsync(newSupplier);
+                // 2. Open the database connection
+                using (var db = new SportRoomContext())
+                {
+                    // 3. Tell EF Core to track the new item
+                    await db.Suppliers.AddAsync(newSupplier);
 
-                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
-                await db.SaveChangesAsync();
-                await UpdateUI();
+                    // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                    await db.SaveChangesAsync();
+                    await UpdateUI();
+                }
+
+                MessageBox.Show("New Supplier added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            MessageBox.Show("New Supplier added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding supplier: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void addNewCategorybtn_Click(object sender, EventArgs e)
@@ -86,18 +96,25 @@ namespace Project_Sport_Room
             // 1. Create the C# object
             Category newCategory = new Category() { CategoryName = categoryName.Text };
 
-            // 2. Open the database connection
-            using (var db = new SportRoomContext())
+            try
             {
-                // 3. Tell EF Core to track the new item
-                await db.Categories.AddAsync(newCategory);
+                // 2. Open the database connection
+                using (var db = new SportRoomContext())
+                {
+                    // 3. Tell EF Core to track the new item
+                    await db.Categories.AddAsync(newCategory);
 
-                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
-                await db.SaveChangesAsync();
-                await UpdateUI();
+                    // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                    await db.SaveChangesAsync();
+                    await UpdateUI();
+                }
+
+                MessageBox.Show("New Category added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            MessageBox.Show("New Category added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding category: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void addNewEquipmentbtn_Click(object sender, EventArgs e)
@@ -122,18 +139,25 @@ namespace Project_Sport_Room
                 CategoryId = (string)categoryCombobox.SelectedValue
             };
 
-            // 2. Open the database connection
-            using (var db = new SportRoomContext())
+            try
             {
-                // 3. Tell EF Core to track the new item
-                await db.Equipments.AddAsync(newEquipment);
+                // 2. Open the database connection
+                using (var db = new SportRoomContext())
+                {
+                    // 3. Tell EF Core to track the new item
+                    await db.Equipments.AddAsync(newEquipment);
 
-                // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
-                await db.SaveChangesAsync();
-                await UpdateUI();
+                    // 4. Actually save it to SQLite (using await so the UI doesn't freeze!)
+                    await db.SaveChangesAsync();
+                    await UpdateUI();
+                }
+
+                MessageBox.Show("New Equipment added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            MessageBox.Show("New Equipment added!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding equipment: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-using Project_Sport_Room.Models;
+﻿using Project_Sport_Room.Models;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +7,7 @@ namespace Project_Sport_Room
     public partial class Form1 : Form
     {
         // 1. Declare single, reusable instances of your forms at the top
+        private Project_Sport_Room.Forms.MainPanel? _homeForm;
         private OverviewForm _overviewForm;
         private InventoryForm _inventoryForm;
         private newIntake _newIntakeForm;
@@ -36,8 +37,14 @@ namespace Project_Sport_Room
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Optional: Automatically load the Overview screen when the app starts
-            overviewbtn_Click_1(sender, e);
+            // Automatically load the Home dashboard when the application starts
+            home_Click(sender, e);
+        }
+
+        private void home_Click(object sender, EventArgs e)
+        {
+            if (_homeForm == null) _homeForm = new Project_Sport_Room.Forms.MainPanel();
+            LoadFormIntoPanel(_homeForm);
         }
 
         private void overviewbtn_Click_1(object sender, EventArgs e)

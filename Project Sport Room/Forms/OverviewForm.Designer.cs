@@ -30,6 +30,7 @@ namespace Project_Sport_Room
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OverviewForm));
             tableLayoutPanel1 = new TableLayoutPanel();
             panel3 = new Panel();
             totalEquipments = new Label();
@@ -106,21 +107,21 @@ namespace Project_Sport_Room
             // totalEquipments
             // 
             totalEquipments.AutoSize = true;
-            totalEquipments.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            totalEquipments.Font = new Font("Montserrat Black", 20F, FontStyle.Bold);
             totalEquipments.ForeColor = Color.Brown;
             totalEquipments.Location = new Point(9, 66);
             totalEquipments.Name = "totalEquipments";
-            totalEquipments.Size = new Size(65, 35);
+            totalEquipments.Size = new Size(88, 47);
             totalEquipments.TabIndex = 4;
             totalEquipments.Text = "N/A";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Montserrat", 9F);
             label3.Location = new Point(9, 8);
             label3.Name = "label3";
-            label3.Size = new Size(116, 18);
+            label3.Size = new Size(135, 21);
             label3.TabIndex = 4;
             label3.Text = "Total Equipment";
             // 
@@ -138,21 +139,21 @@ namespace Project_Sport_Room
             // avalableEq
             // 
             avalableEq.AutoSize = true;
-            avalableEq.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            avalableEq.Font = new Font("Montserrat Black", 20F, FontStyle.Bold);
             avalableEq.ForeColor = Color.Brown;
             avalableEq.Location = new Point(9, 66);
             avalableEq.Name = "avalableEq";
-            avalableEq.Size = new Size(65, 35);
+            avalableEq.Size = new Size(88, 47);
             avalableEq.TabIndex = 4;
             avalableEq.Text = "N/A";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Font = new Font("Montserrat", 9F);
             label10.Location = new Point(9, 8);
             label10.Name = "label10";
-            label10.Size = new Size(66, 18);
+            label10.Size = new Size(78, 21);
             label10.TabIndex = 4;
             label10.Text = "Available";
             // 
@@ -170,21 +171,21 @@ namespace Project_Sport_Room
             // newlyArrived
             // 
             newlyArrived.AutoSize = true;
-            newlyArrived.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            newlyArrived.Font = new Font("Montserrat Black", 20F, FontStyle.Bold);
             newlyArrived.ForeColor = Color.Brown;
             newlyArrived.Location = new Point(9, 66);
             newlyArrived.Name = "newlyArrived";
-            newlyArrived.Size = new Size(65, 35);
+            newlyArrived.Size = new Size(88, 47);
             newlyArrived.TabIndex = 4;
             newlyArrived.Text = "N/A";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Montserrat", 9F);
             label6.Location = new Point(9, 8);
             label6.Name = "label6";
-            label6.Size = new Size(97, 18);
+            label6.Size = new Size(114, 21);
             label6.TabIndex = 4;
             label6.Text = "Newly Arrived";
             // 
@@ -202,33 +203,34 @@ namespace Project_Sport_Room
             // borrowedEq
             // 
             borrowedEq.AutoSize = true;
-            borrowedEq.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            borrowedEq.Font = new Font("Montserrat Black", 20F, FontStyle.Bold);
             borrowedEq.ForeColor = Color.Brown;
             borrowedEq.Location = new Point(9, 66);
             borrowedEq.Name = "borrowedEq";
-            borrowedEq.Size = new Size(65, 35);
+            borrowedEq.Size = new Size(88, 47);
             borrowedEq.TabIndex = 4;
             borrowedEq.Text = "N/A";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Font = new Font("Montserrat", 9F);
             label8.Location = new Point(9, 8);
             label8.Name = "label8";
-            label8.Size = new Size(72, 18);
+            label8.Size = new Size(83, 21);
             label8.TabIndex = 4;
             label8.Text = "Borrowed";
             // 
             // dataGridView1
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -246,6 +248,7 @@ namespace Project_Sport_Room
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.Brown;
             dataGridView1.Location = new Point(3, 196);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
@@ -309,10 +312,10 @@ namespace Project_Sport_Room
             label11.AutoSize = true;
             label11.Dock = DockStyle.Fill;
             label11.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(230, 0);
+            label11.Location = new Point(227, 0);
             label11.Name = "label11";
             label11.Padding = new Padding(0, 7, 0, 0);
-            label11.Size = new Size(98, 39);
+            label11.Size = new Size(97, 39);
             label11.TabIndex = 22;
             label11.Text = "Department";
             label11.TextAlign = ContentAlignment.TopRight;
@@ -322,9 +325,9 @@ namespace Project_Sport_Room
             departmentComboBox.Dock = DockStyle.Fill;
             departmentComboBox.Font = new Font("Montserrat", 7F);
             departmentComboBox.FormattingEnabled = true;
-            departmentComboBox.Location = new Point(334, 3);
+            departmentComboBox.Location = new Point(330, 3);
             departmentComboBox.Name = "departmentComboBox";
-            departmentComboBox.Size = new Size(341, 24);
+            departmentComboBox.Size = new Size(338, 24);
             departmentComboBox.TabIndex = 21;
             // 
             // label1
@@ -335,7 +338,7 @@ namespace Project_Sport_Room
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 7, 0, 0);
-            label1.Size = new Size(72, 39);
+            label1.Size = new Size(71, 39);
             label1.TabIndex = 20;
             label1.Text = "Search";
             label1.TextAlign = ContentAlignment.TopRight;
@@ -344,9 +347,9 @@ namespace Project_Sport_Room
             // 
             searchAll.BorderStyle = BorderStyle.FixedSingle;
             searchAll.Dock = DockStyle.Fill;
-            searchAll.Location = new Point(81, 3);
+            searchAll.Location = new Point(80, 3);
             searchAll.Name = "searchAll";
-            searchAll.Size = new Size(143, 26);
+            searchAll.Size = new Size(141, 26);
             searchAll.TabIndex = 19;
             // 
             // brrStatus
@@ -354,10 +357,10 @@ namespace Project_Sport_Room
             brrStatus.AutoSize = true;
             brrStatus.Dock = DockStyle.Fill;
             brrStatus.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            brrStatus.Location = new Point(681, 0);
+            brrStatus.Location = new Point(674, 0);
             brrStatus.Name = "brrStatus";
             brrStatus.Padding = new Padding(0, 7, 0, 0);
-            brrStatus.Size = new Size(82, 39);
+            brrStatus.Size = new Size(68, 39);
             brrStatus.TabIndex = 24;
             brrStatus.Text = "Status";
             brrStatus.TextAlign = ContentAlignment.TopRight;
@@ -369,9 +372,9 @@ namespace Project_Sport_Room
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15.2351742F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10.6339464F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35.48057F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8.997955F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.4171782F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.66871166F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.1901836F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10.6339464F));
             tableLayoutPanel2.Controls.Add(statusComboBox, 5, 0);
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(searchAll, 1, 0);
@@ -393,18 +396,18 @@ namespace Project_Sport_Room
             statusComboBox.Font = new Font("Montserrat", 7F);
             statusComboBox.FormattingEnabled = true;
             statusComboBox.Items.AddRange(new object[] { "Overdue", "Returned", "Borrowed", "Returned Late" });
-            statusComboBox.Location = new Point(769, 3);
+            statusComboBox.Location = new Point(748, 3);
             statusComboBox.Name = "statusComboBox";
-            statusComboBox.Size = new Size(135, 24);
+            statusComboBox.Size = new Size(121, 24);
             statusComboBox.TabIndex = 27;
             // 
             // adorableFilter
             // 
             adorableFilter.Dock = DockStyle.Top;
-            adorableFilter.Font = new Font("Montserrat", 7F);
-            adorableFilter.Location = new Point(910, 3);
+            adorableFilter.Font = new Font("Montserrat", 9F);
+            adorableFilter.Location = new Point(875, 3);
             adorableFilter.Name = "adorableFilter";
-            adorableFilter.Size = new Size(65, 28);
+            adorableFilter.Size = new Size(100, 28);
             adorableFilter.TabIndex = 26;
             adorableFilter.Text = "Apply";
             adorableFilter.UseVisualStyleBackColor = true;
@@ -443,11 +446,14 @@ namespace Project_Sport_Room
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(990, 571);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "OverviewForm";
             Text = "OverviewForm";
             Load += OverviewForm_Load;
+            VisibleChanged += OverviewForm_VisibleChanged;
             tableLayoutPanel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

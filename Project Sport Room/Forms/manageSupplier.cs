@@ -45,36 +45,43 @@ namespace Project_Sport_Room
 
             string supplierID = supplierIdComboBox.SelectedValue.ToString();
 
-            using (var db = new SportRoomContext())
+            try
             {
-                var intakeInfo = await db.IntakeItems
-                    .Where(cons => cons.SupplierId == supplierID)
-                    .Select(intk => new
-                    {
-                        intk.Id,
-                        EquipmentId = intk.Equipment.Id,
-                        EquipmentName = intk.Equipment.Name, // Extract the actual name text
-                        intk.SuppliedDate,
-                        healthy = intk.Quantity - intk.BrokenQty,
-                        broken = intk.BrokenQty
-                    }).ToListAsync();
-
-                // 2. CRITICAL FIX: Empty the previous items out of the temporary list
-                currentIntakeList.Clear();
-
-                foreach (var eq in intakeInfo)
+                using (var db = new SportRoomContext())
                 {
-                    currentIntakeList.Add(new IntakeRowDTO
+                    var intakeInfo = await db.IntakeItems
+                        .Where(cons => cons.SupplierId == supplierID)
+                        .Select(intk => new
+                        {
+                            intk.Id,
+                            EquipmentId = intk.Equipment.Id,
+                            EquipmentName = intk.Equipment.Name, // Extract the actual name text
+                            intk.SuppliedDate,
+                            healthy = intk.Quantity - intk.BrokenQty,
+                            broken = intk.BrokenQty
+                        }).ToListAsync();
+
+                    // 2. CRITICAL FIX: Empty the previous items out of the temporary list
+                    currentIntakeList.Clear();
+
+                    foreach (var eq in intakeInfo)
                     {
-                        intakeId = eq.Id,
-                        // 3. Map both the ID and Name correctly to your DTO
-                        EquipmentId = eq.EquipmentId,
-                        EquipmentName = eq.EquipmentName,
-                        suppliedDate = eq.SuppliedDate,
-                        HealthyQuantity = eq.healthy,
-                        DamagedQuantity = eq.broken
-                    });
+                        currentIntakeList.Add(new IntakeRowDTO
+                        {
+                            intakeId = eq.Id,
+                            // 3. Map both the ID and Name correctly to your DTO
+                            EquipmentId = eq.EquipmentId,
+                            EquipmentName = eq.EquipmentName,
+                            suppliedDate = eq.SuppliedDate,
+                            HealthyQuantity = eq.healthy,
+                            DamagedQuantity = eq.broken
+                        });
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading intake table: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async Task updateTextBoxes()
@@ -83,18 +90,25 @@ namespace Project_Sport_Room
             if (supplierIdComboBox.SelectedValue == null) return;
 
             string supplierID = supplierIdComboBox.SelectedValue.ToString();
-            using (var db = new SportRoomContext())
+            try
             {
-                var Suppliers = await db.Suppliers.Where(el => el.Id == supplierID).Select(sup => new
+                using (var db = new SportRoomContext())
                 {
-                    sup.Id,
-                    sup.Name,
-                    sup.PhoneNumber
-                }).ToListAsync();
-                if (!string.IsNullOrEmpty(supplierID))
-                {
-                    phoneNO.Text = Suppliers.FirstOrDefault().PhoneNumber;
+                    var Suppliers = await db.Suppliers.Where(el => el.Id == supplierID).Select(sup => new
+                    {
+                        sup.Id,
+                        sup.Name,
+                        sup.PhoneNumber
+                    }).ToListAsync();
+                    if (!string.IsNullOrEmpty(supplierID))
+                    {
+                        phoneNO.Text = Suppliers.FirstOrDefault()?.PhoneNumber ?? "";
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading supplier details: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async Task updateKPYs()
@@ -103,76 +117,90 @@ namespace Project_Sport_Room
             if (supplierIdComboBox.SelectedValue == null) return;
 
             string supplierID = (string)supplierIdComboBox.SelectedValue.ToString();
-            using (var db = new SportRoomContext())
+            try
             {
-                var IntakeData = await db.IntakeItems.Where(el => el.SupplierId == supplierID).Select(intk => new
+                using (var db = new SportRoomContext())
                 {
-                    intk.Id,
-                    intk.SuppliedDate,
-                    equipmentName = intk.Equipment.Name,
-                    intk.Quantity,
-                    intk.BrokenQty
-                }).ToListAsync();
-                int tot = 0;
-                int broken = 0;
-                foreach (var item in IntakeData)
-                {
-                    tot += item.Quantity;
-                    broken += item.BrokenQty;
+                    var IntakeData = await db.IntakeItems.Where(el => el.SupplierId == supplierID).Select(intk => new
+                    {
+                        intk.Id,
+                        intk.SuppliedDate,
+                        equipmentName = intk.Equipment.Name,
+                        intk.Quantity,
+                        intk.BrokenQty
+                    }).ToListAsync();
+                    int tot = 0;
+                    int broken = 0;
+                    foreach (var item in IntakeData)
+                    {
+                        tot += item.Quantity;
+                        broken += item.BrokenQty;
+                    }
+                    totalEq.Text = tot.ToString();
+                    brokenEq.Text = broken.ToString();
+                    healthyEq.Text = (tot - broken).ToString();
                 }
-                totalEq.Text = tot.ToString();
-                brokenEq.Text = broken.ToString();
-                healthyEq.Text = (tot - broken).ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error calculating supplier statistics: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void manageSupplier_Load(object sender, EventArgs e)
         {
-            //Table template
-            // Bind the grid to your temporary DTO list
-            supplierTBspecific.AutoGenerateColumns = false;
-            supplierTBspecific.DataSource = currentIntakeList;
-
-
-            // Define columns programmatically (or do this in the WinForms Designer)
-            supplierTBspecific.Columns.Clear();
-            supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", HeaderText = "Intake ID", DataPropertyName = "intakeId", ReadOnly = true });
-            using (var db = new SportRoomContext())
+            try
             {
-                var equipments = await db.Equipments.Select(x => new { x.Id, x.Name }).ToListAsync();
-                supplierTBspecific.Columns.Add(new DataGridViewComboBoxColumn
+                //Table template
+                // Bind the grid to your temporary DTO list
+                supplierTBspecific.AutoGenerateColumns = false;
+                supplierTBspecific.DataSource = currentIntakeList;
+
+
+                // Define columns programmatically (or do this in the WinForms Designer)
+                supplierTBspecific.Columns.Clear();
+                supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", HeaderText = "Intake ID", DataPropertyName = "intakeId", ReadOnly = true });
+                using (var db = new SportRoomContext())
                 {
-                    Name = "Name",
-                    HeaderText = "Equipment Name",
-                    DataSource = equipments,
-                    DisplayMember = "Name",
-                    ValueMember = "Id",
-                    DataPropertyName = "EquipmentId"
-                });
-            }
-
-            supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "SuppliedDate", HeaderText = "Supplied Date", DataPropertyName = "suppliedDate" });
-            supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Healthy", HeaderText = "Healthy", DataPropertyName = "HealthyQuantity" });
-            supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Damage", HeaderText = "Damaged", DataPropertyName = "DamagedQuantity" });
-            supplierTBspecific.Columns.Add(new DataGridViewButtonColumn { Name = "delete", HeaderText = "DELETE", Text = "Delete", UseColumnTextForButtonValue = true });
-
-            // --- Completely replaced block starts here ---
-            using (var db = new SportRoomContext())
-            {
-                var Suppliers = await db.Suppliers.Select(sup => new { sup.Id, sup.Name }).ToListAsync();
-                supplierIdComboBox.DisplayMember = "Name";
-                supplierIdComboBox.ValueMember = "Id";
-                supplierIdComboBox.DataSource = Suppliers;
-
-                // Use the variable we passed into the constructor!
-                if (!string.IsNullOrEmpty(_initialSupplierId))
-                {
-                    supplierIdComboBox.SelectedValue = _initialSupplierId;
+                    var equipments = await db.Equipments.Select(x => new { x.Id, x.Name }).ToListAsync();
+                    supplierTBspecific.Columns.Add(new DataGridViewComboBoxColumn
+                    {
+                        Name = "Name",
+                        HeaderText = "Equipment Name",
+                        DataSource = equipments,
+                        DisplayMember = "Name",
+                        ValueMember = "Id",
+                        DataPropertyName = "EquipmentId"
+                    });
                 }
+
+                supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "SuppliedDate", HeaderText = "Supplied Date", DataPropertyName = "suppliedDate" });
+                supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Healthy", HeaderText = "Healthy", DataPropertyName = "HealthyQuantity" });
+                supplierTBspecific.Columns.Add(new DataGridViewTextBoxColumn { Name = "Damage", HeaderText = "Damaged", DataPropertyName = "DamagedQuantity" });
+                supplierTBspecific.Columns.Add(new DataGridViewButtonColumn { Name = "delete", HeaderText = "DELETE", Text = "Delete", UseColumnTextForButtonValue = true });
+
+                // --- Completely replaced block starts here ---
+                using (var db = new SportRoomContext())
+                {
+                    var Suppliers = await db.Suppliers.Select(sup => new { sup.Id, sup.Name }).ToListAsync();
+                    supplierIdComboBox.DisplayMember = "Name";
+                    supplierIdComboBox.ValueMember = "Id";
+                    supplierIdComboBox.DataSource = Suppliers;
+
+                    // Use the variable we passed into the constructor!
+                    if (!string.IsNullOrEmpty(_initialSupplierId))
+                    {
+                        supplierIdComboBox.SelectedValue = _initialSupplierId;
+                    }
+                }
+                // --- Completely replaced block ends here ---
+                await updateTextBoxes();
+                await updateTables();
+                await updateKPYs();
             }
-            // --- Completely replaced block ends here ---
-            await updateTextBoxes();
-            await updateTables();
-            await updateKPYs();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error initializing supplier view: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -217,6 +245,11 @@ namespace Project_Sport_Room
                             // 2. Extract New Values
                             int newHealthyQty = row.HealthyQuantity;
                             int newBrokenQty = row.DamagedQuantity;
+                            if (newHealthyQty < 0 || newBrokenQty < 0)
+                            {
+                                MessageBox.Show($"Row for '{row.EquipmentName}': Quantities cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
                             int newTotalQty = newHealthyQty + newBrokenQty;
                             string newEquipmentId = row.EquipmentId;
 
@@ -315,7 +348,7 @@ namespace Project_Sport_Room
                 var rowData = currentIntakeList[e.RowIndex];
                 string intakeId = rowData.intakeId;
                 string eqId = rowData.EquipmentId;
-                int totalQty = rowData.HealthyQuantity + rowData.DamagedQuantity;
+                int healthyQty = rowData.HealthyQuantity;
                 int brokenQty = rowData.DamagedQuantity;
 
                 // 3. Ask the user how they want to handle the deletion
@@ -330,35 +363,42 @@ namespace Project_Sport_Room
 
                 if (dialogResult == DialogResult.Cancel) return;
 
-                using (var db = new SportRoomContext())
+                try
                 {
-                    var intakeToDelete = await db.IntakeItems.FirstOrDefaultAsync(i => i.Id == intakeId);
-
-                    if (intakeToDelete != null)
+                    using (var db = new SportRoomContext())
                     {
-                        // Delete the history record regardless of Yes or No
-                        db.IntakeItems.Remove(intakeToDelete);
+                        var intakeToDelete = await db.IntakeItems.FirstOrDefaultAsync(i => i.Id == intakeId);
 
-                        // If Yes, also deduct from the main Equipment table
-                        if (dialogResult == DialogResult.Yes)
+                        if (intakeToDelete != null)
                         {
-                            var equipment = await db.Equipments.FirstOrDefaultAsync(eq => eq.Id == eqId);
-                            if (equipment != null)
+                            // Delete the history record regardless of Yes or No
+                            db.IntakeItems.Remove(intakeToDelete);
+
+                            // If Yes, also deduct from the main Equipment table
+                            if (dialogResult == DialogResult.Yes)
                             {
-                                equipment.Quantity -= totalQty;
-                                equipment.BrokenQty -= brokenQty;
+                                var equipment = await db.Equipments.FirstOrDefaultAsync(eq => eq.Id == eqId);
+                                if (equipment != null)
+                                {
+                                    equipment.Quantity -= healthyQty;
+                                    equipment.BrokenQty -= brokenQty;
 
-                                // Prevent negative stock just in case
-                                if (equipment.Quantity < 0) equipment.Quantity = 0;
-                                if (equipment.BrokenQty < 0) equipment.BrokenQty = 0;
+                                    // Prevent negative stock just in case
+                                    if (equipment.Quantity < 0) equipment.Quantity = 0;
+                                    if (equipment.BrokenQty < 0) equipment.BrokenQty = 0;
+                                }
                             }
+
+                            await db.SaveChangesAsync();
+
+                            // Refresh the table to remove the deleted row from the UI
+                            await updateTables();
                         }
-
-                        await db.SaveChangesAsync();
-
-                        // Refresh the table to remove the deleted row from the UI
-                        await updateTables();
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting intake item: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -372,39 +412,46 @@ namespace Project_Sport_Room
             DateTime start = startDatePicker.Value;
             DateTime end = endDatePicker.Value;
 
-            using (var db = new SportRoomContext())
+            try
             {
-                var intakeInfo = await db.IntakeItems
-                    .Where(cons => cons.SupplierId == supplierID &&
-                                   cons.SuppliedDate >= start &&
-                                   cons.SuppliedDate <= end)
-                    .Select(intk => new
-                    {
-                        intk.Id,
-                        EquipmentId = intk.Equipment.Id,
-                        EquipmentName = intk.Equipment.Name,
-                        intk.SuppliedDate,
-                        healthy = intk.Quantity - intk.BrokenQty,
-                        broken = intk.BrokenQty
-                    }).ToListAsync();
-
-                currentIntakeList.Clear();
-                foreach (var eq in intakeInfo)
+                using (var db = new SportRoomContext())
                 {
-                    currentIntakeList.Add(new IntakeRowDTO
-                    {
-                        intakeId = eq.Id,
-                        EquipmentId = eq.EquipmentId,
-                        EquipmentName = eq.EquipmentName,
-                        suppliedDate = eq.SuppliedDate,
-                        HealthyQuantity = eq.healthy,
-                        DamagedQuantity = eq.broken
-                    });
-                }
+                    var intakeInfo = await db.IntakeItems
+                        .Where(cons => cons.SupplierId == supplierID &&
+                                       cons.SuppliedDate >= start &&
+                                       cons.SuppliedDate <= end)
+                        .Select(intk => new
+                        {
+                            intk.Id,
+                            EquipmentId = intk.Equipment.Id,
+                            EquipmentName = intk.Equipment.Name,
+                            intk.SuppliedDate,
+                            healthy = intk.Quantity - intk.BrokenQty,
+                            broken = intk.BrokenQty
+                        }).ToListAsync();
 
-                // Force the DataGridView to refresh its view of the list
-                supplierTBspecific.DataSource = null;
-                supplierTBspecific.DataSource = currentIntakeList;
+                    currentIntakeList.Clear();
+                    foreach (var eq in intakeInfo)
+                    {
+                        currentIntakeList.Add(new IntakeRowDTO
+                        {
+                            intakeId = eq.Id,
+                            EquipmentId = eq.EquipmentId,
+                            EquipmentName = eq.EquipmentName,
+                            suppliedDate = eq.SuppliedDate,
+                            HealthyQuantity = eq.healthy,
+                            DamagedQuantity = eq.broken
+                        });
+                    }
+
+                    // Force the DataGridView to refresh its view of the list
+                    supplierTBspecific.DataSource = null;
+                    supplierTBspecific.DataSource = currentIntakeList;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error filtering intake items: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -425,25 +472,32 @@ namespace Project_Sport_Room
 
             if (result == DialogResult.Yes)
             {
-                using (var db = new SportRoomContext())
+                try
                 {
-                    // 1. Extract all the IDs currently loaded in the UI list
-                    var idsToDelete = currentIntakeList.Select(row => row.intakeId).ToList();
+                    using (var db = new SportRoomContext())
+                    {
+                        // 1. Extract all the IDs currently loaded in the UI list
+                        var idsToDelete = currentIntakeList.Select(row => row.intakeId).ToList();
 
-                    // 2. Fetch all matching records from the database
-                    var itemsToDelete = await db.IntakeItems
-                        .Where(i => idsToDelete.Contains(i.Id))
-                        .ToListAsync();
+                        // 2. Fetch all matching records from the database
+                        var itemsToDelete = await db.IntakeItems
+                            .Where(i => idsToDelete.Contains(i.Id))
+                            .ToListAsync();
 
-                    // 3. Remove them in bulk using RemoveRange
-                    db.IntakeItems.RemoveRange(itemsToDelete);
-                    await db.SaveChangesAsync();
+                        // 3. Remove them in bulk using RemoveRange
+                        db.IntakeItems.RemoveRange(itemsToDelete);
+                        await db.SaveChangesAsync();
 
-                    // 4. Clear the UI list and refresh the grid
-                    currentIntakeList.Clear();
-                    supplierTBspecific.DataSource = null;
+                        // 4. Clear the UI list and refresh the grid
+                        currentIntakeList.Clear();
+                        supplierTBspecific.DataSource = null;
 
-                    MessageBox.Show("Filtered history cleared successfully.");
+                        MessageBox.Show("Filtered history cleared successfully.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error clearing history: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

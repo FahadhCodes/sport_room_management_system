@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Add));
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
@@ -83,9 +84,9 @@
             groupBox1.Controls.Add(label4);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(3, 180);
+            groupBox1.Location = new Point(3, 183);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(960, 86);
+            groupBox1.Size = new Size(960, 94);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Adding new supplier";
@@ -108,7 +109,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(954, 61);
+            tableLayoutPanel1.Size = new Size(954, 69);
             tableLayoutPanel1.TabIndex = 22;
             // 
             // label1
@@ -119,7 +120,7 @@
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 7, 0, 0);
-            label1.Size = new Size(89, 30);
+            label1.Size = new Size(89, 34);
             label1.TabIndex = 17;
             label1.Text = "Name";
             label1.TextAlign = ContentAlignment.TopRight;
@@ -150,7 +151,7 @@
             label3.Location = new Point(384, 0);
             label3.Name = "label3";
             label3.Padding = new Padding(0, 7, 0, 0);
-            label3.Size = new Size(184, 30);
+            label3.Size = new Size(184, 34);
             label3.TabIndex = 18;
             label3.Text = "Phone Number";
             label3.TextAlign = ContentAlignment.TopRight;
@@ -158,9 +159,9 @@
             // addSupplierBtn1
             // 
             addSupplierBtn1.Dock = DockStyle.Right;
-            addSupplierBtn1.Location = new Point(857, 33);
+            addSupplierBtn1.Location = new Point(857, 37);
             addSupplierBtn1.Name = "addSupplierBtn1";
-            addSupplierBtn1.Size = new Size(94, 25);
+            addSupplierBtn1.Size = new Size(94, 29);
             addSupplierBtn1.TabIndex = 22;
             addSupplierBtn1.Text = "Add";
             addSupplierBtn1.UseVisualStyleBackColor = true;
@@ -207,7 +208,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(954, 66);
+            tableLayoutPanel2.Size = new Size(954, 70);
             tableLayoutPanel2.TabIndex = 22;
             // 
             // label5
@@ -218,7 +219,7 @@
             label5.Location = new Point(3, 0);
             label5.Name = "label5";
             label5.Padding = new Padding(0, 7, 0, 0);
-            label5.Size = new Size(153, 33);
+            label5.Size = new Size(153, 35);
             label5.TabIndex = 17;
             label5.Text = "Name";
             label5.TextAlign = ContentAlignment.TopRight;
@@ -235,9 +236,9 @@
             // addNewCategorybtn
             // 
             addNewCategorybtn.Dock = DockStyle.Right;
-            addNewCategorybtn.Location = new Point(857, 36);
+            addNewCategorybtn.Location = new Point(857, 38);
             addNewCategorybtn.Name = "addNewCategorybtn";
-            addNewCategorybtn.Size = new Size(94, 27);
+            addNewCategorybtn.Size = new Size(94, 29);
             addNewCategorybtn.TabIndex = 24;
             addNewCategorybtn.Text = "Add";
             addNewCategorybtn.UseVisualStyleBackColor = true;
@@ -249,9 +250,9 @@
             groupBox2.Controls.Add(label7);
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(3, 272);
+            groupBox2.Location = new Point(3, 283);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(960, 91);
+            groupBox2.Size = new Size(960, 95);
             groupBox2.TabIndex = 23;
             groupBox2.TabStop = false;
             groupBox2.Text = "Adding New Equipment Category Type";
@@ -262,9 +263,9 @@
             groupBox3.Controls.Add(label9);
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox3.Location = new Point(3, 369);
+            groupBox3.Location = new Point(3, 384);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(960, 90);
+            groupBox3.Size = new Size(960, 95);
             groupBox3.TabIndex = 23;
             groupBox3.TabStop = false;
             groupBox3.Text = "Adding new Equipment Type";
@@ -287,7 +288,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(954, 65);
+            tableLayoutPanel3.Size = new Size(954, 70);
             tableLayoutPanel3.TabIndex = 22;
             // 
             // label6
@@ -298,7 +299,7 @@
             label6.Location = new Point(3, 0);
             label6.Name = "label6";
             label6.Padding = new Padding(0, 7, 0, 0);
-            label6.Size = new Size(184, 32);
+            label6.Size = new Size(184, 35);
             label6.TabIndex = 17;
             label6.Text = "Name";
             label6.TextAlign = ContentAlignment.TopRight;
@@ -320,7 +321,7 @@
             label8.Location = new Point(479, 0);
             label8.Name = "label8";
             label8.Padding = new Padding(0, 7, 0, 0);
-            label8.Size = new Size(184, 32);
+            label8.Size = new Size(184, 35);
             label8.TabIndex = 18;
             label8.Text = "Category";
             label8.TextAlign = ContentAlignment.TopRight;
@@ -337,9 +338,9 @@
             // addNewEquipmentbtn
             // 
             addNewEquipmentbtn.Dock = DockStyle.Right;
-            addNewEquipmentbtn.Location = new Point(857, 35);
+            addNewEquipmentbtn.Location = new Point(857, 38);
             addNewEquipmentbtn.Name = "addNewEquipmentbtn";
-            addNewEquipmentbtn.Size = new Size(94, 27);
+            addNewEquipmentbtn.Size = new Size(94, 29);
             addNewEquipmentbtn.TabIndex = 25;
             addNewEquipmentbtn.Text = "Add";
             addNewEquipmentbtn.UseVisualStyleBackColor = true;
@@ -370,7 +371,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(960, 171);
+            tableLayoutPanel4.Size = new Size(960, 174);
             tableLayoutPanel4.TabIndex = 24;
             // 
             // panel3
@@ -381,27 +382,27 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(3, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(313, 165);
+            panel3.Size = new Size(313, 168);
             panel3.TabIndex = 3;
             // 
             // totalSuppliers
             // 
             totalSuppliers.AutoSize = true;
-            totalSuppliers.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            totalSuppliers.Font = new Font("Montserrat Black", 18F, FontStyle.Bold);
             totalSuppliers.ForeColor = Color.Brown;
             totalSuppliers.Location = new Point(9, 81);
             totalSuppliers.Name = "totalSuppliers";
-            totalSuppliers.Size = new Size(65, 35);
+            totalSuppliers.Size = new Size(78, 41);
             totalSuppliers.TabIndex = 4;
             totalSuppliers.Text = "N/A";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Font = new Font("Montserrat", 9F);
             label11.Location = new Point(9, 8);
             label11.Name = "label11";
-            label11.Size = new Size(95, 18);
+            label11.Size = new Size(112, 21);
             label11.TabIndex = 4;
             label11.Text = "Total Supplier";
             // 
@@ -413,27 +414,27 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(322, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(313, 165);
+            panel4.Size = new Size(313, 168);
             panel4.TabIndex = 5;
             // 
             // totalEquipmentTypes
             // 
             totalEquipmentTypes.AutoSize = true;
-            totalEquipmentTypes.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            totalEquipmentTypes.Font = new Font("Montserrat Black", 18F, FontStyle.Bold);
             totalEquipmentTypes.ForeColor = Color.Brown;
             totalEquipmentTypes.Location = new Point(9, 81);
             totalEquipmentTypes.Name = "totalEquipmentTypes";
-            totalEquipmentTypes.Size = new Size(65, 35);
+            totalEquipmentTypes.Size = new Size(78, 41);
             totalEquipmentTypes.TabIndex = 4;
             totalEquipmentTypes.Text = "N/A";
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.Font = new Font("Montserrat", 9F);
             label15.Location = new Point(9, 8);
             label15.Name = "label15";
-            label15.Size = new Size(156, 18);
+            label15.Size = new Size(181, 21);
             label15.TabIndex = 4;
             label15.Text = "Total Equipment Types";
             // 
@@ -445,27 +446,27 @@
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(641, 3);
             panel5.Name = "panel5";
-            panel5.Size = new Size(316, 165);
+            panel5.Size = new Size(316, 168);
             panel5.TabIndex = 6;
             // 
             // totalCategory
             // 
             totalCategory.AutoSize = true;
-            totalCategory.Font = new Font("Montserrat Black", 15F, FontStyle.Bold);
+            totalCategory.Font = new Font("Montserrat Black", 18F, FontStyle.Bold);
             totalCategory.ForeColor = Color.Brown;
             totalCategory.Location = new Point(9, 81);
             totalCategory.Name = "totalCategory";
-            totalCategory.Size = new Size(65, 35);
+            totalCategory.Size = new Size(78, 41);
             totalCategory.TabIndex = 4;
             totalCategory.Text = "N/A";
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.Font = new Font("Montserrat", 9F);
             label17.Location = new Point(9, 8);
             label17.Name = "label17";
-            label17.Size = new Size(188, 18);
+            label17.Size = new Size(219, 21);
             label17.TabIndex = 4;
             label17.Text = "Total Equipment Categories";
             // 
@@ -481,11 +482,11 @@
             tableLayoutPanel5.Location = new Point(3, 22);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 4;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 38.3116875F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 19.91342F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 37.44589F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 20.77922F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 20.99567F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 20.56277F));
-            tableLayoutPanel5.Size = new Size(966, 462);
+            tableLayoutPanel5.Size = new Size(966, 482);
             tableLayoutPanel5.TabIndex = 25;
             // 
             // groupBox4
@@ -495,7 +496,7 @@
             groupBox4.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(972, 487);
+            groupBox4.Size = new Size(972, 507);
             groupBox4.TabIndex = 26;
             groupBox4.TabStop = false;
             groupBox4.Text = "Add New Componets";
@@ -504,8 +505,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(972, 487);
+            ClientSize = new Size(972, 507);
             Controls.Add(groupBox4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Add";
             Text = "Add New Componets";
             Load += Add_Load;

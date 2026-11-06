@@ -42,27 +42,39 @@ namespace Project_Sport_Room
 
         private async Task UpdateUI()
         {
-            using (var db = new SportRoomContext())
+            try
             {
-                var supplier_Data = await db.Suppliers.Select(data => new
+                using (var db = new SportRoomContext())
                 {
-                    data.Id,
-                    data.Name,
-                    data.PhoneNumber
-                }).ToListAsync();
+                    var supplier_Data = await db.Suppliers.Select(data => new
+                    {
+                        data.Id,
+                        data.Name,
+                        data.PhoneNumber
+                    }).ToListAsync();
 
-                supplierTable.Columns.Clear();
-                supplierTable.DataSource = supplier_Data;
+                    supplierTable.Columns.Clear();
+                    supplierTable.DataSource = supplier_Data;
 
-                supplierTable.Columns["Id"].HeaderText = "Supplier ID";
-                supplierTable.Columns["Name"].HeaderText = "Supplier Name";
-                supplierTable.Columns["PhoneNumber"].HeaderText = "Phone Number";
+                    if (supplierTable.Columns.Contains("Id"))
+                        supplierTable.Columns["Id"].HeaderText = "Supplier ID";
+                    if (supplierTable.Columns.Contains("Name"))
+                        supplierTable.Columns["Name"].HeaderText = "Supplier Name";
+                    if (supplierTable.Columns.Contains("PhoneNumber"))
+                        supplierTable.Columns["PhoneNumber"].HeaderText = "Phone Number";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading suppliers: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public async Task changeTableBasedOnConstrints(string constrintsTypex, string searchString)
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 var query = db.IntakeItems.AsQueryable();
                 switch (constrintsTypex)
@@ -75,10 +87,10 @@ namespace Project_Sport_Room
                 var tableData = await query.Select(data => new
                 {
                     data.Id,
-                    supplierName = data.Supplier.Name,
+                    supplierName = data.Supplier != null ? data.Supplier.Name : "N/A",
                     equipmentName = data.Equipment.Name,
                     data.SuppliedDate,
-                    healthy =  data.Quantity - data.BrokenQty,
+                    healthy = Math.Max(0, data.Quantity - data.BrokenQty),
                     broken = data.BrokenQty
 
                 }).ToListAsync();
@@ -89,9 +101,17 @@ namespace Project_Sport_Room
                 intakeTable.Columns["Id"].HeaderText = "Intake ID";
                 intakeTable.Columns["supplierName"].HeaderText = "Supplier Name";
                 intakeTable.Columns["equipmentName"].HeaderText = "Equipment Name";
-                intakeTable.Columns["healthy"].HeaderText = "Healthy Equipment";
-                intakeTable.Columns["broken"].HeaderText = "Broken Equipment";
-                intakeTable.Columns["SuppliedDate"].HeaderText = "Supplied Date";
+                if (intakeTable.Columns.Contains("healthy"))
+                    intakeTable.Columns["healthy"].HeaderText = "Healthy Equipment";
+                if (intakeTable.Columns.Contains("broken"))
+                    intakeTable.Columns["broken"].HeaderText = "Broken Equipment";
+                if (intakeTable.Columns.Contains("SuppliedDate"))
+                    intakeTable.Columns["SuppliedDate"].HeaderText = "Supplied Date";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading intake records: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

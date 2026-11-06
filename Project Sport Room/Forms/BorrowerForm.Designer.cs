@@ -46,25 +46,25 @@
             status = new DataGridViewTextBoxColumn();
             BorrowReceipt = new DataGridViewTextBoxColumn();
             tableLayoutPanel3 = new TableLayoutPanel();
+            tableLayoutPanel9 = new TableLayoutPanel();
+            label1 = new Label();
+            brrPhoneNumber = new Label();
             panel1 = new Panel();
             button2 = new Button();
-            tableLayoutPanel9 = new TableLayoutPanel();
-            label13 = new Label();
-            brrDept = new Label();
             brrName = new Label();
-            tableLayoutPanel6 = new TableLayoutPanel();
-            label7 = new Label();
-            brrEmail = new Label();
-            tableLayoutPanel7 = new TableLayoutPanel();
-            label9 = new Label();
-            brrPhoneNumber = new Label();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            label5 = new Label();
-            brrRole = new Label();
             brrId = new Label();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            label2 = new Label();
+            brrRole = new Label();
             tableLayoutPanel4 = new TableLayoutPanel();
-            label3 = new Label();
+            brrEmail = new Label();
+            label7 = new Label();
+            tableLayoutPanel6 = new TableLayoutPanel();
+            brrDept = new Label();
+            label13 = new Label();
+            tableLayoutPanel14 = new TableLayoutPanel();
             ItemsToReturn = new Label();
+            label3 = new Label();
             panel2 = new Panel();
             tableLayoutPanel11 = new TableLayoutPanel();
             tableLayoutPanel12 = new TableLayoutPanel();
@@ -92,12 +92,12 @@
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)borrowerInfoTB).BeginInit();
             tableLayoutPanel3.SuspendLayout();
-            panel1.SuspendLayout();
             tableLayoutPanel9.SuspendLayout();
-            tableLayoutPanel6.SuspendLayout();
+            panel1.SuspendLayout();
             tableLayoutPanel7.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
+            tableLayoutPanel14.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel11.SuspendLayout();
             tableLayoutPanel12.SuspendLayout();
@@ -148,12 +148,12 @@
             // borrowerInfoTB
             // 
             borrowerInfoTB.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            borrowerInfoTB.BorderStyle = BorderStyle.None;
+            borrowerInfoTB.BackgroundColor = SystemColors.Control;
             borrowerInfoTB.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             borrowerInfoTB.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -171,6 +171,7 @@
             borrowerInfoTB.DefaultCellStyle = dataGridViewCellStyle2;
             borrowerInfoTB.Dock = DockStyle.Fill;
             borrowerInfoTB.EnableHeadersVisualStyles = false;
+            borrowerInfoTB.GridColor = Color.Brown;
             borrowerInfoTB.Location = new Point(3, 211);
             borrowerInfoTB.Name = "borrowerInfoTB";
             borrowerInfoTB.RowHeadersVisible = false;
@@ -242,14 +243,14 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel9, 2, 1);
             tableLayoutPanel3.Controls.Add(panel1, 2, 0);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel9, 1, 2);
             tableLayoutPanel3.Controls.Add(brrName, 0, 0);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 1, 1);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel7, 2, 1);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 2, 2);
             tableLayoutPanel3.Controls.Add(brrId, 0, 1);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel7, 2, 2);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 1, 0);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 1, 1);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel14, 1, 2);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(3, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -259,6 +260,50 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.Size = new Size(911, 106);
             tableLayoutPanel3.TabIndex = 0;
+            // 
+            // tableLayoutPanel9
+            // 
+            tableLayoutPanel9.ColumnCount = 2;
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 186F));
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel9.Controls.Add(label1, 0, 0);
+            tableLayoutPanel9.Controls.Add(brrPhoneNumber, 1, 0);
+            tableLayoutPanel9.Dock = DockStyle.Fill;
+            tableLayoutPanel9.Location = new Point(610, 38);
+            tableLayoutPanel9.Name = "tableLayoutPanel9";
+            tableLayoutPanel9.RowCount = 1;
+            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel9.Size = new Size(297, 27);
+            tableLayoutPanel9.TabIndex = 17;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Brown;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(105, 27);
+            label1.TabIndex = 2;
+            label1.Text = "Phone";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // brrPhoneNumber
+            // 
+            brrPhoneNumber.AutoSize = true;
+            brrPhoneNumber.Dock = DockStyle.Fill;
+            brrPhoneNumber.Font = new Font("Montserrat", 8F);
+            brrPhoneNumber.ForeColor = Color.Black;
+            brrPhoneNumber.Location = new Point(114, 0);
+            brrPhoneNumber.Name = "brrPhoneNumber";
+            brrPhoneNumber.Size = new Size(180, 27);
+            brrPhoneNumber.TabIndex = 2;
+            brrPhoneNumber.Text = "076XXXXXXX";
+            brrPhoneNumber.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -281,49 +326,6 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // tableLayoutPanel9
-            // 
-            tableLayoutPanel9.ColumnCount = 1;
-            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel9.Controls.Add(label13, 0, 0);
-            tableLayoutPanel9.Controls.Add(brrDept, 0, 1);
-            tableLayoutPanel9.Dock = DockStyle.Fill;
-            tableLayoutPanel9.Location = new Point(307, 72);
-            tableLayoutPanel9.Name = "tableLayoutPanel9";
-            tableLayoutPanel9.RowCount = 2;
-            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel9.Size = new Size(296, 30);
-            tableLayoutPanel9.TabIndex = 8;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Dock = DockStyle.Left;
-            label13.Font = new Font("Montserrat SemiBold", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.ForeColor = Color.Brown;
-            label13.Location = new Point(3, 0);
-            label13.Name = "label13";
-            label13.Size = new Size(70, 15);
-            label13.TabIndex = 1;
-            label13.Text = "Department";
-            label13.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // brrDept
-            // 
-            brrDept.AutoSize = true;
-            brrDept.Dock = DockStyle.Right;
-            brrDept.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            brrDept.ForeColor = Color.Black;
-            brrDept.Location = new Point(267, 15);
-            brrDept.Name = "brrDept";
-            brrDept.Size = new Size(26, 15);
-            brrDept.TabIndex = 2;
-            brrDept.Text = "PST";
-            brrDept.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // brrName
             // 
             brrName.AutoSize = true;
@@ -337,140 +339,11 @@
             brrName.Text = "Name";
             brrName.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel6
-            // 
-            tableLayoutPanel6.ColumnCount = 1;
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel6.Controls.Add(label7, 0, 0);
-            tableLayoutPanel6.Controls.Add(brrEmail, 0, 1);
-            tableLayoutPanel6.Dock = DockStyle.Fill;
-            tableLayoutPanel6.Location = new Point(307, 38);
-            tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 2;
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel6.Size = new Size(296, 27);
-            tableLayoutPanel6.TabIndex = 5;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Dock = DockStyle.Left;
-            label7.Font = new Font("Montserrat SemiBold", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.Brown;
-            label7.Location = new Point(3, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(37, 13);
-            label7.TabIndex = 1;
-            label7.Text = "Email";
-            label7.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // brrEmail
-            // 
-            brrEmail.AutoSize = true;
-            brrEmail.Dock = DockStyle.Right;
-            brrEmail.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            brrEmail.ForeColor = Color.Black;
-            brrEmail.Location = new Point(177, 13);
-            brrEmail.Name = "brrEmail";
-            brrEmail.Size = new Size(116, 14);
-            brrEmail.TabIndex = 2;
-            brrEmail.Text = "example@gmail.com";
-            brrEmail.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel7
-            // 
-            tableLayoutPanel7.ColumnCount = 1;
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel7.Controls.Add(label9, 0, 0);
-            tableLayoutPanel7.Controls.Add(brrPhoneNumber, 0, 1);
-            tableLayoutPanel7.Dock = DockStyle.Fill;
-            tableLayoutPanel7.Location = new Point(610, 38);
-            tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.RowCount = 2;
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel7.Size = new Size(297, 27);
-            tableLayoutPanel7.TabIndex = 6;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Dock = DockStyle.Left;
-            label9.Font = new Font("Montserrat SemiBold", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.Brown;
-            label9.Location = new Point(3, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(86, 13);
-            label9.TabIndex = 1;
-            label9.Text = "Phone Number";
-            label9.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // brrPhoneNumber
-            // 
-            brrPhoneNumber.AutoSize = true;
-            brrPhoneNumber.Dock = DockStyle.Right;
-            brrPhoneNumber.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            brrPhoneNumber.ForeColor = Color.Black;
-            brrPhoneNumber.Location = new Point(219, 13);
-            brrPhoneNumber.Name = "brrPhoneNumber";
-            brrPhoneNumber.Size = new Size(75, 14);
-            brrPhoneNumber.TabIndex = 2;
-            brrPhoneNumber.Text = "076XXXXXXX";
-            brrPhoneNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel5
-            // 
-            tableLayoutPanel5.ColumnCount = 1;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Controls.Add(label5, 0, 0);
-            tableLayoutPanel5.Controls.Add(brrRole, 0, 1);
-            tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(610, 72);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(297, 30);
-            tableLayoutPanel5.TabIndex = 4;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Dock = DockStyle.Left;
-            label5.Font = new Font("Montserrat SemiBold", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Brown;
-            label5.Location = new Point(3, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(29, 15);
-            label5.TabIndex = 1;
-            label5.Text = "Role";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // brrRole
-            // 
-            brrRole.AutoSize = true;
-            brrRole.Dock = DockStyle.Right;
-            brrRole.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            brrRole.ForeColor = Color.Black;
-            brrRole.Location = new Point(246, 15);
-            brrRole.Name = "brrRole";
-            brrRole.Size = new Size(48, 15);
-            brrRole.TabIndex = 2;
-            brrRole.Text = "Student";
-            brrRole.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // brrId
             // 
             brrId.AutoSize = true;
             brrId.Dock = DockStyle.Fill;
-            brrId.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            brrId.Font = new Font("Montserrat", 7F);
             brrId.ForeColor = Color.Black;
             brrId.Location = new Point(4, 35);
             brrId.Name = "brrId";
@@ -478,48 +351,179 @@
             brrId.TabIndex = 9;
             brrId.Text = "BRR_001";
             // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 2;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 186F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel7.Controls.Add(label2, 0, 0);
+            tableLayoutPanel7.Controls.Add(brrRole, 1, 0);
+            tableLayoutPanel7.Dock = DockStyle.Fill;
+            tableLayoutPanel7.Location = new Point(610, 72);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 1;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel7.Size = new Size(297, 30);
+            tableLayoutPanel7.TabIndex = 19;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Brown;
+            label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label2.ForeColor = SystemColors.Control;
+            label2.Location = new Point(3, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(105, 30);
+            label2.TabIndex = 2;
+            label2.Text = "Role";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // brrRole
+            // 
+            brrRole.AutoSize = true;
+            brrRole.Dock = DockStyle.Fill;
+            brrRole.Font = new Font("Montserrat", 8F);
+            brrRole.ForeColor = Color.Black;
+            brrRole.Location = new Point(114, 0);
+            brrRole.Name = "brrRole";
+            brrRole.Size = new Size(180, 30);
+            brrRole.TabIndex = 2;
+            brrRole.Text = "Student";
+            brrRole.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnCount = 2;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 229F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Controls.Add(label3, 0, 0);
-            tableLayoutPanel4.Controls.Add(ItemsToReturn, 0, 1);
+            tableLayoutPanel4.Controls.Add(brrEmail, 1, 0);
+            tableLayoutPanel4.Controls.Add(label7, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(307, 4);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 2;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel4.Size = new Size(296, 27);
-            tableLayoutPanel4.TabIndex = 3;
+            tableLayoutPanel4.TabIndex = 12;
             // 
-            // label3
+            // brrEmail
             // 
-            label3.AutoSize = true;
-            label3.Dock = DockStyle.Left;
-            label3.Font = new Font("Montserrat SemiBold", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Brown;
-            label3.Location = new Point(3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(134, 13);
-            label3.TabIndex = 1;
-            label3.Text = "Available Items to return";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
+            brrEmail.AutoSize = true;
+            brrEmail.Dock = DockStyle.Fill;
+            brrEmail.Font = new Font("Montserrat", 8F);
+            brrEmail.ForeColor = Color.Black;
+            brrEmail.Location = new Point(70, 0);
+            brrEmail.Name = "brrEmail";
+            brrEmail.Size = new Size(223, 27);
+            brrEmail.TabIndex = 2;
+            brrEmail.Text = "example@gmail.com";
+            brrEmail.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.Brown;
+            label7.Dock = DockStyle.Fill;
+            label7.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label7.ForeColor = SystemColors.Control;
+            label7.Location = new Point(3, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 27);
+            label7.TabIndex = 1;
+            label7.Text = "Email";
+            label7.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel6
+            // 
+            tableLayoutPanel6.ColumnCount = 2;
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 186F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel6.Controls.Add(brrDept, 1, 0);
+            tableLayoutPanel6.Controls.Add(label13, 0, 0);
+            tableLayoutPanel6.Dock = DockStyle.Fill;
+            tableLayoutPanel6.Location = new Point(307, 38);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 1;
+            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel6.Size = new Size(296, 27);
+            tableLayoutPanel6.TabIndex = 15;
+            // 
+            // brrDept
+            // 
+            brrDept.AutoSize = true;
+            brrDept.Dock = DockStyle.Fill;
+            brrDept.Font = new Font("Montserrat", 8F);
+            brrDept.ForeColor = Color.Black;
+            brrDept.Location = new Point(113, 0);
+            brrDept.Name = "brrDept";
+            brrDept.Size = new Size(180, 27);
+            brrDept.TabIndex = 2;
+            brrDept.Text = "PST";
+            brrDept.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = Color.Brown;
+            label13.Dock = DockStyle.Fill;
+            label13.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label13.ForeColor = SystemColors.Control;
+            label13.Location = new Point(3, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(104, 27);
+            label13.TabIndex = 1;
+            label13.Text = "Department";
+            label13.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel14
+            // 
+            tableLayoutPanel14.ColumnCount = 2;
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 47.9729729F));
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 52.0270271F));
+            tableLayoutPanel14.Controls.Add(ItemsToReturn, 1, 0);
+            tableLayoutPanel14.Controls.Add(label3, 0, 0);
+            tableLayoutPanel14.Dock = DockStyle.Fill;
+            tableLayoutPanel14.Location = new Point(307, 72);
+            tableLayoutPanel14.Name = "tableLayoutPanel14";
+            tableLayoutPanel14.RowCount = 1;
+            tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel14.Size = new Size(296, 30);
+            tableLayoutPanel14.TabIndex = 13;
             // 
             // ItemsToReturn
             // 
             ItemsToReturn.AutoSize = true;
-            ItemsToReturn.Dock = DockStyle.Right;
-            ItemsToReturn.Font = new Font("Montserrat", 6F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ItemsToReturn.Dock = DockStyle.Fill;
+            ItemsToReturn.Font = new Font("Montserrat", 8F);
             ItemsToReturn.ForeColor = Color.Black;
-            ItemsToReturn.Location = new Point(279, 13);
+            ItemsToReturn.Location = new Point(145, 0);
             ItemsToReturn.Name = "ItemsToReturn";
-            ItemsToReturn.Size = new Size(14, 14);
-            ItemsToReturn.TabIndex = 2;
+            ItemsToReturn.Size = new Size(148, 30);
+            ItemsToReturn.TabIndex = 3;
             ItemsToReturn.Text = "0";
             ItemsToReturn.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Brown;
+            label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(136, 30);
+            label3.TabIndex = 2;
+            label3.Text = "Borrowed Items";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -551,7 +555,7 @@
             // 
             tableLayoutPanel12.ColumnCount = 2;
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 109F));
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 142F));
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel12.Controls.Add(filterableDates, 0, 0);
             tableLayoutPanel12.Controls.Add(applyButton, 1, 0);
@@ -566,22 +570,22 @@
             // 
             // filterableDates
             // 
-            filterableDates.Dock = DockStyle.Fill;
+            filterableDates.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             filterableDates.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             filterableDates.FormattingEnabled = true;
             filterableDates.Items.AddRange(new object[] { "Issued Date", "Due Date", "Returned Date" });
             filterableDates.Location = new Point(3, 3);
             filterableDates.Name = "filterableDates";
-            filterableDates.Size = new Size(790, 29);
+            filterableDates.Size = new Size(757, 29);
             filterableDates.TabIndex = 37;
             // 
             // applyButton
             // 
-            applyButton.Dock = DockStyle.Fill;
-            applyButton.Font = new Font("Montserrat", 5F);
-            applyButton.Location = new Point(799, 3);
+            applyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            applyButton.Font = new Font("Montserrat", 8F);
+            applyButton.Location = new Point(766, 3);
             applyButton.Name = "applyButton";
-            applyButton.Size = new Size(103, 29);
+            applyButton.Size = new Size(136, 29);
             applyButton.TabIndex = 36;
             applyButton.Text = "Apply";
             applyButton.UseVisualStyleBackColor = true;
@@ -605,8 +609,8 @@
             // 
             // startDate
             // 
-            startDate.CustomFormat = "dd/MM/yyyy  |  hh:mm tt";
-            startDate.Dock = DockStyle.Fill;
+            startDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            startDate.CustomFormat = "dd/MM/yyyy     hh:mm tt";
             startDate.Font = new Font("Montserrat", 9F);
             startDate.Format = DateTimePickerFormat.Custom;
             startDate.Location = new Point(3, 3);
@@ -616,8 +620,8 @@
             // 
             // endDate
             // 
-            endDate.CustomFormat = "dd/MM/yyyy  |  hh:mm tt";
-            endDate.Dock = DockStyle.Fill;
+            endDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            endDate.CustomFormat = "dd/MM/yyyy     hh:mm tt";
             endDate.Font = new Font("Montserrat", 9F);
             endDate.Format = DateTimePickerFormat.Custom;
             endDate.Location = new Point(499, 3);
@@ -652,7 +656,7 @@
             // 
             // label11
             // 
-            label11.Dock = DockStyle.Fill;
+            label11.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label11.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.Location = new Point(3, 0);
             label11.Name = "label11";
@@ -663,10 +667,10 @@
             // 
             // brrSearchfromData
             // 
+            brrSearchfromData.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             brrSearchfromData.BorderStyle = BorderStyle.FixedSingle;
-            brrSearchfromData.Dock = DockStyle.Fill;
             brrSearchfromData.Font = new Font("Montserrat", 9F);
-            brrSearchfromData.Location = new Point(77, 3);
+            brrSearchfromData.Location = new Point(77, 4);
             brrSearchfromData.Name = "brrSearchfromData";
             brrSearchfromData.Size = new Size(831, 26);
             brrSearchfromData.TabIndex = 27;
@@ -696,12 +700,12 @@
             // reciptsData
             // 
             reciptsData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            reciptsData.BorderStyle = BorderStyle.None;
+            reciptsData.BackgroundColor = SystemColors.Control;
             reciptsData.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             reciptsData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle3.Font = new Font("Montserrat", 9F);
+            dataGridViewCellStyle3.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = Color.Brown;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -719,6 +723,7 @@
             reciptsData.DefaultCellStyle = dataGridViewCellStyle4;
             reciptsData.Dock = DockStyle.Fill;
             reciptsData.EnableHeadersVisualStyles = false;
+            reciptsData.GridColor = Color.Brown;
             reciptsData.Location = new Point(3, 382);
             reciptsData.Name = "reciptsData";
             reciptsData.RowHeadersVisible = false;
@@ -747,12 +752,12 @@
             // borrList
             // 
             borrList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            borrList.BorderStyle = BorderStyle.None;
+            borrList.BackgroundColor = SystemColors.Control;
             borrList.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             borrList.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle5.Font = new Font("Montserrat", 9F);
+            dataGridViewCellStyle5.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle5.ForeColor = Color.Brown;
             dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
@@ -770,6 +775,7 @@
             borrList.DefaultCellStyle = dataGridViewCellStyle6;
             borrList.Dock = DockStyle.Fill;
             borrList.EnableHeadersVisualStyles = false;
+            borrList.GridColor = Color.Brown;
             borrList.Location = new Point(3, 52);
             borrList.Name = "borrList";
             borrList.ReadOnly = true;
@@ -789,12 +795,13 @@
             // 
             // tableLayoutPanel10
             // 
+            tableLayoutPanel10.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel10.ColumnCount = 2;
             tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.90909F));
             tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 69.09091F));
             tableLayoutPanel10.Controls.Add(borrSearchFromList, 1, 0);
             tableLayoutPanel10.Controls.Add(label12, 0, 0);
-            tableLayoutPanel10.Location = new Point(3, 3);
+            tableLayoutPanel10.Location = new Point(3, 15);
             tableLayoutPanel10.Name = "tableLayoutPanel10";
             tableLayoutPanel10.RowCount = 1;
             tableLayoutPanel10.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -863,17 +870,17 @@
             ((System.ComponentModel.ISupportInitialize)borrowerInfoTB).EndInit();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
-            panel1.ResumeLayout(false);
             tableLayoutPanel9.ResumeLayout(false);
             tableLayoutPanel9.PerformLayout();
-            tableLayoutPanel6.ResumeLayout(false);
-            tableLayoutPanel6.PerformLayout();
+            panel1.ResumeLayout(false);
             tableLayoutPanel7.ResumeLayout(false);
             tableLayoutPanel7.PerformLayout();
-            tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
+            tableLayoutPanel6.ResumeLayout(false);
+            tableLayoutPanel6.PerformLayout();
+            tableLayoutPanel14.ResumeLayout(false);
+            tableLayoutPanel14.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tableLayoutPanel11.ResumeLayout(false);
@@ -896,21 +903,8 @@
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
         private Label brrName;
-        private Label label3;
-        private TableLayoutPanel tableLayoutPanel4;
-        private Label ItemsToReturn;
-        private TableLayoutPanel tableLayoutPanel5;
-        private Label label5;
-        private Label brrRole;
-        private TableLayoutPanel tableLayoutPanel9;
-        private Label label13;
-        private Label brrDept;
-        private TableLayoutPanel tableLayoutPanel6;
         private Label label7;
         private Label brrEmail;
-        private TableLayoutPanel tableLayoutPanel7;
-        private Label label9;
-        private Label brrPhoneNumber;
         private Label brrId;
         private Panel panel1;
         private Panel panel2;
@@ -946,5 +940,18 @@
         private DataGridViewTextBoxColumn BorrowReceipt;
         private DataGridViewTextBoxColumn recipts;
         private DataGridViewCheckBoxColumn Returned;
+        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel tableLayoutPanel14;
+        private Label ItemsToReturn;
+        private Label label3;
+        private TableLayoutPanel tableLayoutPanel6;
+        private Label brrDept;
+        private Label label13;
+        private TableLayoutPanel tableLayoutPanel9;
+        private Label label1;
+        private Label brrPhoneNumber;
+        private TableLayoutPanel tableLayoutPanel7;
+        private Label label2;
+        private Label brrRole;
     }
 }

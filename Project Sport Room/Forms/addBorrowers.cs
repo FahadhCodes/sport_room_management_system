@@ -21,7 +21,9 @@ namespace Project_Sport_Room
 
         private async void addBorrowers_Load(object sender, EventArgs e)
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 var items = await db.Departments.Select(dep => new { dep.Id, dep.Name }).ToListAsync();
 
@@ -59,7 +61,12 @@ namespace Project_Sport_Room
             }
 
             // Bind defaults for the datagridview
-            borrowingList.DefaultValuesNeeded += borrowingList_DefaultValuesNeeded;
+                borrowingList.DefaultValuesNeeded += borrowingList_DefaultValuesNeeded;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading borrower form data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void addBtn_Click(object sender, EventArgs e)
@@ -121,8 +128,10 @@ namespace Project_Sport_Room
 
             // Email is deliberately ignored here so it remains optional!
 
-            using (var db = new SportRoomContext())
+            try
             {
+                using (var db = new SportRoomContext())
+                {
                 // 1. Check if the borrower already exists in the database
                 Borrower currentBorrower = await db.Borrowers.FirstOrDefaultAsync(b => b.BorrowerId == studentId);
 
@@ -183,9 +192,9 @@ namespace Project_Sport_Room
                     string eqName = row.Cells["EquipmentName"].FormattedValue?.ToString() ?? "Unknown Equipment";
 
                     // 1. Safely parse the required Quantity
-                    if (!int.TryParse(qtyCell.ToString(), out int qty))
+                    if (!int.TryParse(qtyCell.ToString(), out int qty) || qty <= 0)
                     {
-                        MessageBox.Show($"Row {row.Index + 1} has an invalid Quantity. Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Row {row.Index + 1} has an invalid Quantity. Please enter a valid positive number greater than 0.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return; // Abort the save process completely so the user can fix it
                     }
 
@@ -193,9 +202,14 @@ namespace Project_Sport_Room
                     int bqty = 0;
                     if (brokenQtyCell != null && !string.IsNullOrWhiteSpace(brokenQtyCell.ToString()))
                     {
-                        if (!int.TryParse(brokenQtyCell.ToString(), out bqty))
+                        if (!int.TryParse(brokenQtyCell.ToString(), out bqty) || bqty < 0)
                         {
-                            MessageBox.Show($"Row {row.Index + 1} has an invalid Broken Quantity. Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"Row {row.Index + 1} has an invalid Broken Quantity. Please enter 0 or a positive number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        if (bqty > qty)
+                        {
+                            MessageBox.Show($"Row {row.Index + 1}: Damaged quantity ({bqty}) cannot exceed total borrowed quantity ({qty}).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                     }
@@ -267,6 +281,11 @@ namespace Project_Sport_Room
                 await db.SaveChangesAsync();
 
                 MessageBox.Show("Borrower and valid rows saved successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving borrower record: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -296,31 +315,38 @@ namespace Project_Sport_Room
             // If the box is empty, do nothing
             if (string.IsNullOrEmpty(searchId)) return;
 
-            using (var db = new SportRoomContext())
+            try
             {
-                // Check if this ID already exists in the database
-                var existingBorrower = await db.Borrowers.FirstOrDefaultAsync(b => b.BorrowerId == searchId);
-
-                // If we found them, auto-fill all the fields!
-                if (existingBorrower != null)
+                using (var db = new SportRoomContext())
                 {
-                    // The ?? "" safely handles null database values so your text boxes don't crash
-                    brrName.Text = existingBorrower.Name ?? "";
-                    email.Text = existingBorrower.Email ?? "";
-                    phoneNumber.Text = existingBorrower.PhoneNumber ?? "";
+                    // Check if this ID already exists in the database
+                    var existingBorrower = await db.Borrowers.FirstOrDefaultAsync(b => b.BorrowerId == searchId);
 
-                    // Safely set the role dropdown
-                    if (!string.IsNullOrEmpty(existingBorrower.Role))
+                    // If we found them, auto-fill all the fields!
+                    if (existingBorrower != null)
                     {
-                        brrRoleCombobox.Text = existingBorrower.Role;
-                    }
+                        // The ?? "" safely handles null database values so your text boxes don't crash
+                        brrName.Text = existingBorrower.Name ?? "";
+                        email.Text = existingBorrower.Email ?? "";
+                        phoneNumber.Text = existingBorrower.PhoneNumber ?? "";
 
-                    // Safely set the department dropdown
-                    if (existingBorrower.DepartmentId != null)
-                    {
-                        departmentComboBox.SelectedValue = existingBorrower.DepartmentId;
+                        // Safely set the role dropdown
+                        if (!string.IsNullOrEmpty(existingBorrower.Role))
+                        {
+                            brrRoleCombobox.Text = existingBorrower.Role;
+                        }
+
+                        // Safely set the department dropdown
+                        if (existingBorrower.DepartmentId != null)
+                        {
+                            departmentComboBox.SelectedValue = existingBorrower.DepartmentId;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving borrower: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

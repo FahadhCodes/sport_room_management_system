@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(addBorrowers));
             label2 = new Label();
             groupBox1 = new GroupBox();
             tableLayoutPanel2 = new TableLayoutPanel();
@@ -95,8 +96,8 @@
             tableLayoutPanel2.Location = new Point(3, 22);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 42.4317627F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 57.5682373F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 39.2059555F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 60.7940445F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             tableLayoutPanel2.Size = new Size(907, 439);
             tableLayoutPanel2.TabIndex = 24;
@@ -104,12 +105,13 @@
             // borrowingList
             // 
             borrowingList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            borrowingList.BackgroundColor = SystemColors.Control;
             borrowingList.BorderStyle = BorderStyle.None;
             borrowingList.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             borrowingList.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -127,11 +129,12 @@
             borrowingList.DefaultCellStyle = dataGridViewCellStyle2;
             borrowingList.Dock = DockStyle.Fill;
             borrowingList.EnableHeadersVisualStyles = false;
-            borrowingList.Location = new Point(3, 174);
+            borrowingList.GridColor = Color.Brown;
+            borrowingList.Location = new Point(3, 161);
             borrowingList.Name = "borrowingList";
             borrowingList.RowHeadersVisible = false;
             borrowingList.RowHeadersWidth = 51;
-            borrowingList.Size = new Size(901, 226);
+            borrowingList.Size = new Size(901, 239);
             borrowingList.TabIndex = 24;
             borrowingList.DefaultValuesNeeded += borrowingList_DefaultValuesNeeded;
             borrowingList.EditingControlShowing += borrowingList_EditingControlShowing;
@@ -183,20 +186,20 @@
             tableLayoutPanel1.Location = new Point(3, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 39.3056F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 32.852932F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 27.8414669F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 39F));
-            tableLayoutPanel1.Size = new Size(901, 165);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 35.7142868F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0357132F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 31.25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            tableLayoutPanel1.Size = new Size(901, 152);
             tableLayoutPanel1.TabIndex = 22;
             // 
             // dueDatepicker
             // 
-            dueDatepicker.CustomFormat = "dd/MM/yyyy   hh:mm tt";
+            dueDatepicker.CustomFormat = "dd/MM/yyyy  hh : mm tt";
             dueDatepicker.Dock = DockStyle.Fill;
             dueDatepicker.Font = new Font("Montserrat", 9F);
             dueDatepicker.Format = DateTimePickerFormat.Custom;
-            dueDatepicker.Location = new Point(573, 128);
+            dueDatepicker.Location = new Point(573, 115);
             dueDatepicker.Name = "dueDatepicker";
             dueDatepicker.Size = new Size(325, 26);
             dueDatepicker.TabIndex = 36;
@@ -206,7 +209,7 @@
             dueDate.AutoSize = true;
             dueDate.Dock = DockStyle.Fill;
             dueDate.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dueDate.Location = new Point(451, 125);
+            dueDate.Location = new Point(451, 112);
             dueDate.Name = "dueDate";
             dueDate.Padding = new Padding(0, 8, 0, 0);
             dueDate.Size = new Size(116, 40);
@@ -218,7 +221,7 @@
             issuedDate.AutoSize = true;
             issuedDate.Dock = DockStyle.Fill;
             issuedDate.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            issuedDate.Location = new Point(3, 125);
+            issuedDate.Location = new Point(3, 112);
             issuedDate.Name = "issuedDate";
             issuedDate.Padding = new Padding(0, 8, 0, 0);
             issuedDate.Size = new Size(90, 40);
@@ -230,7 +233,7 @@
             label5.AutoSize = true;
             label5.Dock = DockStyle.Fill;
             label5.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(3, 90);
+            label5.Location = new Point(3, 77);
             label5.Name = "label5";
             label5.Padding = new Padding(0, 8, 0, 0);
             label5.Size = new Size(90, 35);
@@ -242,7 +245,7 @@
             email.BorderStyle = BorderStyle.FixedSingle;
             email.Dock = DockStyle.Fill;
             email.Font = new Font("Montserrat", 9F);
-            email.Location = new Point(99, 93);
+            email.Location = new Point(99, 80);
             email.Name = "email";
             email.Size = new Size(346, 26);
             email.TabIndex = 25;
@@ -252,10 +255,10 @@
             label3.AutoSize = true;
             label3.Dock = DockStyle.Fill;
             label3.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(3, 49);
+            label3.Location = new Point(3, 40);
             label3.Name = "label3";
             label3.Padding = new Padding(0, 8, 0, 0);
-            label3.Size = new Size(90, 41);
+            label3.Size = new Size(90, 37);
             label3.TabIndex = 18;
             label3.Text = "Role";
             // 
@@ -265,7 +268,7 @@
             brrRoleCombobox.Font = new Font("Montserrat", 9F);
             brrRoleCombobox.FormattingEnabled = true;
             brrRoleCombobox.Items.AddRange(new object[] { "Student", "Staff" });
-            brrRoleCombobox.Location = new Point(99, 52);
+            brrRoleCombobox.Location = new Point(99, 43);
             brrRoleCombobox.Name = "brrRoleCombobox";
             brrRoleCombobox.Size = new Size(346, 29);
             brrRoleCombobox.TabIndex = 23;
@@ -288,7 +291,7 @@
             label1.Location = new Point(451, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 8, 0, 0);
-            label1.Size = new Size(116, 49);
+            label1.Size = new Size(116, 40);
             label1.TabIndex = 17;
             label1.Text = "Name";
             // 
@@ -300,7 +303,7 @@
             label8.Location = new Point(3, 0);
             label8.Name = "label8";
             label8.Padding = new Padding(0, 8, 0, 0);
-            label8.Size = new Size(90, 49);
+            label8.Size = new Size(90, 40);
             label8.TabIndex = 30;
             label8.Text = "Id";
             // 
@@ -320,7 +323,7 @@
             label6.AutoSize = true;
             label6.Dock = DockStyle.Fill;
             label6.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(451, 90);
+            label6.Location = new Point(451, 77);
             label6.Name = "label6";
             label6.Padding = new Padding(0, 8, 0, 0);
             label6.Size = new Size(116, 35);
@@ -332,7 +335,7 @@
             phoneNumber.BorderStyle = BorderStyle.FixedSingle;
             phoneNumber.Dock = DockStyle.Fill;
             phoneNumber.Font = new Font("Montserrat", 9F);
-            phoneNumber.Location = new Point(573, 93);
+            phoneNumber.Location = new Point(573, 80);
             phoneNumber.Name = "phoneNumber";
             phoneNumber.Size = new Size(325, 26);
             phoneNumber.TabIndex = 27;
@@ -342,10 +345,10 @@
             label7.AutoSize = true;
             label7.Dock = DockStyle.Fill;
             label7.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(451, 49);
+            label7.Location = new Point(451, 40);
             label7.Name = "label7";
             label7.Padding = new Padding(0, 8, 0, 0);
-            label7.Size = new Size(116, 41);
+            label7.Size = new Size(116, 37);
             label7.TabIndex = 28;
             label7.Text = "Department";
             // 
@@ -354,18 +357,18 @@
             departmentComboBox.Dock = DockStyle.Fill;
             departmentComboBox.Font = new Font("Montserrat", 8F);
             departmentComboBox.FormattingEnabled = true;
-            departmentComboBox.Location = new Point(573, 52);
+            departmentComboBox.Location = new Point(573, 43);
             departmentComboBox.Name = "departmentComboBox";
             departmentComboBox.Size = new Size(325, 26);
             departmentComboBox.TabIndex = 29;
             // 
             // issueDatepicker
             // 
-            issueDatepicker.CustomFormat = "dd/MM/yyyy   hh:mm tt";
+            issueDatepicker.CustomFormat = "dd/MM/yyyy   hh : mm tt";
             issueDatepicker.Dock = DockStyle.Fill;
             issueDatepicker.Font = new Font("Montserrat", 9F);
             issueDatepicker.Format = DateTimePickerFormat.Custom;
-            issueDatepicker.Location = new Point(99, 128);
+            issueDatepicker.Location = new Point(99, 115);
             issueDatepicker.Name = "issueDatepicker";
             issueDatepicker.Size = new Size(346, 26);
             issueDatepicker.TabIndex = 35;
@@ -399,6 +402,7 @@
             ClientSize = new Size(913, 464);
             Controls.Add(groupBox1);
             Controls.Add(label2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "addBorrowers";
             Text = "Add Borrowers";
             Load += addBorrowers_Load;

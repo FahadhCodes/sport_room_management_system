@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project_Sport_Room.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSetup : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,7 +101,7 @@ namespace Project_Sport_Room.Migrations
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     BrokenQty = table.Column<int>(type: "INTEGER", nullable: false),
                     EquipmentId = table.Column<string>(type: "TEXT", nullable: false),
-                    SupplierId = table.Column<string>(type: "TEXT", nullable: false)
+                    SupplierId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,8 +116,7 @@ namespace Project_Sport_Room.Migrations
                         name: "FK_IntakeItems_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -148,7 +147,6 @@ namespace Project_Sport_Room.Migrations
                 {
                     CombinationId = table.Column<string>(type: "TEXT", nullable: false),
                     ReceiptId = table.Column<string>(type: "TEXT", nullable: false),
-                    BorrowReceiptReceiptId = table.Column<string>(type: "TEXT", nullable: false),
                     EquipmentId = table.Column<string>(type: "TEXT", nullable: false),
                     Qty = table.Column<int>(type: "INTEGER", nullable: false),
                     ReturnedQuantity = table.Column<int>(type: "INTEGER", nullable: false),
@@ -158,8 +156,8 @@ namespace Project_Sport_Room.Migrations
                 {
                     table.PrimaryKey("PK_BorrowedCombinations", x => x.CombinationId);
                     table.ForeignKey(
-                        name: "FK_BorrowedCombinations_BorrowReceipts_BorrowReceiptReceiptId",
-                        column: x => x.BorrowReceiptReceiptId,
+                        name: "FK_BorrowedCombinations_BorrowReceipts_ReceiptId",
+                        column: x => x.ReceiptId,
                         principalTable: "BorrowReceipts",
                         principalColumn: "ReceiptId",
                         onDelete: ReferentialAction.Cascade);
@@ -172,14 +170,14 @@ namespace Project_Sport_Room.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BorrowedCombinations_BorrowReceiptReceiptId",
-                table: "BorrowedCombinations",
-                column: "BorrowReceiptReceiptId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BorrowedCombinations_EquipmentId",
                 table: "BorrowedCombinations",
                 column: "EquipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BorrowedCombinations_ReceiptId",
+                table: "BorrowedCombinations",
+                column: "ReceiptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Borrowers_DepartmentId",

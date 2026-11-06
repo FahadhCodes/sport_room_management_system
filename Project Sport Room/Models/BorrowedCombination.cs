@@ -1,15 +1,19 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project_Sport_Room.Models
 {
     public class BorrowedCombination
     {
-        [Key] public string CombinationId { get; set; }
+        [Key]
+        public string CombinationId { get; set; }
 
+        [ForeignKey(nameof(BorrowReceipt))]
         public string ReceiptId { get; set; }
         public BorrowReceipt BorrowReceipt { get; set; }
 
+        [ForeignKey(nameof(Equipment))]
         public string EquipmentId { get; set; }
         public Equipment Equipment { get; set; }
 
@@ -24,4 +28,3 @@ namespace Project_Sport_Room.Models
         }
     }
 }
-

@@ -11,8 +11,8 @@ using Project_Sport_Room.Models;
 namespace Project_Sport_Room.Migrations
 {
     [DbContext(typeof(SportRoomContext))]
-    [Migration("20261103131459_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20261105122514_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,10 +54,6 @@ namespace Project_Sport_Room.Migrations
                     b.Property<string>("CombinationId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("BorrowReceiptReceiptId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("BrokenQty")
                         .HasColumnType("INTEGER");
 
@@ -77,9 +73,9 @@ namespace Project_Sport_Room.Migrations
 
                     b.HasKey("CombinationId");
 
-                    b.HasIndex("BorrowReceiptReceiptId");
-
                     b.HasIndex("EquipmentId");
+
+                    b.HasIndex("ReceiptId");
 
                     b.ToTable("BorrowedCombinations");
                 });
@@ -189,7 +185,6 @@ namespace Project_Sport_Room.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SupplierId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -235,15 +230,15 @@ namespace Project_Sport_Room.Migrations
 
             modelBuilder.Entity("Project_Sport_Room.Models.BorrowedCombination", b =>
                 {
-                    b.HasOne("Project_Sport_Room.Models.BorrowReceipt", "BorrowReceipt")
-                        .WithMany("BorrowedCombinations")
-                        .HasForeignKey("BorrowReceiptReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Project_Sport_Room.Models.Equipment", "Equipment")
                         .WithMany()
                         .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project_Sport_Room.Models.BorrowReceipt", "BorrowReceipt")
+                        .WithMany("BorrowedCombinations")
+                        .HasForeignKey("ReceiptId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -284,9 +279,7 @@ namespace Project_Sport_Room.Migrations
 
                     b.HasOne("Project_Sport_Room.Models.Supplier", "Supplier")
                         .WithMany("IntakeItems")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SupplierId");
 
                     b.Navigation("Equipment");
 

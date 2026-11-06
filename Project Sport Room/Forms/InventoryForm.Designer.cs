@@ -71,12 +71,13 @@
             // EquipmentDataTable
             // 
             EquipmentDataTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            EquipmentDataTable.BackgroundColor = SystemColors.Control;
             EquipmentDataTable.BorderStyle = BorderStyle.None;
             EquipmentDataTable.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             EquipmentDataTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -94,6 +95,7 @@
             EquipmentDataTable.DefaultCellStyle = dataGridViewCellStyle2;
             EquipmentDataTable.Dock = DockStyle.Fill;
             EquipmentDataTable.EnableHeadersVisualStyles = false;
+            EquipmentDataTable.GridColor = Color.Brown;
             EquipmentDataTable.Location = new Point(3, 194);
             EquipmentDataTable.Name = "EquipmentDataTable";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -394,7 +396,7 @@
             ClientSize = new Size(1002, 578);
             Controls.Add(groupBox1);
             Name = "InventoryForm";
-            Text = "InventoryForm";
+            Text = "Inventory";
             Load += InventoryForm_Load;
             ((System.ComponentModel.ISupportInitialize)EquipmentDataTable).EndInit();
             tableLayoutPanel1.ResumeLayout(false);

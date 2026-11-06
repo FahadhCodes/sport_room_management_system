@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(manageSupplier));
             groupBox4 = new GroupBox();
             tableLayoutPanel5 = new TableLayoutPanel();
             supplierTBspecific = new DataGridView();
@@ -80,7 +81,7 @@
             groupBox4.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(880, 538);
+            groupBox4.Size = new Size(880, 611);
             groupBox4.TabIndex = 27;
             groupBox4.TabStop = false;
             groupBox4.Text = "Edit Suppliers";
@@ -98,21 +99,22 @@
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 4;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 22.2689075F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 20.7983189F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 56.9327736F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
-            tableLayoutPanel5.Size = new Size(874, 513);
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 18.9435329F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 58.8342438F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel5.Size = new Size(874, 586);
             tableLayoutPanel5.TabIndex = 25;
             // 
             // supplierTBspecific
             // 
             supplierTBspecific.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            supplierTBspecific.BackgroundColor = SystemColors.Control;
             supplierTBspecific.BorderStyle = BorderStyle.None;
             supplierTBspecific.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             supplierTBspecific.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -130,11 +132,12 @@
             supplierTBspecific.DefaultCellStyle = dataGridViewCellStyle2;
             supplierTBspecific.Dock = DockStyle.Fill;
             supplierTBspecific.EnableHeadersVisualStyles = false;
-            supplierTBspecific.Location = new Point(3, 208);
+            supplierTBspecific.GridColor = Color.Brown;
+            supplierTBspecific.Location = new Point(3, 223);
             supplierTBspecific.Name = "supplierTBspecific";
             supplierTBspecific.RowHeadersVisible = false;
             supplierTBspecific.RowHeadersWidth = 51;
-            supplierTBspecific.Size = new Size(868, 265);
+            supplierTBspecific.Size = new Size(868, 308);
             supplierTBspecific.TabIndex = 25;
             supplierTBspecific.CellContentClick += supplierTBspecific_CellContentClick;
             supplierTBspecific.EditingControlShowing += supplierTBspecific_EditingControlShowing;
@@ -184,7 +187,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(868, 100);
+            tableLayoutPanel4.Size = new Size(868, 113);
             tableLayoutPanel4.TabIndex = 24;
             // 
             // panel3
@@ -195,7 +198,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(3, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(283, 94);
+            panel3.Size = new Size(283, 107);
             panel3.TabIndex = 3;
             // 
             // totalEq
@@ -227,7 +230,7 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(292, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(283, 94);
+            panel4.Size = new Size(283, 107);
             panel4.TabIndex = 5;
             // 
             // brokenEq
@@ -259,7 +262,7 @@
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(581, 3);
             panel5.Name = "panel5";
-            panel5.Size = new Size(284, 94);
+            panel5.Size = new Size(284, 107);
             panel5.TabIndex = 6;
             // 
             // healthyEq
@@ -289,9 +292,9 @@
             groupBox1.Controls.Add(label4);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(3, 109);
+            groupBox1.Location = new Point(3, 122);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(868, 93);
+            groupBox1.Size = new Size(868, 95);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Update supplier";
@@ -314,7 +317,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(862, 68);
+            tableLayoutPanel1.Size = new Size(862, 70);
             tableLayoutPanel1.TabIndex = 22;
             tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
@@ -335,7 +338,7 @@
             label3.Location = new Point(367, 0);
             label3.Name = "label3";
             label3.Padding = new Padding(0, 7, 0, 0);
-            label3.Size = new Size(146, 34);
+            label3.Size = new Size(146, 35);
             label3.TabIndex = 26;
             label3.Text = "Phone Number";
             label3.TextAlign = ContentAlignment.TopCenter;
@@ -348,7 +351,7 @@
             label2.Location = new Point(3, 0);
             label2.Name = "label2";
             label2.Padding = new Padding(0, 7, 0, 0);
-            label2.Size = new Size(134, 34);
+            label2.Size = new Size(134, 35);
             label2.TabIndex = 24;
             label2.Text = "Supplier Name";
             label2.TextAlign = ContentAlignment.TopCenter;
@@ -366,9 +369,9 @@
             // updateBtn
             // 
             updateBtn.Dock = DockStyle.Right;
-            updateBtn.Location = new Point(765, 37);
+            updateBtn.Location = new Point(765, 38);
             updateBtn.Name = "updateBtn";
-            updateBtn.Size = new Size(94, 28);
+            updateBtn.Size = new Size(94, 29);
             updateBtn.TabIndex = 28;
             updateBtn.Text = "Update";
             updateBtn.UseVisualStyleBackColor = true;
@@ -396,18 +399,18 @@
             tableLayoutPanel2.Controls.Add(bottomDeleteBtn, 3, 0);
             tableLayoutPanel2.Controls.Add(startDatePicker, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 479);
+            tableLayoutPanel2.Location = new Point(3, 537);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(868, 31);
+            tableLayoutPanel2.Size = new Size(868, 46);
             tableLayoutPanel2.TabIndex = 26;
             // 
             // endDatePicker
             // 
-            endDatePicker.CalendarFont = new Font("Montserrat", 8F);
-            endDatePicker.CustomFormat = "dd/MM/yyyy  |  hh:mm  tt";
-            endDatePicker.Dock = DockStyle.Fill;
+            endDatePicker.CalendarFont = new Font("Montserrat", 10F);
+            endDatePicker.CustomFormat = "dd/MM/yyyy     hh:mm  tt";
+            endDatePicker.Dock = DockStyle.Top;
             endDatePicker.Font = new Font("Montserrat", 8F);
             endDatePicker.Format = DateTimePickerFormat.Custom;
             endDatePicker.Location = new Point(371, 3);
@@ -417,8 +420,8 @@
             // 
             // filterBtn
             // 
-            filterBtn.Dock = DockStyle.Fill;
-            filterBtn.Font = new Font("Montserrat", 7F);
+            filterBtn.Dock = DockStyle.Top;
+            filterBtn.Font = new Font("Montserrat", 8F);
             filterBtn.Location = new Point(700, 3);
             filterBtn.Name = "filterBtn";
             filterBtn.Size = new Size(84, 25);
@@ -429,8 +432,8 @@
             // 
             // bottomDeleteBtn
             // 
-            bottomDeleteBtn.Dock = DockStyle.Fill;
-            bottomDeleteBtn.Font = new Font("Montserrat", 7F);
+            bottomDeleteBtn.Dock = DockStyle.Top;
+            bottomDeleteBtn.Font = new Font("Montserrat", 8F);
             bottomDeleteBtn.Location = new Point(790, 3);
             bottomDeleteBtn.Name = "bottomDeleteBtn";
             bottomDeleteBtn.Size = new Size(75, 25);
@@ -441,9 +444,9 @@
             // 
             // startDatePicker
             // 
-            startDatePicker.CalendarFont = new Font("Montserrat", 8F);
-            startDatePicker.CustomFormat = "dd/MM/yyyy  |  hh:mm  tt";
-            startDatePicker.Dock = DockStyle.Fill;
+            startDatePicker.CalendarFont = new Font("Montserrat", 10F);
+            startDatePicker.CustomFormat = "dd/MM/yyyy     hh:mm  tt";
+            startDatePicker.Dock = DockStyle.Top;
             startDatePicker.Font = new Font("Montserrat", 8F);
             startDatePicker.Format = DateTimePickerFormat.Custom;
             startDatePicker.Location = new Point(3, 3);
@@ -455,8 +458,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 538);
+            ClientSize = new Size(880, 611);
             Controls.Add(groupBox4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "manageSupplier";
             Text = "Manage Supplier";
             Load += manageSupplier_Load;

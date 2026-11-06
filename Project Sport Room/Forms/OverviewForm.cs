@@ -15,8 +15,8 @@ namespace Project_Sport_Room
         public OverviewForm()
         {
             InitializeComponent();
-            // Use Activated to catch when the user clicks this tab from the Sidebar
-            this.Activated += OverviewForm_Activated;
+            // CRITICAL FIX: Use VisibleChanged instead of Activated for Panel-hosted forms!
+            this.VisibleChanged += OverviewForm_VisibleChanged;
         }
 
         // 2. Leave this empty so the Visual Studio Designer doesn't crash!
@@ -45,7 +45,9 @@ namespace Project_Sport_Room
 
         private async Task LoadComboBoxes()
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 // Setup Department Dropdown with an "All" option at the top
                 var depts = await db.Departments.Select(dep => new { Id = dep.Id, Name = dep.Name }).ToListAsync();
@@ -57,14 +59,21 @@ namespace Project_Sport_Room
             }
 
             // Setup Status Dropdown with an "All" option
-            statusComboBox.Items.Clear();
-            statusComboBox.Items.AddRange(new string[] { "All", "Borrowed", "Overdue", "Returned", "Returned Late" });
-            statusComboBox.SelectedIndex = 0; // Default to "All"
+                statusComboBox.Items.Clear();
+                statusComboBox.Items.AddRange(new string[] { "All", "Borrowed", "Overdue", "Returned", "Returned Late" });
+                statusComboBox.SelectedIndex = 0; // Default to "All"
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading department list: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async Task UpdateKPIs()
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 // 1. Available: Healthy items currently on the shelf (Deducts borrowed natively)
                 int available = await db.Equipments.SumAsync(e => (int?)e.Quantity) ?? 0;
@@ -89,12 +98,19 @@ namespace Project_Sport_Room
                     .Where(i => i.SuppliedDate >= thirtyDaysAgo)
                     .SumAsync(i => (int?)i.Quantity) ?? 0;
                 newlyArrived.Text = newlyArr.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error calculating dashboard statistics: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private async Task LoadGridData()
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 var query = db.BorrowedCombinations
                     .Include(bc => bc.BorrowReceipt)
@@ -160,6 +176,11 @@ namespace Project_Sport_Room
 
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = gridData;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading overview grid data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -172,6 +193,15 @@ namespace Project_Sport_Room
         // Required to prevent Visual Studio Designer errors if accidentally double-clicked
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
+
+        private async void OverviewForm_VisibleChanged(object sender, EventArgs e)
+        {
+            // This now perfectly catches every time you click the Overview button on the sidebar!
+            if (this.Visible && isOverviewLoaded)
+            {
+                await RefreshDashboard();
+            }
         }
     }
 }

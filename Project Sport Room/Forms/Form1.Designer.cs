@@ -30,21 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
-            label1 = new Label();
+            tableLayoutPanel4 = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
+            tableLayoutPanel5 = new TableLayoutPanel();
+            label2 = new Label();
+            label1 = new Label();
             panel2 = new Panel();
-            button1 = new Button();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            home = new Button();
+            label11 = new Label();
             borrowerBtn = new Button();
+            button1 = new Button();
             newIntakebtn = new Button();
             inventorybtn = new Button();
             overviewbtn = new Button();
-            label11 = new Label();
             MainPanel = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            tableLayoutPanel5.SuspendLayout();
             panel2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -53,120 +61,210 @@
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(tableLayoutPanel4);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1245, 86);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // tableLayoutPanel4
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(90, 27);
-            label1.Name = "label1";
-            label1.Size = new Size(274, 21);
-            label1.TabIndex = 3;
-            label1.Text = "Sport Room Management System";
-            label1.Click += label1_Click;
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.16009665F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 92.8399048F));
+            tableLayoutPanel4.Controls.Add(pictureBox1, 0, 0);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel5, 1, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(0, 0);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Size = new Size(1243, 84);
+            tableLayoutPanel4.TabIndex = 4;
             // 
             // pictureBox1
             // 
+            pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(2, 2);
+            pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(85, 79);
+            pictureBox1.Size = new Size(83, 78);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel5.Controls.Add(label2, 0, 1);
+            tableLayoutPanel5.Controls.Add(label1, 0, 0);
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(92, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 2;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 65.38461F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 34.6153831F));
+            tableLayoutPanel5.Size = new Size(1148, 78);
+            tableLayoutPanel5.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Montserrat", 9F, FontStyle.Bold);
+            label2.ForeColor = Color.Brown;
+            label2.Location = new Point(3, 51);
+            label2.Name = "label2";
+            label2.Size = new Size(1142, 27);
+            label2.TabIndex = 6;
+            label2.Text = "Department of Sport Sciences and Physical Education";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Montserrat Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Brown;
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(1142, 51);
+            label1.TabIndex = 5;
+            label1.Text = "SPORT ROOM MANAGEMENT SYSTEM";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(borrowerBtn);
-            panel2.Controls.Add(newIntakebtn);
-            panel2.Controls.Add(inventorybtn);
-            panel2.Controls.Add(overviewbtn);
-            panel2.Controls.Add(label11);
+            panel2.Controls.Add(tableLayoutPanel3);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(197, 531);
             panel2.TabIndex = 1;
             // 
-            // button1
+            // tableLayoutPanel3
             // 
-            button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(4, 365);
-            button1.Name = "button1";
-            button1.Size = new Size(188, 48);
-            button1.TabIndex = 13;
-            button1.Text = "Suppliers";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            tableLayoutPanel3.ColumnCount = 1;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(home, 0, 1);
+            tableLayoutPanel3.Controls.Add(label11, 0, 0);
+            tableLayoutPanel3.Controls.Add(borrowerBtn, 0, 6);
+            tableLayoutPanel3.Controls.Add(button1, 0, 5);
+            tableLayoutPanel3.Controls.Add(newIntakebtn, 0, 4);
+            tableLayoutPanel3.Controls.Add(inventorybtn, 0, 3);
+            tableLayoutPanel3.Controls.Add(overviewbtn, 0, 2);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(0, 0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 7;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2853069F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.285305F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.285305F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.285305F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.285305F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.285305F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2881613F));
+            tableLayoutPanel3.Size = new Size(197, 531);
+            tableLayoutPanel3.TabIndex = 14;
+            // 
+            // home
+            // 
+            home.BackColor = Color.Brown;
+            home.Dock = DockStyle.Fill;
+            home.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            home.ForeColor = Color.White;
+            home.Location = new Point(3, 78);
+            home.Name = "home";
+            home.Size = new Size(191, 69);
+            home.TabIndex = 14;
+            home.Text = "Home";
+            home.UseVisualStyleBackColor = false;
+            home.Click += home_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Dock = DockStyle.Fill;
+            label11.Font = new Font("Montserrat", 15F, FontStyle.Bold);
+            label11.Location = new Point(3, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(191, 75);
+            label11.TabIndex = 0;
+            label11.Text = "Workspace";
+            label11.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // borrowerBtn
             // 
-            borrowerBtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            borrowerBtn.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            borrowerBtn.Location = new Point(5, 293);
+            borrowerBtn.BackColor = Color.Brown;
+            borrowerBtn.Dock = DockStyle.Fill;
+            borrowerBtn.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            borrowerBtn.ForeColor = Color.White;
+            borrowerBtn.Location = new Point(3, 453);
             borrowerBtn.Name = "borrowerBtn";
-            borrowerBtn.Size = new Size(188, 48);
+            borrowerBtn.Size = new Size(191, 75);
             borrowerBtn.TabIndex = 12;
             borrowerBtn.Text = "Borrowers";
-            borrowerBtn.UseVisualStyleBackColor = true;
+            borrowerBtn.UseVisualStyleBackColor = false;
             borrowerBtn.Click += borrowerBtn_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Brown;
+            button1.Dock = DockStyle.Fill;
+            button1.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(3, 378);
+            button1.Name = "button1";
+            button1.Size = new Size(191, 69);
+            button1.TabIndex = 13;
+            button1.Text = "Suppliers";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
             // 
             // newIntakebtn
             // 
-            newIntakebtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            newIntakebtn.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            newIntakebtn.Location = new Point(5, 215);
+            newIntakebtn.BackColor = Color.Brown;
+            newIntakebtn.Dock = DockStyle.Fill;
+            newIntakebtn.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            newIntakebtn.ForeColor = Color.White;
+            newIntakebtn.Location = new Point(3, 303);
             newIntakebtn.Name = "newIntakebtn";
-            newIntakebtn.Size = new Size(188, 48);
+            newIntakebtn.Size = new Size(191, 69);
             newIntakebtn.TabIndex = 11;
             newIntakebtn.Text = "New Intakes";
-            newIntakebtn.UseVisualStyleBackColor = true;
+            newIntakebtn.UseVisualStyleBackColor = false;
             newIntakebtn.Click += newIntakebtn_Click;
             // 
             // inventorybtn
             // 
-            inventorybtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            inventorybtn.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            inventorybtn.Location = new Point(5, 141);
+            inventorybtn.BackColor = Color.Brown;
+            inventorybtn.Dock = DockStyle.Fill;
+            inventorybtn.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            inventorybtn.ForeColor = Color.White;
+            inventorybtn.Location = new Point(3, 228);
             inventorybtn.Name = "inventorybtn";
-            inventorybtn.Size = new Size(188, 48);
+            inventorybtn.Size = new Size(191, 69);
             inventorybtn.TabIndex = 10;
             inventorybtn.Text = "Inventory";
-            inventorybtn.UseVisualStyleBackColor = true;
+            inventorybtn.UseVisualStyleBackColor = false;
             inventorybtn.Click += inventorybtn_Click;
             // 
             // overviewbtn
             // 
-            overviewbtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            overviewbtn.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            overviewbtn.Location = new Point(5, 62);
+            overviewbtn.BackColor = Color.Brown;
+            overviewbtn.Dock = DockStyle.Fill;
+            overviewbtn.Font = new Font("Montserrat ExtraBold", 9F, FontStyle.Bold);
+            overviewbtn.ForeColor = Color.White;
+            overviewbtn.Location = new Point(3, 153);
             overviewbtn.Name = "overviewbtn";
-            overviewbtn.Size = new Size(188, 48);
+            overviewbtn.Size = new Size(191, 69);
             overviewbtn.TabIndex = 9;
             overviewbtn.Text = "Overview";
-            overviewbtn.UseVisualStyleBackColor = true;
+            overviewbtn.UseVisualStyleBackColor = false;
             overviewbtn.Click += overviewbtn_Click_1;
-            // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label11.AutoSize = true;
-            label11.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(54, 10);
-            label11.Name = "label11";
-            label11.Size = new Size(97, 21);
-            label11.TabIndex = 0;
-            label11.Text = "Workspace";
             // 
             // MainPanel
             // 
@@ -214,14 +312,18 @@
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1251, 635);
             Controls.Add(tableLayoutPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Sport Room Managment System";
             Load += Form1_Load;
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -232,7 +334,6 @@
         private Panel panel1;
         private Panel panel2;
         private PictureBox pictureBox1;
-        private Label label1;
         private Button newIntakebtn;
         private Button inventorybtn;
         private Button overviewbtn;
@@ -242,5 +343,11 @@
         private Button button1;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Label label2;
+        private Label label1;
+        private Button home;
     }
 }

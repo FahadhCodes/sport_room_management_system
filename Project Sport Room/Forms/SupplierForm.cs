@@ -14,11 +14,15 @@ namespace Project_Sport_Room
 {
     public partial class SupplierForm : Form
     {
-        public string selectedsuppliertId { get; set; }
+        public string? selectedsuppliertId { get; set; }
+
         public SupplierForm()
         {
             InitializeComponent();
+            // Tells the form to refresh every time the sidebar button clicks it into view
+            this.VisibleChanged += SupplierForm_VisibleChanged;
         }
+
         private async Task LoadAllSuppliers()
         {
             try
@@ -30,17 +34,25 @@ namespace Project_Sport_Room
                     suppliersTb.Columns.Clear();
                     suppliersTb.DataSource = suppliersList;
 
-                    suppliersTb.Columns["Name"].HeaderText = "Supplier Name";
-                    suppliersTb.Columns["Id"].Visible = false;
+                    if (suppliersTb.Columns.Contains("Name"))
+                        suppliersTb.Columns["Name"].HeaderText = "Supplier Name";
+                    if (suppliersTb.Columns.Contains("Id"))
+                        suppliersTb.Columns["Id"].Visible = false;
 
-                    if (!string.IsNullOrEmpty(suppliersList.FirstOrDefault()?.Id))
+                    var firstSupplier = suppliersList.FirstOrDefault();
+                    if (firstSupplier != null && !string.IsNullOrEmpty(firstSupplier.Id))
                     {
-                        await updateSummary(suppliersList.FirstOrDefault().Id);
+                        selectedsuppliertId = firstSupplier.Id;
+                        await updateSummary(firstSupplier.Id);
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading suppliers: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private async void button1_Click(object sender, EventArgs e)
         {
             Add frm2 = new Add();
@@ -72,99 +84,86 @@ namespace Project_Sport_Room
 
         private async void SupplierForm_Load(object sender, EventArgs e)
         {
+          
+        }
+
+        private async Task updateSummary(string id)
+        {
             try
             {
                 using (var db = new SportRoomContext())
                 {
-                    var suppliersList = await db.Suppliers.Select(sup => new { sup.Name, sup.Id }).ToListAsync();
+                    var supplier = await db.Suppliers.FirstOrDefaultAsync(sup => sup.Id == id);
+                    int tot = await db.IntakeItems.Where(item => item.SupplierId == id).SumAsync(item => (int?)item.Quantity) ?? 0;
 
-                    suppliersTb.Columns.Clear();
-                    suppliersTb.DataSource = suppliersList;
-
-                    suppliersTb.Columns["Name"].HeaderText = "Supplier Name";
-                    suppliersTb.Columns["Id"].Visible = false;
-
-                    // Use ?. to safely check the Id without crashing if FirstOrDefault() is null
-                    if (!string.IsNullOrEmpty(suppliersList.FirstOrDefault()?.Id))
-                    {
-                        await updateSummary(suppliersList.FirstOrDefault().Id);
-                    }
+                    suppIdLabel.Text = id;
+                    phoneNumaber.Text = supplier?.PhoneNumber ?? "";
+                    NameLable.Text = supplier?.Name ?? "";
+                    totLabel.Text = tot.ToString();
                 }
             }
-            catch (Exception ex) { }
-            await LoadAllSuppliers();
-        }
-        private async Task updateSummary(string id)
-        {
-            using (var db = new SportRoomContext())
+            catch (Exception ex)
             {
-                var supplierData = await db.Suppliers.Where(sup => sup.Id == id).
-                    Select(val => new
-                    {
-                        val.Name,
-                        val.PhoneNumber
-                    }).ToListAsync();
-                var totalSuppliedQty = await db.IntakeItems.Where(item => item.SupplierId == id).Select(sel => new
-                {
-                    sel.Quantity
-                }).ToListAsync();
-                int tot = 0;
-                foreach (var item in totalSuppliedQty)
-                {
-                    tot += int.Parse(item.Quantity.ToString());
-                }
-                suppIdLabel.Text = id;
-                phoneNumaber.Text = supplierData.FirstOrDefault().PhoneNumber??"";
-                NameLable.Text = supplierData.FirstOrDefault().Name??"";
-                totLabel.Text = tot.ToString();
+                MessageBox.Show($"Error loading supplier summary: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private async Task updateTable(string id, string cho)
         {
-            using (var db = new SportRoomContext())
+            try
             {
-                var query = db.IntakeItems.AsQueryable();
-                // 2. Extract the dates from the two DateTimePickers
-                // Start date defaults to midnight (00:00:00)
-                DateTime startDate = startDatePicker.Value.Date;
-
-                // End date defaults to midnight, so we add 1 day and subtract 1 tick 
-                // to make it 23:59:59.999 of the selected end day.
-                DateTime endDate = endDatePicker.Value.Date.AddDays(1).AddTicks(-1);
-                switch (cho)
+                using (var db = new SportRoomContext())
                 {
-                    case "forSupllierList":
-                        query = query.Where(dt => dt.Supplier.Id == id);
-                        break;
-                    case "search":
-                        query = query.Where(dt => dt.Supplier.Id == id && dt.Equipment.Name.Contains(searchTextBox.Text));
-                        break;
-                    case "dateFilter":
-                        query = query.Where(dt => dt.SupplierId == id
-                      && dt.SuppliedDate >= startDate
-                      && dt.SuppliedDate <= endDate);
-                        break;
+                    var query = db.IntakeItems.AsQueryable();
+
+                    DateTime startDate = startDatePicker.Value.Date;
+                    DateTime endDate = endDatePicker.Value.Date.AddDays(1).AddTicks(-1);
+
+                    switch (cho)
+                    {
+                        case "forSupllierList":
+                            query = query.Where(dt => dt.SupplierId == id);
+                            break;
+                        case "search":
+                            query = query.Where(dt => dt.SupplierId == id && dt.Equipment.Name.Contains(searchTextBox.Text));
+                            break;
+                        case "dateFilter":
+                            query = query.Where(dt => dt.SupplierId == id
+                                && dt.SuppliedDate >= startDate
+                                && dt.SuppliedDate <= endDate);
+                            break;
+                    }
+
+                    var IntakeData = await query.Select(intk => new
+                    {
+                        intk.Id,
+                        intk.SuppliedDate,
+                        supplierName = intk.Supplier != null ? intk.Supplier.Name : "N/A",
+                        equipmentName = intk.Equipment != null ? intk.Equipment.Name : "N/A",
+                        intk.Quantity
+                    }).ToListAsync();
+
+                    supplierInfoTB.Columns.Clear();
+                    supplierInfoTB.DataSource = IntakeData;
+
+                    if (supplierInfoTB.Columns.Contains("Id"))
+                        supplierInfoTB.Columns["Id"].HeaderText = "Intake Id";
+                    if (supplierInfoTB.Columns.Contains("SuppliedDate"))
+                        supplierInfoTB.Columns["SuppliedDate"].HeaderText = "Supplied Date";
+                    if (supplierInfoTB.Columns.Contains("supplierName"))
+                        supplierInfoTB.Columns["supplierName"].HeaderText = "Supplier Name";
+                    if (supplierInfoTB.Columns.Contains("equipmentName"))
+                        supplierInfoTB.Columns["equipmentName"].HeaderText = "Equipment Name";
+                    if (supplierInfoTB.Columns.Contains("Quantity"))
+                        supplierInfoTB.Columns["Quantity"].HeaderText = "Quantity";
                 }
-                var IntakeData = await query.Select(intk => new
-                {
-                    intk.Id,
-                    intk.SuppliedDate,
-                    supplierName = intk.Supplier.Name,
-                    equipmentName = intk.Equipment.Name,
-                    intk.Quantity
-                }).ToListAsync();
-
-                supplierInfoTB.Columns.Clear();
-                supplierInfoTB.DataSource = IntakeData;
-
-                supplierInfoTB.Columns["Id"].HeaderText = "Intake Id";
-                supplierInfoTB.Columns["SuppliedDate"].HeaderText = "Supplied Date";
-                supplierInfoTB.Columns["supplierName"].HeaderText = "supplier Name";
-                supplierInfoTB.Columns["equipmentName"].HeaderText = "Equipment Name";
-                supplierInfoTB.Columns["Quantity"].HeaderText = "Quantity";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading intake table: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private async void suppliersTb_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -194,16 +193,33 @@ namespace Project_Sport_Room
 
         private async void searchSupplier_TextChanged(object sender, EventArgs e)
         {
-            using (var db = new SportRoomContext())
+            try
             {
-                var suppliersList = await db.Suppliers.Where(cons => cons.Name.Contains(searchSupplier.Text))
-                    .Select(sup => new { sup.Name, sup.Id }).ToListAsync();
+                using (var db = new SportRoomContext())
+                {
+                    var suppliersList = await db.Suppliers.Where(cons => cons.Name.Contains(searchSupplier.Text))
+                        .Select(sup => new { sup.Name, sup.Id }).ToListAsync();
 
-                suppliersTb.Columns.Clear();
-                suppliersTb.DataSource = suppliersList;
+                    suppliersTb.Columns.Clear();
+                    suppliersTb.DataSource = suppliersList;
 
-                suppliersTb.Columns["Name"].HeaderText = "Supplier Name";
-                suppliersTb.Columns["Id"].Visible = false;
+                    if (suppliersTb.Columns.Contains("Name"))
+                        suppliersTb.Columns["Name"].HeaderText = "Supplier Name";
+                    if (suppliersTb.Columns.Contains("Id"))
+                        suppliersTb.Columns["Id"].Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching suppliers: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void SupplierForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                await LoadAllSuppliers();
             }
         }
     }

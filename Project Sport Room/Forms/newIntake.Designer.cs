@@ -32,6 +32,8 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(newIntake));
             tableLayoutPanel1 = new TableLayoutPanel();
             intakeTable = new DataGridView();
             IntakeId = new DataGridViewTextBoxColumn();
@@ -73,12 +75,12 @@
             // intakeTable
             // 
             intakeTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            intakeTable.BorderStyle = BorderStyle.None;
+            intakeTable.BackgroundColor = SystemColors.Control;
             intakeTable.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             intakeTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -96,8 +98,17 @@
             intakeTable.DefaultCellStyle = dataGridViewCellStyle2;
             intakeTable.Dock = DockStyle.Fill;
             intakeTable.EnableHeadersVisualStyles = false;
+            intakeTable.GridColor = Color.Brown;
             intakeTable.Location = new Point(3, 256);
             intakeTable.Name = "intakeTable";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            intakeTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             intakeTable.RowHeadersVisible = false;
             intakeTable.RowHeadersWidth = 51;
             intakeTable.Size = new Size(902, 248);
@@ -130,31 +141,33 @@
             // supplierTable
             // 
             supplierTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            supplierTable.BorderStyle = BorderStyle.None;
+            supplierTable.BackgroundColor = SystemColors.Control;
             supplierTable.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             supplierTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Montserrat", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Brown;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            supplierTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            supplierTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            supplierTable.Columns.AddRange(new DataGridViewColumn[] { Supplier_Id, Supplier_Name, SuppliedEquipQty, TotalIntakes });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Montserrat", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Brown;
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            supplierTable.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            supplierTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            supplierTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            supplierTable.Columns.AddRange(new DataGridViewColumn[] { Supplier_Id, Supplier_Name, SuppliedEquipQty, TotalIntakes });
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Montserrat", 9F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            supplierTable.DefaultCellStyle = dataGridViewCellStyle5;
             supplierTable.Dock = DockStyle.Fill;
             supplierTable.EnableHeadersVisualStyles = false;
+            supplierTable.GridColor = Color.Brown;
             supplierTable.Location = new Point(3, 3);
             supplierTable.Name = "supplierTable";
+            supplierTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             supplierTable.RowHeadersVisible = false;
             supplierTable.RowHeadersWidth = 51;
             supplierTable.Size = new Size(902, 247);
@@ -219,7 +232,7 @@
             groupBox1.Size = new Size(1015, 532);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
-            groupBox1.Text = "New Equipment Intake";
+            groupBox1.Text = "New Intake";
             // 
             // newIntake
             // 
@@ -227,8 +240,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1015, 532);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "newIntake";
-            Text = "newIntake";
+            Text = "New Intake";
             Load += newIntake_Load;
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)intakeTable).EndInit();

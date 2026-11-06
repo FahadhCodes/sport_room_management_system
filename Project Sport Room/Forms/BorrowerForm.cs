@@ -48,8 +48,10 @@ namespace Project_Sport_Room
             // 1. Hide the picker instantly
             returnPicker.Visible = false;
 
-            // 2. Save the new date AND Restock the inventory
-            using (var db = new SportRoomContext())
+            try
+            {
+                // 2. Save the new date AND Restock the inventory
+                using (var db = new SportRoomContext())
             {
                 // Fetch the receipt AND its associated equipment items
                 var receipt = await db.BorrowReceipts
@@ -68,15 +70,24 @@ namespace Project_Sport_Room
                         var equipment = await db.Equipments.FindAsync(combo.EquipmentId);
                         if (equipment != null)
                         {
-                            equipment.Quantity += combo.Qty; // Put it back on the shelf
+                            int broken = Math.Max(0, combo.BrokenQty);
+                            int healthy = Math.Max(0, combo.Qty - broken);
+                            equipment.Quantity += healthy; // Put healthy units back on the shelf
+                            equipment.BrokenQty += broken; // Add damaged units to broken inventory
                         }
+                        combo.ReturnedQuantity = combo.Qty;
                     }
                     await db.SaveChangesAsync();
                 }
             }
 
             // 3. Refresh the UI so the grids and labels update
-            await UpdateBorrowerSummary(brrName.Text);
+                await UpdateBorrowerSummary(brrName.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing return: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -125,7 +136,9 @@ namespace Project_Sport_Room
 
         private async Task UpdateBorrowerSummary(string searchName = null)
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 Borrower targetBorrower = null;
 
@@ -194,13 +207,20 @@ namespace Project_Sport_Room
                     borrowerInfoTB.AutoGenerateColumns = false;
                     borrowerInfoTB.DataSource = filteredReceipts;
                 }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading borrower summary: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // 3. Helper Method to fetch equipment for a specific Receipt ID
         private async Task LoadReceiptDetails(string receiptId)
         {
-            using (var db = new SportRoomContext())
+            try
+            {
+                using (var db = new SportRoomContext())
             {
                 var filteredReceipts = await db.BorrowedCombinations
                     .Include(c => c.Equipment)
@@ -221,6 +241,11 @@ namespace Project_Sport_Room
 
                 borrowerInfoTB.AutoGenerateColumns = false;
                 borrowerInfoTB.DataSource = filteredReceipts;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading receipt details: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -269,40 +294,10 @@ namespace Project_Sport_Room
 
                 string receiptId = cellValue.ToString();
 
-                DialogResult dr = MessageBox.Show(
-                    "Do you want to mark this receipt as returned right now?",
-                    "Update Return Date",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dr == DialogResult.Yes)
+                ReturnInspectionDialog dialog = new ReturnInspectionDialog(receiptId);
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    using (var db = new SportRoomContext())
-                    {
-                        var receipt = await db.BorrowReceipts
-                            .Include(r => r.BorrowedCombinations)
-                            .FirstOrDefaultAsync(r => r.ReceiptId == receiptId);
-
-                        if (receipt != null && receipt.ReturnedDate == null)
-                        {
-                            receipt.ReturnedDate = DateTime.Now;
-                            receipt.UpdateStatus();
-
-                            // RESTOCK INVENTORY
-                            foreach (var combo in receipt.BorrowedCombinations)
-                            {
-                                var equipment = await db.Equipments.FindAsync(combo.EquipmentId);
-                                if (equipment != null)
-                                {
-                                    equipment.Quantity += combo.Qty;
-                                }
-                            }
-                            await db.SaveChangesAsync();
-                        }
-                    }
-
                     await UpdateBorrowerSummary(brrName.Text);
-                    MessageBox.Show("Successfully marked as returned!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -310,18 +305,25 @@ namespace Project_Sport_Room
         // 7. Left List Search Filter
         private async void borrSearchFromList_TextChanged(object sender, EventArgs e)
         {
-            using (var db = new SportRoomContext())
+            try
             {
-                string searchText = borrSearchFromList.Text.Trim();
+                using (var db = new SportRoomContext())
+                {
+                    string searchText = borrSearchFromList.Text.Trim();
 
-                var borrowerList = await db.Borrowers
-                    .Where(b => b.Name.Contains(searchText))
-                    .Select(b => b.Name)
-                    .Distinct()
-                    .Select(name => new { borrnames = name })
-                    .ToListAsync();
+                    var borrowerList = await db.Borrowers
+                        .Where(b => b.Name.Contains(searchText))
+                        .Select(b => b.Name)
+                        .Distinct()
+                        .Select(name => new { borrnames = name })
+                        .ToListAsync();
 
-                borrList.DataSource = borrowerList;
+                    borrList.DataSource = borrowerList;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching borrower list: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -329,35 +331,42 @@ namespace Project_Sport_Room
         // 8. Main Grid Global Search Filter
         private async void brrSearchfromData_TextChanged(object sender, EventArgs e)
         {
-            using (var db = new SportRoomContext())
+            try
             {
-                string searchText = brrSearchfromData.Text.Trim();
-                var query = db.BorrowedCombinations.AsNoTracking().AsQueryable();
-
-                if (!string.IsNullOrEmpty(searchText))
+                using (var db = new SportRoomContext())
                 {
-                    query = query.Where(v => v.Equipment.Name.Contains(searchText) ||
-                                             v.BorrowReceipt.Borrower.Name.Contains(searchText));
+                    string searchText = brrSearchfromData.Text.Trim();
+                    var query = db.BorrowedCombinations.AsNoTracking().AsQueryable();
+
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        query = query.Where(v => v.Equipment.Name.Contains(searchText) ||
+                                                 v.BorrowReceipt.Borrower.Name.Contains(searchText));
+                    }
+
+                    var filteredData = await query.Select(val => new
+                    {
+                        BorrowReceipt = val.BorrowReceipt.ReceiptId,
+                        borrName = val.BorrowReceipt.Borrower.Name,
+                        borrowedItems = val.Equipment.Name,
+                        Qty = val.Qty,
+                        IssuedDate = val.BorrowReceipt.IssuedDate,
+                        DueDate = val.BorrowReceipt.DueDate,
+                        ReturnedDate = val.BorrowReceipt.ReturnedDate,
+                        status = val.BorrowReceipt.ReturnedDate.HasValue
+                            ? (val.BorrowReceipt.ReturnedDate.Value <= val.BorrowReceipt.DueDate ? "Returned" : "Returned Late")
+                            : (DateTime.Now > val.BorrowReceipt.DueDate ? "Overdue" : "Borrowed")
+                    }).ToListAsync();
+
+                    // ADD THIS LINE TO PREVENT GHOST COLUMNS DURING SEARCH:
+                    borrowerInfoTB.AutoGenerateColumns = false;
+
+                    borrowerInfoTB.DataSource = filteredData;
                 }
-
-                var filteredData = await query.Select(val => new
-                {
-                    BorrowReceipt = val.BorrowReceipt.ReceiptId,
-                    borrName = val.BorrowReceipt.Borrower.Name,
-                    borrowedItems = val.Equipment.Name,
-                    Qty = val.Qty,
-                    IssuedDate = val.BorrowReceipt.IssuedDate,
-                    DueDate = val.BorrowReceipt.DueDate,
-                    ReturnedDate = val.BorrowReceipt.ReturnedDate,
-                    status = val.BorrowReceipt.ReturnedDate.HasValue
-                        ? (val.BorrowReceipt.ReturnedDate.Value <= val.BorrowReceipt.DueDate ? "Returned" : "Returned Late")
-                        : (DateTime.Now > val.BorrowReceipt.DueDate ? "Overdue" : "Borrowed")
-                }).ToListAsync();
-
-                // ADD THIS LINE TO PREVENT GHOST COLUMNS DURING SEARCH:
-                borrowerInfoTB.AutoGenerateColumns = false;
-
-                borrowerInfoTB.DataSource = filteredData;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching borrowed records: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -428,27 +437,23 @@ namespace Project_Sport_Room
 
                 if (isChecked)
                 {
-                    currentReceiptIdForReturn = receiptId;
-                    Rectangle cellRect = reciptsData.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-
-                    // 1. Give it a fixed, comfortable width so the entire Date and Time fit perfectly
-                    returnPicker.Size = new Size(180, 24);
-
-                    // 2. Translate coordinates so it pops out to the RIGHT of the narrow list, floating over the main form
-                    Point screenPos = reciptsData.PointToScreen(new Point(cellRect.Right, cellRect.Top));
-                    Point formPos = this.PointToClient(screenPos);
-
-                    returnPicker.Location = formPos;
-                    returnPicker.Value = DateTime.Now;
-
-                    returnPicker.Visible = true;
-                    returnPicker.BringToFront();
-                    returnPicker.Focus();
+                    ReturnInspectionDialog dialog = new ReturnInspectionDialog(receiptId);
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        await UpdateBorrowerSummary(brrName.Text);
+                    }
+                    else
+                    {
+                        // User cancelled inspection: refresh summary to revert checkmark
+                        await UpdateBorrowerSummary(brrName.Text);
+                    }
                 }
                 else
                 {
-                    // BOX UNCHECKED: They made a mistake. Remove the return date and DEDUCT the stock again!
-                    using (var db = new SportRoomContext())
+                    try
+                    {
+                        // BOX UNCHECKED: They made a mistake. Remove the return date and DEDUCT the stock again!
+                        using (var db = new SportRoomContext())
                     {
                         var receipt = await db.BorrowReceipts
                             .Include(r => r.BorrowedCombinations)
@@ -466,13 +471,22 @@ namespace Project_Sport_Room
                                 var equipment = await db.Equipments.FindAsync(combo.EquipmentId);
                                 if (equipment != null)
                                 {
-                                    equipment.Quantity -= combo.Qty; // Take it off the shelf again
+                                    int broken = Math.Max(0, combo.BrokenQty);
+                                    int healthy = Math.Max(0, combo.Qty - broken);
+                                    equipment.Quantity = Math.Max(0, equipment.Quantity - healthy);
+                                    equipment.BrokenQty = Math.Max(0, equipment.BrokenQty - broken);
                                 }
+                                combo.ReturnedQuantity = 0;
                             }
                             await db.SaveChangesAsync();
                         }
+                        await UpdateBorrowerSummary(brrName.Text);
                     }
-                    await UpdateBorrowerSummary(brrName.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error canceling return: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

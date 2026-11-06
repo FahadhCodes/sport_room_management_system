@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(manageBorrower));
             tableLayoutPanel1 = new TableLayoutPanel();
             updateBtn = new Button();
             borrwedEquipmentTB = new DataGridView();
@@ -102,12 +103,12 @@
             // borrwedEquipmentTB
             // 
             borrwedEquipmentTB.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            borrwedEquipmentTB.BorderStyle = BorderStyle.None;
+            borrwedEquipmentTB.BackgroundColor = SystemColors.Control;
             borrwedEquipmentTB.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             borrwedEquipmentTB.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Brown;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -125,6 +126,7 @@
             borrwedEquipmentTB.DefaultCellStyle = dataGridViewCellStyle2;
             borrwedEquipmentTB.Dock = DockStyle.Fill;
             borrwedEquipmentTB.EnableHeadersVisualStyles = false;
+            borrwedEquipmentTB.GridColor = Color.Brown;
             borrwedEquipmentTB.Location = new Point(3, 322);
             borrwedEquipmentTB.Name = "borrwedEquipmentTB";
             borrwedEquipmentTB.RowHeadersVisible = false;
@@ -170,12 +172,12 @@
             // borrowalsTb
             // 
             borrowalsTb.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            borrowalsTb.BorderStyle = BorderStyle.None;
+            borrowalsTb.BackgroundColor = SystemColors.Control;
             borrowalsTb.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             borrowalsTb.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(230, 230, 230);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = Color.Brown;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -193,6 +195,7 @@
             borrowalsTb.DefaultCellStyle = dataGridViewCellStyle4;
             borrowalsTb.Dock = DockStyle.Fill;
             borrowalsTb.EnableHeadersVisualStyles = false;
+            borrowalsTb.GridColor = Color.Brown;
             borrowalsTb.Location = new Point(3, 147);
             borrowalsTb.Name = "borrowalsTb";
             borrowalsTb.RowHeadersVisible = false;
@@ -408,6 +411,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 522);
             Controls.Add(tableLayoutPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "manageBorrower";
             Text = "Manage Borrower";
             Load += manageBorrower_Load;

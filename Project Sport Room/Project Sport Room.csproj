@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <None Update="sportroom.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="sportroom.db-shm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
