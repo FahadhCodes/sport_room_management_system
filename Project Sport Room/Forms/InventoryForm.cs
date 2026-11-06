@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Project_Sport_Room.Forms;
 using Project_Sport_Room.Models;
 using System;
 using System.Data;
@@ -13,8 +14,16 @@ namespace Project_Sport_Room
         public InventoryForm()
         {
             InitializeComponent();
-            // Fire the refresh every time the user navigates to this screen
+
+            // Set grid usability enhancements
+            EquipmentDataTable.ReadOnly = true;
+            EquipmentDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            EquipmentDataTable.MultiSelect = false;
+            EquipmentDataTable.Cursor = Cursors.Hand;
+
+            // Wire events
             this.VisibleChanged += InventoryForm_VisibleChanged;
+            this.EquipmentDataTable.CellClick += EquipmentDataTable_CellClick;
         }
 
         // Leave empty to protect the designer
@@ -29,6 +38,29 @@ namespace Project_Sport_Room
                 try
                 {
                     using (var db = new SportRoomContext())
+                    {
+                        var categories = await db.Categories.Select(cat => new { cat.Id, cat.CategoryName }).ToListAsync();
+                        categories.Insert(0, new { Id = "ALL", CategoryName = "All Categories" }); // Add an ALL option
+
+                        categoryCombobox.DisplayMember = "CategoryName";
+                        categoryCombobox.ValueMember = "Id";
+                        categoryCombobox.DataSource = categories;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading categories: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                await RefreshInventoryData();
+            }
+        }
+
+        public async Task RefreshInventoryData()
+        {
+            try
+            {
+                using (var db = new SportRoomContext())
                 {
                     // 1. Total Types of Equipment (Count of unique rows)
                     var totalTypes = await db.Equipments.CountAsync();
@@ -48,21 +80,43 @@ namespace Project_Sport_Room
                     TotQuantity.Text = totalPhysicalStock.ToString();
                     healthyEquipments.Text = totalHealthyStock.ToString();
                     damagedEquipments.Text = damaged.ToString();
+                }
 
-                    // 4. Setup Combobox safely
-                    var Categories = await db.Categories.Select(cat => new { cat.Id, cat.CategoryName }).ToListAsync();
-                    Categories.Insert(0, new { Id = "ALL", CategoryName = "All Categories" }); // Add an ALL option
-
-                    categoryCombobox.DisplayMember = "CategoryName";
-                    categoryCombobox.ValueMember = "Id";
-                    categoryCombobox.DataSource = Categories;
-
+                // Re-apply current table filter so user stays on the same view
+                if (!string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    await changeTableBasedOnConstrints("idANDname", textBox1.Text);
+                }
+                else if (categoryCombobox.SelectedItem != null && categoryCombobox.Text != "All Categories")
+                {
+                    await changeTableBasedOnConstrints("EquipmentCategory", categoryCombobox.Text);
+                }
+                else
+                {
                     await changeTableBasedOnConstrints("", "");
                 }
-                }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error refreshing inventory data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void EquipmentDataTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= EquipmentDataTable.Rows.Count) return;
+
+            var row = EquipmentDataTable.Rows[e.RowIndex];
+            if (row.Cells["Equipment_Id"]?.Value == null) return;
+
+            string eqId = row.Cells["Equipment_Id"].Value.ToString();
+            if (string.IsNullOrWhiteSpace(eqId)) return;
+
+            using (var editForm = new equipmentEdit(eqId))
+            {
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show($"Error loading inventory summary: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await RefreshInventoryData();
                 }
             }
         }
@@ -72,45 +126,45 @@ namespace Project_Sport_Room
             try
             {
                 using (var db = new SportRoomContext())
-            {
-                var query = db.Equipments.AsQueryable();
-
-                switch (constrintsTypex)
                 {
-                    case "EquipmentCategory":
-                        if (searchString != "All Categories")
-                            query = query.Where(data => data.Category.CategoryName.Contains(searchString));
-                        break;
-                    case "idANDname":
-                        query = query.Where(data => data.Id.Contains(searchString) || data.Name.Contains(searchString));
-                        break;
-                }
+                    var query = db.Equipments.AsQueryable();
 
-                // Map explicitly to match your designer column names exactly
-                var tableData = await query.Select(data => new
-                {
-                    Equipment_Id = data.Id,
-                    Equipment_Name = data.Name,
-                    Equipment_Category = data.Category.CategoryName,
-                    Qty_healthy = data.Quantity,
-                    Qty_damaged = data.BrokenQty
-                }).ToListAsync();
+                    switch (constrintsTypex)
+                    {
+                        case "EquipmentCategory":
+                            if (searchString != "All Categories")
+                                query = query.Where(data => data.Category.CategoryName.Contains(searchString));
+                            break;
+                        case "idANDname":
+                            query = query.Where(data => data.Id.Contains(searchString) || data.Name.Contains(searchString));
+                            break;
+                    }
 
-                // Lock auto-generation and strictly bind your columns
-                EquipmentDataTable.AutoGenerateColumns = false;
+                    // Map explicitly to match your designer column names exactly
+                    var tableData = await query.Select(data => new
+                    {
+                        Equipment_Id = data.Id,
+                        Equipment_Name = data.Name,
+                        Equipment_Category = data.Category.CategoryName,
+                        Qty_healthy = data.Quantity,
+                        Qty_damaged = data.BrokenQty
+                    }).ToListAsync();
 
-                if (EquipmentDataTable.Columns.Contains("Equipment_Id"))
-                    EquipmentDataTable.Columns["Equipment_Id"].DataPropertyName = "Equipment_Id";
-                if (EquipmentDataTable.Columns.Contains("Equipment_Name"))
-                    EquipmentDataTable.Columns["Equipment_Name"].DataPropertyName = "Equipment_Name";
-                if (EquipmentDataTable.Columns.Contains("Equipment_Category"))
-                    EquipmentDataTable.Columns["Equipment_Category"].DataPropertyName = "Equipment_Category";
-                if (EquipmentDataTable.Columns.Contains("Qty_healthy"))
-                    EquipmentDataTable.Columns["Qty_healthy"].DataPropertyName = "Qty_healthy";
-                if (EquipmentDataTable.Columns.Contains("Qty_damaged"))
-                    EquipmentDataTable.Columns["Qty_damaged"].DataPropertyName = "Qty_damaged";
+                    // Lock auto-generation and strictly bind your columns
+                    EquipmentDataTable.AutoGenerateColumns = false;
 
-                EquipmentDataTable.DataSource = tableData;
+                    if (EquipmentDataTable.Columns.Contains("Equipment_Id"))
+                        EquipmentDataTable.Columns["Equipment_Id"].DataPropertyName = "Equipment_Id";
+                    if (EquipmentDataTable.Columns.Contains("Equipment_Name"))
+                        EquipmentDataTable.Columns["Equipment_Name"].DataPropertyName = "Equipment_Name";
+                    if (EquipmentDataTable.Columns.Contains("Equipment_Category"))
+                        EquipmentDataTable.Columns["Equipment_Category"].DataPropertyName = "Equipment_Category";
+                    if (EquipmentDataTable.Columns.Contains("Qty_healthy"))
+                        EquipmentDataTable.Columns["Qty_healthy"].DataPropertyName = "Qty_healthy";
+                    if (EquipmentDataTable.Columns.Contains("Qty_damaged"))
+                        EquipmentDataTable.Columns["Qty_damaged"].DataPropertyName = "Qty_damaged";
+
+                    EquipmentDataTable.DataSource = tableData;
                 }
             }
             catch (Exception ex)

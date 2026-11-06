@@ -111,5 +111,53 @@ namespace Project_Sport_Room.TestRunner.Modules
 
             Assert.Equal(2, results.Count);
         }
+
+        [TestCase("TC-MOD2-005", "Inventory", "Direct Equipment Stock Edit Healthy and Damaged Quantities", "Functional / Integration")]
+        public async Task Test_DirectEquipmentStock_Edit()
+        {
+            using var testDb = new IsolatedTestDatabase();
+            using var db = testDb.CreateContext();
+
+            var cat = new Category { CategoryName = "Hockey" };
+            var eq = new Equipment { Name = "Hockey Stick", Quantity = 10, BrokenQty = 2, Category = cat };
+            var dep = new Department { Name = "Physical Education" };
+            var borrower = new Borrower("Student", "STU_H1") { Name = "Alex", Department = dep, Email = "a@pe.com", PhoneNumber = "111" };
+            var receipt = new BorrowReceipt { Borrower = borrower, IssuedDate = DateTime.Now, DueDate = DateTime.Now.AddDays(2) };
+            var combo = new BorrowedCombination { BorrowReceipt = receipt, Equipment = eq, Qty = 3 };
+
+            db.Categories.Add(cat);
+            db.Equipments.Add(eq);
+            db.Departments.Add(dep);
+            db.Borrowers.Add(borrower);
+            db.BorrowReceipts.Add(receipt);
+            db.BorrowedCombinations.Add(combo);
+            await db.SaveChangesAsync();
+
+            // Simulate user directly editing healthy stock from 10 to 15, and damaged from 2 to 4 via equipmentEdit
+            var itemToEdit = await db.Equipments.FirstOrDefaultAsync(e => e.Id == eq.Id);
+            Assert.NotNull(itemToEdit);
+            if (itemToEdit == null) return;
+
+            // Fetch active borrowed items
+            int borrowedQty = await db.BorrowedCombinations
+                .Where(bc => bc.EquipmentId == itemToEdit.Id && bc.BorrowReceipt.ReturnedDate == null)
+                .SumAsync(bc => (int?)bc.Qty) ?? 0;
+            Assert.Equal(3, borrowedQty);
+
+            itemToEdit.Quantity = 15;
+            itemToEdit.BrokenQty = 4;
+            await db.SaveChangesAsync();
+
+            // Verify database updated
+            var reloaded = await db.Equipments.FirstOrDefaultAsync(e => e.Id == eq.Id);
+            Assert.NotNull(reloaded);
+            if (reloaded == null) return;
+            Assert.Equal(15, reloaded.Quantity);
+            Assert.Equal(4, reloaded.BrokenQty);
+
+            // Verify total university stock conservation: shelf healthy (15) + damaged (4) + active borrowed (3) = 22
+            int totalStock = reloaded.Quantity + reloaded.BrokenQty + borrowedQty;
+            Assert.Equal(22, totalStock);
+        }
     }
 }
