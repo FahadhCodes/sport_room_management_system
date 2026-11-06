@@ -35,6 +35,9 @@
             groupBox1 = new GroupBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             borrowingList = new DataGridView();
+            EquipmentName = new DataGridViewComboBoxColumn();
+            Qty = new DataGridViewTextBoxColumn();
+            BrokenQty = new DataGridViewTextBoxColumn();
             tableLayoutPanel1 = new TableLayoutPanel();
             dueDatepicker = new DateTimePicker();
             dueDate = new Label();
@@ -54,9 +57,6 @@
             issueDatepicker = new DateTimePicker();
             addBtn = new Button();
             label4 = new Label();
-            EquipmentName = new DataGridViewComboBoxColumn();
-            Qty = new DataGridViewTextBoxColumn();
-            BrokenQty = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)borrowingList).BeginInit();
@@ -138,6 +138,27 @@
             borrowingList.TabIndex = 24;
             borrowingList.DefaultValuesNeeded += borrowingList_DefaultValuesNeeded;
             borrowingList.EditingControlShowing += borrowingList_EditingControlShowing;
+            // 
+            // EquipmentName
+            // 
+            EquipmentName.HeaderText = "Equipment Name";
+            EquipmentName.MinimumWidth = 6;
+            EquipmentName.Name = "EquipmentName";
+            EquipmentName.Resizable = DataGridViewTriState.True;
+            EquipmentName.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // Qty
+            // 
+            Qty.HeaderText = "Quantity";
+            Qty.MinimumWidth = 6;
+            Qty.Name = "Qty";
+            // 
+            // BrokenQty
+            // 
+            BrokenQty.HeaderText = "Damaged";
+            BrokenQty.MinimumWidth = 6;
+            BrokenQty.Name = "BrokenQty";
+            BrokenQty.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -374,27 +395,6 @@
             label4.Size = new Size(0, 18);
             label4.TabIndex = 19;
             label4.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // EquipmentName
-            // 
-            EquipmentName.HeaderText = "Equipment Name";
-            EquipmentName.MinimumWidth = 6;
-            EquipmentName.Name = "EquipmentName";
-            EquipmentName.Resizable = DataGridViewTriState.True;
-            EquipmentName.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // Qty
-            // 
-            Qty.HeaderText = "Quantity";
-            Qty.MinimumWidth = 6;
-            Qty.Name = "Qty";
-            // 
-            // BrokenQty
-            // 
-            BrokenQty.HeaderText = "Damaged";
-            BrokenQty.MinimumWidth = 6;
-            BrokenQty.Name = "BrokenQty";
-            BrokenQty.Visible = false;
             // 
             // addBorrowers
             // 

@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(addNewIntake));
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             supplierIdComboBox = new ComboBox();
             label1 = new Label();
@@ -324,6 +325,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(990, 512);
             Controls.Add(tableLayoutPanel3);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "addNewIntake";
             Text = "New Intake";
             Load += addNewIntake_Load;

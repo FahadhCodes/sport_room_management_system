@@ -34,6 +34,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BorrowerForm));
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             borrowerInfoTB = new DataGridView();
@@ -60,7 +61,6 @@
             brrEmail = new Label();
             label7 = new Label();
             tableLayoutPanel6 = new TableLayoutPanel();
-            brrDept = new Label();
             label13 = new Label();
             tableLayoutPanel14 = new TableLayoutPanel();
             ItemsToReturn = new Label();
@@ -88,6 +88,7 @@
             label12 = new Label();
             button1 = new Button();
             groupBox1 = new GroupBox();
+            brrDept = new Label();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)borrowerInfoTB).BeginInit();
@@ -243,6 +244,7 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Controls.Add(brrDept, 0, 2);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel9, 2, 1);
             tableLayoutPanel3.Controls.Add(panel1, 2, 0);
             tableLayoutPanel3.Controls.Add(brrName, 0, 0);
@@ -399,7 +401,7 @@
             // 
             tableLayoutPanel4.ColumnCount = 2;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 229F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 238F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel4.Controls.Add(brrEmail, 1, 0);
             tableLayoutPanel4.Controls.Add(label7, 0, 0);
@@ -418,9 +420,9 @@
             brrEmail.Dock = DockStyle.Fill;
             brrEmail.Font = new Font("Montserrat", 8F);
             brrEmail.ForeColor = Color.Black;
-            brrEmail.Location = new Point(70, 0);
+            brrEmail.Location = new Point(61, 0);
             brrEmail.Name = "brrEmail";
-            brrEmail.Size = new Size(223, 27);
+            brrEmail.Size = new Size(232, 27);
             brrEmail.TabIndex = 2;
             brrEmail.Text = "example@gmail.com";
             brrEmail.TextAlign = ContentAlignment.MiddleCenter;
@@ -434,7 +436,7 @@
             label7.ForeColor = SystemColors.Control;
             label7.Location = new Point(3, 0);
             label7.Name = "label7";
-            label7.Size = new Size(61, 27);
+            label7.Size = new Size(52, 27);
             label7.TabIndex = 1;
             label7.Text = "Email";
             label7.TextAlign = ContentAlignment.MiddleCenter;
@@ -443,9 +445,8 @@
             // 
             tableLayoutPanel6.ColumnCount = 2;
             tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 186F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 189F));
             tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel6.Controls.Add(brrDept, 1, 0);
             tableLayoutPanel6.Controls.Add(label13, 0, 0);
             tableLayoutPanel6.Dock = DockStyle.Fill;
             tableLayoutPanel6.Location = new Point(307, 38);
@@ -456,19 +457,6 @@
             tableLayoutPanel6.Size = new Size(296, 27);
             tableLayoutPanel6.TabIndex = 15;
             // 
-            // brrDept
-            // 
-            brrDept.AutoSize = true;
-            brrDept.Dock = DockStyle.Fill;
-            brrDept.Font = new Font("Montserrat", 8F);
-            brrDept.ForeColor = Color.Black;
-            brrDept.Location = new Point(113, 0);
-            brrDept.Name = "brrDept";
-            brrDept.Size = new Size(180, 27);
-            brrDept.TabIndex = 2;
-            brrDept.Text = "PST";
-            brrDept.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // label13
             // 
             label13.AutoSize = true;
@@ -478,7 +466,7 @@
             label13.ForeColor = SystemColors.Control;
             label13.Location = new Point(3, 0);
             label13.Name = "label13";
-            label13.Size = new Size(104, 27);
+            label13.Size = new Size(101, 27);
             label13.TabIndex = 1;
             label13.Text = "Department";
             label13.TextAlign = ContentAlignment.MiddleCenter;
@@ -486,8 +474,8 @@
             // tableLayoutPanel14
             // 
             tableLayoutPanel14.ColumnCount = 2;
-            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 47.9729729F));
-            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 52.0270271F));
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45.27027F));
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 54.72973F));
             tableLayoutPanel14.Controls.Add(ItemsToReturn, 1, 0);
             tableLayoutPanel14.Controls.Add(label3, 0, 0);
             tableLayoutPanel14.Dock = DockStyle.Fill;
@@ -504,9 +492,9 @@
             ItemsToReturn.Dock = DockStyle.Fill;
             ItemsToReturn.Font = new Font("Montserrat", 8F);
             ItemsToReturn.ForeColor = Color.Black;
-            ItemsToReturn.Location = new Point(145, 0);
+            ItemsToReturn.Location = new Point(137, 0);
             ItemsToReturn.Name = "ItemsToReturn";
-            ItemsToReturn.Size = new Size(148, 30);
+            ItemsToReturn.Size = new Size(156, 30);
             ItemsToReturn.TabIndex = 3;
             ItemsToReturn.Text = "0";
             ItemsToReturn.TextAlign = ContentAlignment.MiddleCenter;
@@ -520,7 +508,7 @@
             label3.ForeColor = SystemColors.Control;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(136, 30);
+            label3.Size = new Size(128, 30);
             label3.TabIndex = 2;
             label3.Text = "Borrowed Items";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -856,12 +844,26 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Borrowers";
             // 
+            // brrDept
+            // 
+            brrDept.AutoSize = true;
+            brrDept.Dock = DockStyle.Fill;
+            brrDept.Font = new Font("Montserrat", 8F);
+            brrDept.ForeColor = Color.Black;
+            brrDept.Location = new Point(4, 69);
+            brrDept.Name = "brrDept";
+            brrDept.Size = new Size(296, 36);
+            brrDept.TabIndex = 20;
+            brrDept.Text = "PST";
+            brrDept.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // BorrowerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1159, 607);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "BorrowerForm";
             Text = "BorrowerForm";
             Load += BorrowerForm_Load;
@@ -945,7 +947,6 @@
         private Label ItemsToReturn;
         private Label label3;
         private TableLayoutPanel tableLayoutPanel6;
-        private Label brrDept;
         private Label label13;
         private TableLayoutPanel tableLayoutPanel9;
         private Label label1;
@@ -953,5 +954,6 @@
         private TableLayoutPanel tableLayoutPanel7;
         private Label label2;
         private Label brrRole;
+        private Label brrDept;
     }
 }

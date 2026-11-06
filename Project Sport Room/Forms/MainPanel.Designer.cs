@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPanel));
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel15 = new TableLayoutPanel();
             label1 = new Label();
@@ -66,8 +67,8 @@
             healthyQty = new DataGridViewTextBoxColumn();
             BrokenQty = new DataGridViewTextBoxColumn();
             totQty = new DataGridViewTextBoxColumn();
-            groupBox1 = new GroupBox();
             reportGen = new Button();
+            groupBox1 = new GroupBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel15.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -489,6 +490,16 @@
             totQty.MinimumWidth = 6;
             totQty.Name = "totQty";
             // 
+            // reportGen
+            // 
+            reportGen.Dock = DockStyle.Fill;
+            reportGen.Location = new Point(3, 488);
+            reportGen.Name = "reportGen";
+            reportGen.Size = new Size(936, 30);
+            reportGen.TabIndex = 29;
+            reportGen.Text = "Generate Summaries Damage Report";
+            reportGen.UseVisualStyleBackColor = true;
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(tableLayoutPanel1);
@@ -500,22 +511,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Home";
             // 
-            // reportGen
-            // 
-            reportGen.Dock = DockStyle.Fill;
-            reportGen.Location = new Point(3, 488);
-            reportGen.Name = "reportGen";
-            reportGen.Size = new Size(936, 30);
-            reportGen.TabIndex = 29;
-            reportGen.Text = "Generate Summaries Damage Report";
-            reportGen.UseVisualStyleBackColor = true;
-            // 
             // MainPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 547);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainPanel";
             Text = "Main Panel";
             tableLayoutPanel1.ResumeLayout(false);

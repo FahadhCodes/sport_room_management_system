@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryForm));
             EquipmentDataTable = new DataGridView();
             Equipment_Id = new DataGridViewTextBoxColumn();
             Equipment_Name = new DataGridViewTextBoxColumn();
@@ -395,6 +396,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1002, 578);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InventoryForm";
             Text = "Inventory";
             Load += InventoryForm_Load;

@@ -146,6 +146,7 @@ namespace Project_Sport_Room
                 {
                     var latestReceipt = await db.BorrowReceipts
                         .Include(r => r.Borrower)
+                            .ThenInclude(b => b.Department)
                         .OrderByDescending(r => r.IssuedDate)
                         .FirstOrDefaultAsync();
 
@@ -154,7 +155,9 @@ namespace Project_Sport_Room
                 }
                 else
                 {
-                    targetBorrower = await db.Borrowers.FirstOrDefaultAsync(b => b.Name == searchName);
+                    targetBorrower = await db.Borrowers
+                        .Include(b => b.Department)
+                        .FirstOrDefaultAsync(b => b.Name == searchName);
                 }
 
                 if (targetBorrower != null)
@@ -164,7 +167,14 @@ namespace Project_Sport_Room
                     brrRole.Text = targetBorrower.Role;
                     brrEmail.Text = targetBorrower.Email;
                     brrPhoneNumber.Text = targetBorrower.PhoneNumber;
-                    brrDept.Text = targetBorrower.DepartmentId;
+
+                    string deptName = targetBorrower.Department?.Name;
+                    if (string.IsNullOrEmpty(deptName) && !string.IsNullOrEmpty(targetBorrower.DepartmentId))
+                    {
+                        var dept = await db.Departments.FirstOrDefaultAsync(d => d.Id == targetBorrower.DepartmentId);
+                        deptName = dept?.Name;
+                    }
+                    brrDept.Text = deptName ?? targetBorrower.DepartmentId ?? "";
 
                     int pendingItems = await db.BorrowedCombinations
                         .Where(c => c.BorrowReceipt.BorrowerId == targetBorrower.BorrowerId && c.BorrowReceipt.ReturnedDate == null)

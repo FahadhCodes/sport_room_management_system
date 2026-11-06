@@ -451,7 +451,7 @@ namespace Project_Sport_Room
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "OverviewForm";
-            Text = "OverviewForm";
+            Text = "Overview Form";
             Load += OverviewForm_Load;
             VisibleChanged += OverviewForm_VisibleChanged;
             tableLayoutPanel1.ResumeLayout(false);
