@@ -368,6 +368,7 @@ namespace Project_Sport_Room
                         <td style='text-align: center;'>{item.BorrowedQty}</td>
                         <td style='text-align: center; color: #16a34a; font-weight: bold;'>{item.HealthyQty}</td>
                         <td style='text-align: center; color: #dc2626; font-weight: bold;'>{item.BrokenQty}</td>
+                        <td style='text-align: center; color: #b45309; font-weight: bold;'>{item.LostQty}</td>
                         <td style='height: 34px;'>&nbsp;</td>
                     </tr>");
                 }
@@ -649,7 +650,7 @@ namespace Project_Sport_Room
         </div>
         <div class='slip-meta'>
             <strong>Ref:</strong> {reportId} &nbsp;|&nbsp;
-            <strong>Date:</strong> {DateTime.Now:yyyy-MM-dd HH:mm} &nbsp;|&nbsp;
+            <strong>Date:</strong> {DateTime.Now:dd/MM/yyyy  hh:mm tt} &nbsp;|&nbsp;
             <span class='status-badge'>{returnStatusStr}</span>
         </div>
     </div>
@@ -666,19 +667,19 @@ namespace Project_Sport_Room
             <td class='info-label'>Borrower ID / Reg No</td>
             <td class='info-value'>{borrowerIdStr}</td>
             <td class='info-label'>Issued Date</td>
-            <td class='info-value'>{receipt.IssuedDate:yyyy-MM-dd}</td>
+            <td class='info-value'>{receipt.IssuedDate:dd/MM/yyyy  hh:mm tt}</td>
         </tr>
         <tr>
             <td class='info-label'>Role</td>
             <td class='info-value'>{borrowerRoleStr}</td>
             <td class='info-label'>Scheduled Due Date</td>
-            <td class='info-value'>{receipt.DueDate:yyyy-MM-dd}</td>
+            <td class='info-value'>{receipt.DueDate:dd/MM/yyyy  hh:mm tt}</td>
         </tr>
         <tr>
             <td class='info-label'>Department / Faculty</td>
             <td class='info-value'>{deptStr}</td>
             <td class='info-label'>Actual Return Date</td>
-            <td class='info-value'><strong>{returnDate:yyyy-MM-dd HH:mm}</strong></td>
+            <td class='info-value'><strong>{returnDate:dd/MM/yyyy  hh:mm tt}</strong></td>
         </tr>
         <tr>
             <td class='info-label'>Contact Phone</td>
@@ -695,13 +696,14 @@ namespace Project_Sport_Room
         <thead>
             <tr>
                 <th style='width: 4%;'>#</th>
-                <th style='width: 12%;'>Item Code</th>
-                <th style='width: 24%;'>Equipment Description</th>
-                <th style='width: 14%;'>Category</th>
+                <th style='width: 11%;'>Item Code</th>
+                <th style='width: 21%;'>Equipment Description</th>
+                <th style='width: 12%;'>Category</th>
                 <th style='width: 7%;'>Issued</th>
-                <th style='width: 8%;'>Healthy</th>
-                <th style='width: 9%;'>Damaged</th>
-                <th style='width: 22%;'>Nature of Defect / Officer's Remarks</th>
+                <th style='width: 7%;'>Healthy</th>
+                <th style='width: 8%;'>Damaged</th>
+                <th style='width: 7%;'>Lost</th>
+                <th style='width: 23%;'>Nature of Defect / Officer's Remarks</th>
             </tr>
         </thead>
         <tbody>
@@ -743,14 +745,12 @@ namespace Project_Sport_Room
                 <div class='sig-subtitle'>Date: ____________________</div>
             </td>
             <td class='sig-block'>
+                <div class='stamp-box'></div>
+            </td>
+            <td class='sig-block'>
                 <div class='sig-line'>Sport Room Officer-in-Charge</div>
                 <div class='sig-subtitle'>Dept of Sport Sciences & Physical Education</div>
                 <div class='sig-subtitle'>Date: ____________________</div>
-            </td>
-            <td class='sig-block'>
-                <div class='stamp-box'>
-                    Official Department Seal
-                </div>
             </td>
         </tr>
     </table>

@@ -23,13 +23,20 @@ namespace Project_Sport_Room
             this.VisibleChanged += SupplierForm_VisibleChanged;
         }
 
+        private async void SupplierForm_Load(object sender, EventArgs e)
+        {
+            await LoadAllSuppliers();
+        }
+
         private async Task LoadAllSuppliers()
         {
             try
             {
                 using (var db = new SportRoomContext())
                 {
-                    var suppliersList = await db.Suppliers.Select(sup => new { sup.Name, sup.Id }).ToListAsync();
+                    var suppliersList = await db.Suppliers
+                        .Select(sup => new { sup.Name, sup.Id })
+                        .ToListAsync();
 
                     suppliersTb.Columns.Clear();
                     suppliersTb.DataSource = suppliersList;
@@ -39,11 +46,36 @@ namespace Project_Sport_Room
                     if (suppliersTb.Columns.Contains("Id"))
                         suppliersTb.Columns["Id"].Visible = false;
 
-                    var firstSupplier = suppliersList.FirstOrDefault();
-                    if (firstSupplier != null && !string.IsNullOrEmpty(firstSupplier.Id))
+                    // Preserve previously selected supplier if still in the list
+                    string? targetSupplierId = selectedsuppliertId;
+                    if (string.IsNullOrEmpty(targetSupplierId) || !suppliersList.Any(s => s.Id == targetSupplierId))
                     {
-                        selectedsuppliertId = firstSupplier.Id;
-                        await updateSummary(firstSupplier.Id);
+                        targetSupplierId = suppliersList.FirstOrDefault()?.Id;
+                    }
+
+                    selectedsuppliertId = targetSupplierId;
+
+                    if (!string.IsNullOrEmpty(selectedsuppliertId))
+                    {
+                        foreach (DataGridViewRow row in suppliersTb.Rows)
+                        {
+                            if (row.Cells["Id"]?.Value?.ToString() == selectedsuppliertId)
+                            {
+                                row.Selected = true;
+                                break;
+                            }
+                        }
+
+                        await updateSummary(selectedsuppliertId);
+                        await updateTable(selectedsuppliertId, "forSupllierList");
+                    }
+                    else
+                    {
+                        supplierInfoTB.DataSource = null;
+                        totLabel.Text = "0";
+                        suppIdLabel.Text = "";
+                        phoneNumaber.Text = "";
+                        NameLable.Text = "";
                     }
                 }
             }
@@ -82,11 +114,6 @@ namespace Project_Sport_Room
             await updateTable(selectedsuppliertId, "forSupllierList");
         }
 
-        private async void SupplierForm_Load(object sender, EventArgs e)
-        {
-          
-        }
-
         private async Task updateSummary(string id)
         {
             try
@@ -114,7 +141,10 @@ namespace Project_Sport_Room
             {
                 using (var db = new SportRoomContext())
                 {
-                    var query = db.IntakeItems.AsQueryable();
+                    var query = db.IntakeItems
+                        .Include(intk => intk.Equipment)
+                        .Include(intk => intk.Supplier)
+                        .AsQueryable();
 
                     DateTime startDate = startDatePicker.Value.Date;
                     DateTime endDate = endDatePicker.Value.Date.AddDays(1).AddTicks(-1);
@@ -134,17 +164,32 @@ namespace Project_Sport_Room
                             break;
                     }
 
-                    var IntakeData = await query.Select(intk => new
+                    var rawIntakes = await query
+                        .OrderByDescending(intk => intk.SuppliedDate)
+                        .Select(intk => new
+                        {
+                            intk.Id,
+                            intk.SuppliedDate,
+                            supplierName = intk.Supplier != null ? intk.Supplier.Name : "N/A",
+                            equipmentName = intk.Equipment != null ? intk.Equipment.Name : "N/A",
+                            healthy = Math.Max(0, intk.Quantity - intk.BrokenQty),
+                            damaged = intk.BrokenQty,
+                            intk.Quantity
+                        }).ToListAsync();
+
+                    var intakeData = rawIntakes.Select(intk => new
                     {
                         intk.Id,
-                        intk.SuppliedDate,
-                        supplierName = intk.Supplier != null ? intk.Supplier.Name : "N/A",
-                        equipmentName = intk.Equipment != null ? intk.Equipment.Name : "N/A",
+                        SuppliedDate = intk.SuppliedDate.ToString("dd/MM/yyyy  hh:mm tt"),
+                        intk.supplierName,
+                        intk.equipmentName,
+                        intk.healthy,
+                        intk.damaged,
                         intk.Quantity
-                    }).ToListAsync();
+                    }).ToList();
 
                     supplierInfoTB.Columns.Clear();
-                    supplierInfoTB.DataSource = IntakeData;
+                    supplierInfoTB.DataSource = intakeData;
 
                     if (supplierInfoTB.Columns.Contains("Id"))
                         supplierInfoTB.Columns["Id"].HeaderText = "Intake Id";
@@ -154,8 +199,12 @@ namespace Project_Sport_Room
                         supplierInfoTB.Columns["supplierName"].HeaderText = "Supplier Name";
                     if (supplierInfoTB.Columns.Contains("equipmentName"))
                         supplierInfoTB.Columns["equipmentName"].HeaderText = "Equipment Name";
+                    if (supplierInfoTB.Columns.Contains("healthy"))
+                        supplierInfoTB.Columns["healthy"].HeaderText = "Healthy";
+                    if (supplierInfoTB.Columns.Contains("damaged"))
+                        supplierInfoTB.Columns["damaged"].HeaderText = "Damaged";
                     if (supplierInfoTB.Columns.Contains("Quantity"))
-                        supplierInfoTB.Columns["Quantity"].HeaderText = "Quantity";
+                        supplierInfoTB.Columns["Quantity"].HeaderText = "Total Quantity";
                 }
             }
             catch (Exception ex)
@@ -177,7 +226,7 @@ namespace Project_Sport_Room
 
         private async void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(searchTextBox.Text) && !string.IsNullOrEmpty(selectedsuppliertId))
+            if (!string.IsNullOrEmpty(selectedsuppliertId))
             {
                 await updateTable(selectedsuppliertId, "search");
             }

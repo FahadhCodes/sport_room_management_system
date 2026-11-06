@@ -188,6 +188,7 @@
             applyDateFilterBtn.TabIndex = 34;
             applyDateFilterBtn.Text = "Apply";
             applyDateFilterBtn.UseVisualStyleBackColor = true;
+            applyDateFilterBtn.Click += applyDateFilterBtn_Click;
             // 
             // tableLayoutPanel13
             // 
@@ -462,6 +463,7 @@
             searchTextBox.Name = "searchTextBox";
             searchTextBox.Size = new Size(833, 22);
             searchTextBox.TabIndex = 30;
+            searchTextBox.TextChanged += searchTextBox_TextChanged;
             // 
             // label11
             // 

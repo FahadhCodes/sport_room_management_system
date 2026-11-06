@@ -296,6 +296,34 @@ namespace Project_Sport_Room
                             intakeItem.Quantity = newTotalQty;
                             intakeItem.BrokenQty = newBrokenQty;
                         }
+                        else if (!string.IsNullOrEmpty(row.EquipmentId) && (row.HealthyQuantity > 0 || row.DamagedQuantity > 0))
+                        {
+                            int newHealthyQty = row.HealthyQuantity;
+                            int newBrokenQty = row.DamagedQuantity;
+                            if (newHealthyQty < 0 || newBrokenQty < 0)
+                            {
+                                MessageBox.Show($"Row for '{row.EquipmentName}': Quantities cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            int newTotalQty = newHealthyQty + newBrokenQty;
+
+                            var newIntake = new IntakeItem
+                            {
+                                SupplierId = supplierID,
+                                EquipmentId = row.EquipmentId,
+                                SuppliedDate = row.suppliedDate == default ? DateTime.Now : row.suppliedDate,
+                                Quantity = newTotalQty,
+                                BrokenQty = newBrokenQty
+                            };
+                            await db.IntakeItems.AddAsync(newIntake);
+
+                            var eq = await db.Equipments.FirstOrDefaultAsync(e => e.Id == row.EquipmentId);
+                            if (eq != null)
+                            {
+                                eq.Quantity += newHealthyQty;
+                                eq.BrokenQty += newBrokenQty;
+                            }
+                        }
                     }
 
                     await db.SaveChangesAsync();

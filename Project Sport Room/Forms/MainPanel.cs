@@ -476,7 +476,7 @@ namespace Project_Sport_Room.Forms
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>Equipment Damage, Loss & Deficiency Audit Report - {reportId}</title>
+    <title>Equipment Damage, Loss & Deficiency Report - {reportId}</title>
     <style>
         @page {{
             size: A4 portrait;
@@ -780,7 +780,7 @@ namespace Project_Sport_Room.Forms
                 <div class='uni-name'>Sabaragamuwa University of Sri Lanka</div>
                 <div class='faculty-name'>Faculty of Applied Sciences</div>
                 <div class='dept-name'>Department of Sport Sciences and Physical Education</div>
-                <div class='system-name'>Sport Room Management System (SRMS) &bull; Official Inventory Audit</div>
+                <div class='system-name'>Sport Room Management System (SRMS)</div>
             </td>
         </tr>
     </table>
@@ -791,13 +791,12 @@ namespace Project_Sport_Room.Forms
     <table class='report-meta-table'>
         <tr>
             <td style='width: 60%;'>
-                <div class='meta-title'>Comprehensive Equipment Damage, Loss & Deficiency Report</div>
+                <div class='meta-title'>Equipment Damage, Loss & Deficiency Report</div>
                 <div style='color: #64748b; font-size: 10px; margin-top: 2px;'>Formal Reconciliation of Broken Assets, Unreturned Equipment & Inventory Deficits</div>
             </td>
             <td style='width: 40%; text-align: right;'>
                 <div><strong>Report Ref:</strong> {reportId}</div>
-                <div><strong>Audit Date:</strong> {DateTime.Now:dd MMMM yyyy, hh:mm tt}</div>
-                <div><strong>Scope:</strong> Department Sports Room Inventory</div>
+                <div><strong>Audit Date:</strong> {DateTime.Now:dd/MM/yyyy  hh:mm tt}</div>
             </td>
         </tr>
     </table>
@@ -908,14 +907,12 @@ namespace Project_Sport_Room.Forms
                 <div class='sig-subtitle'>Date: ________________________</div>
             </td>
             <td class='sig-block'>
+                <div class='stamp-box'></div>
+            </td>
+            <td class='sig-block'>
                 <div class='sig-line'>Head of Department / Director</div>
                 <div class='sig-subtitle'>Dept. of Sport Sciences & Physical Education</div>
                 <div class='sig-subtitle'>Date: ________________________</div>
-            </td>
-            <td class='sig-block'>
-                <div class='stamp-box'>
-                    Official Department / Dean's Seal
-                </div>
             </td>
         </tr>
     </table>
@@ -941,7 +938,7 @@ namespace Project_Sport_Room.Forms
                     }
 
                     MessageBox.Show(
-                        $"Comprehensive Equipment Damage, Loss & Deficiency Summary Report generated successfully!\n\nSaved to: {fullPath}",
+                        $"Equipment Damage, Loss & Deficiency Summary Report generated successfully!\n\nSaved to: {fullPath}",
                         "Report Generated", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

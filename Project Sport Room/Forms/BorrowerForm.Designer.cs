@@ -840,7 +840,7 @@
             button1.Name = "button1";
             button1.Size = new Size(218, 27);
             button1.TabIndex = 18;
-            button1.Text = "Add New Borrower";
+            button1.Text = "Borrow Equipments";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
