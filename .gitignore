@@ -16,6 +16,8 @@ x64/
 x86/
 build/
 bld/
+publish/
+Output/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
