@@ -32,25 +32,25 @@
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            equipmentId = new Label();
-            equipmentName = new Label();
             equipmentCate = new Label();
+            equipmentName = new Label();
+            equipmentId = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
-            label1 = new Label();
-            healthyQty = new NumericUpDown();
             label2 = new Label();
             dmg = new NumericUpDown();
+            label1 = new Label();
+            healthyQty = new NumericUpDown();
             tableLayoutPanel4 = new TableLayoutPanel();
+            cancelBtn = new Button();
             label3 = new Label();
             totQty = new Label();
             saveBtn = new Button();
-            cancelBtn = new Button();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)healthyQty).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dmg).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)healthyQty).BeginInit();
             tableLayoutPanel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -100,22 +100,24 @@
             tableLayoutPanel2.Size = new Size(615, 79);
             tableLayoutPanel2.TabIndex = 0;
             // 
-            // equipmentId
+            // equipmentCate
             // 
-            equipmentId.AutoSize = true;
-            equipmentId.Dock = DockStyle.Fill;
-            equipmentId.ForeColor = Color.Brown;
-            equipmentId.Location = new Point(3, 0);
-            equipmentId.Name = "equipmentId";
-            equipmentId.Size = new Size(199, 79);
-            equipmentId.TabIndex = 0;
-            equipmentId.Text = "Equipment Id";
-            equipmentId.TextAlign = ContentAlignment.MiddleCenter;
+            equipmentCate.AutoSize = true;
+            equipmentCate.Dock = DockStyle.Fill;
+            equipmentCate.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
+            equipmentCate.ForeColor = Color.Brown;
+            equipmentCate.Location = new Point(413, 0);
+            equipmentCate.Name = "equipmentCate";
+            equipmentCate.Size = new Size(199, 79);
+            equipmentCate.TabIndex = 2;
+            equipmentCate.Text = "Equipment Category";
+            equipmentCate.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // equipmentName
             // 
             equipmentName.AutoSize = true;
             equipmentName.Dock = DockStyle.Fill;
+            equipmentName.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
             equipmentName.ForeColor = Color.Brown;
             equipmentName.Location = new Point(208, 0);
             equipmentName.Name = "equipmentName";
@@ -124,17 +126,18 @@
             equipmentName.Text = "Equipment Name";
             equipmentName.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // equipmentCate
+            // equipmentId
             // 
-            equipmentCate.AutoSize = true;
-            equipmentCate.Dock = DockStyle.Fill;
-            equipmentCate.ForeColor = Color.Brown;
-            equipmentCate.Location = new Point(413, 0);
-            equipmentCate.Name = "equipmentCate";
-            equipmentCate.Size = new Size(199, 79);
-            equipmentCate.TabIndex = 2;
-            equipmentCate.Text = "Equipment Category";
-            equipmentCate.TextAlign = ContentAlignment.MiddleCenter;
+            equipmentId.AutoSize = true;
+            equipmentId.Dock = DockStyle.Fill;
+            equipmentId.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
+            equipmentId.ForeColor = Color.Brown;
+            equipmentId.Location = new Point(3, 0);
+            equipmentId.Name = "equipmentId";
+            equipmentId.Size = new Size(199, 79);
+            equipmentId.TabIndex = 0;
+            equipmentId.Text = "Equipment Id";
+            equipmentId.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
@@ -154,46 +157,53 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.Size = new Size(615, 98);
             tableLayoutPanel3.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Fill;
-            label1.ForeColor = Color.Brown;
-            label1.Location = new Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(147, 98);
-            label1.TabIndex = 1;
-            label1.Text = "Healthy";
-            label1.TextAlign = ContentAlignment.BottomCenter;
-            // 
-            // healthyQty
-            // 
-            healthyQty.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            healthyQty.Location = new Point(156, 69);
-            healthyQty.Name = "healthyQty";
-            healthyQty.Size = new Size(147, 26);
-            healthyQty.TabIndex = 2;
+            tableLayoutPanel3.Paint += tableLayoutPanel3_Paint;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
             label2.ForeColor = Color.Brown;
             label2.Location = new Point(309, 0);
             label2.Name = "label2";
+            label2.Padding = new Padding(0, 0, 0, 7);
             label2.Size = new Size(147, 98);
             label2.TabIndex = 3;
             label2.Text = "Damage";
-            label2.TextAlign = ContentAlignment.BottomCenter;
+            label2.TextAlign = ContentAlignment.BottomRight;
             // 
             // dmg
             // 
             dmg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dmg.Font = new Font("Montserrat", 9F);
             dmg.Location = new Point(462, 69);
             dmg.Name = "dmg";
             dmg.Size = new Size(150, 26);
             dmg.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
+            label1.ForeColor = Color.Brown;
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Padding = new Padding(0, 0, 0, 7);
+            label1.Size = new Size(147, 98);
+            label1.TabIndex = 1;
+            label1.Text = "Healthy";
+            label1.TextAlign = ContentAlignment.BottomRight;
+            // 
+            // healthyQty
+            // 
+            healthyQty.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            healthyQty.Font = new Font("Montserrat", 9F);
+            healthyQty.Location = new Point(156, 69);
+            healthyQty.Name = "healthyQty";
+            healthyQty.Size = new Size(147, 26);
+            healthyQty.TabIndex = 2;
             // 
             // tableLayoutPanel4
             // 
@@ -214,10 +224,22 @@
             tableLayoutPanel4.Size = new Size(615, 36);
             tableLayoutPanel4.TabIndex = 2;
             // 
+            // cancelBtn
+            // 
+            cancelBtn.Dock = DockStyle.Fill;
+            cancelBtn.Font = new Font("Montserrat", 9F);
+            cancelBtn.Location = new Point(462, 3);
+            cancelBtn.Name = "cancelBtn";
+            cancelBtn.Size = new Size(150, 30);
+            cancelBtn.TabIndex = 4;
+            cancelBtn.Text = "Cancel";
+            cancelBtn.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold);
             label3.ForeColor = Color.Brown;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
@@ -249,17 +271,6 @@
             saveBtn.Text = "Save";
             saveBtn.UseVisualStyleBackColor = true;
             // 
-            // cancelBtn
-            // 
-            cancelBtn.Dock = DockStyle.Fill;
-            cancelBtn.Font = new Font("Montserrat", 9F);
-            cancelBtn.Location = new Point(462, 3);
-            cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(150, 30);
-            cancelBtn.TabIndex = 4;
-            cancelBtn.Text = "Cancel";
-            cancelBtn.UseVisualStyleBackColor = true;
-            // 
             // equipmentEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -275,8 +286,8 @@
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)healthyQty).EndInit();
             ((System.ComponentModel.ISupportInitialize)dmg).EndInit();
+            ((System.ComponentModel.ISupportInitialize)healthyQty).EndInit();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             ResumeLayout(false);

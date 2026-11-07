@@ -177,5 +177,10 @@ namespace Project_Sport_Room.Forms
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

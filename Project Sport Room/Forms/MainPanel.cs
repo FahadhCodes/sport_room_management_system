@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Project_Sport_Room.Models;
 using System;
 using System.Collections.Generic;
@@ -187,7 +187,7 @@ namespace Project_Sport_Room.Forms
             {
                 using (var db = new SportRoomContext())
                 {
-                    string searchTxt = txtSearchDamage.Text.Trim();
+                    string searchTxt = txtSearchDamage.Text.Trim().ToLower();
 
                     // Fetch active borrowed counts per equipment to calculate true total quantity
                     var borrowedCounts = await db.BorrowedCombinations
@@ -206,9 +206,9 @@ namespace Project_Sport_Room.Forms
                     if (!string.IsNullOrEmpty(searchTxt))
                     {
                         query = query.Where(e =>
-                            e.Id.Contains(searchTxt) ||
-                            e.Name.Contains(searchTxt) ||
-                            (e.Category != null && e.Category.CategoryName.Contains(searchTxt)));
+                            (e.Id != null && e.Id.ToLower().Contains(searchTxt)) ||
+                            (e.Name != null && e.Name.ToLower().Contains(searchTxt)) ||
+                            (e.Category != null && e.Category.CategoryName != null && e.Category.CategoryName.ToLower().Contains(searchTxt)));
                     }
 
                     var rawList = await query

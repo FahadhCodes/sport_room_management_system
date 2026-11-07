@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Project_Sport_Room.Models;
 using System;
 using System.Collections.Generic;
@@ -155,7 +155,15 @@ namespace Project_Sport_Room
                             query = query.Where(dt => dt.SupplierId == id);
                             break;
                         case "search":
-                            query = query.Where(dt => dt.SupplierId == id && dt.Equipment.Name.Contains(searchTextBox.Text));
+                            string searchEquip = searchTextBox.Text.Trim().ToLower();
+                            if (!string.IsNullOrEmpty(searchEquip))
+                            {
+                                query = query.Where(dt => dt.SupplierId == id && dt.Equipment != null && dt.Equipment.Name != null && dt.Equipment.Name.ToLower().Contains(searchEquip));
+                            }
+                            else
+                            {
+                                query = query.Where(dt => dt.SupplierId == id);
+                            }
                             break;
                         case "dateFilter":
                             query = query.Where(dt => dt.SupplierId == id
@@ -246,7 +254,15 @@ namespace Project_Sport_Room
             {
                 using (var db = new SportRoomContext())
                 {
-                    var suppliersList = await db.Suppliers.Where(cons => cons.Name.Contains(searchSupplier.Text))
+                    string search = searchSupplier.Text.Trim().ToLower();
+                    var query = db.Suppliers.AsQueryable();
+
+                    if (!string.IsNullOrEmpty(search))
+                    {
+                        query = query.Where(cons => cons.Name != null && cons.Name.ToLower().Contains(search));
+                    }
+
+                    var suppliersList = await query
                         .Select(sup => new { sup.Name, sup.Id }).ToListAsync();
 
                     suppliersTb.Columns.Clear();

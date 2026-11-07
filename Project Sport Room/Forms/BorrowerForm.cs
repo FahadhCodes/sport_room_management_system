@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Project_Sport_Room.Models;
 using System;
 using System.Collections.Generic;
@@ -319,10 +319,15 @@ namespace Project_Sport_Room
             {
                 using (var db = new SportRoomContext())
                 {
-                    string searchText = borrSearchFromList.Text.Trim();
+                    string searchText = borrSearchFromList.Text.Trim().ToLower();
 
-                    var borrowerList = await db.Borrowers
-                        .Where(b => b.Name.Contains(searchText))
+                    var query = db.Borrowers.AsQueryable();
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        query = query.Where(b => b.Name != null && b.Name.ToLower().Contains(searchText));
+                    }
+
+                    var borrowerList = await query
                         .Select(b => b.Name)
                         .Distinct()
                         .Select(name => new { borrnames = name })
@@ -338,20 +343,21 @@ namespace Project_Sport_Room
         }
 
         // 8. Main Grid Global Search Filter
-        // 8. Main Grid Global Search Filter
         private async void brrSearchfromData_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 using (var db = new SportRoomContext())
                 {
-                    string searchText = brrSearchfromData.Text.Trim();
+                    string searchText = brrSearchfromData.Text.Trim().ToLower();
                     var query = db.BorrowedCombinations.AsNoTracking().AsQueryable();
 
                     if (!string.IsNullOrEmpty(searchText))
                     {
-                        query = query.Where(v => v.Equipment.Name.Contains(searchText) ||
-                                                 v.BorrowReceipt.Borrower.Name.Contains(searchText));
+                        query = query.Where(v =>
+                            (v.Equipment != null && v.Equipment.Name != null && v.Equipment.Name.ToLower().Contains(searchText)) ||
+                            (v.BorrowReceipt != null && v.BorrowReceipt.Borrower != null && v.BorrowReceipt.Borrower.Name != null && v.BorrowReceipt.Borrower.Name.ToLower().Contains(searchText)) ||
+                            (v.BorrowReceipt != null && v.BorrowReceipt.ReceiptId != null && v.BorrowReceipt.ReceiptId.ToLower().Contains(searchText)));
                     }
 
                     var filteredData = await query.Select(val => new

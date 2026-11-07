@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Project_Sport_Room.Models;
 using System;
 using System.Collections.Generic;
@@ -123,13 +123,13 @@ namespace Project_Sport_Room
                 // --- APPLY FILTERS ---
 
                 // 1. Global Text Search (Searches Receipt ID, Borrower Name, and Equipment Name)
-                string searchTxt = searchAll.Text.Trim();
+                string searchTxt = searchAll.Text.Trim().ToLower();
                 if (!string.IsNullOrEmpty(searchTxt))
                 {
                     query = query.Where(bc =>
-                        bc.BorrowReceipt.ReceiptId.Contains(searchTxt) ||
-                        bc.BorrowReceipt.Borrower.Name.Contains(searchTxt) ||
-                        bc.Equipment.Name.Contains(searchTxt));
+                        (bc.BorrowReceipt != null && bc.BorrowReceipt.ReceiptId != null && bc.BorrowReceipt.ReceiptId.ToLower().Contains(searchTxt)) ||
+                        (bc.BorrowReceipt != null && bc.BorrowReceipt.Borrower != null && bc.BorrowReceipt.Borrower.Name != null && bc.BorrowReceipt.Borrower.Name.ToLower().Contains(searchTxt)) ||
+                        (bc.Equipment != null && bc.Equipment.Name != null && bc.Equipment.Name.ToLower().Contains(searchTxt)));
                 }
 
                 // 2. Department Filter

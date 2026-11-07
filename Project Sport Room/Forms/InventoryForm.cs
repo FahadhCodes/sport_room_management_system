@@ -128,15 +128,23 @@ namespace Project_Sport_Room
                 using (var db = new SportRoomContext())
                 {
                     var query = db.Equipments.AsQueryable();
+                    string term = (searchString ?? "").Trim().ToLower();
 
                     switch (constrintsTypex)
                     {
                         case "EquipmentCategory":
-                            if (searchString != "All Categories")
-                                query = query.Where(data => data.Category.CategoryName.Contains(searchString));
+                            if (!string.IsNullOrEmpty(searchString) && searchString != "All Categories")
+                            {
+                                query = query.Where(data => data.Category != null && data.Category.CategoryName != null && data.Category.CategoryName.ToLower().Contains(term));
+                            }
                             break;
                         case "idANDname":
-                            query = query.Where(data => data.Id.Contains(searchString) || data.Name.Contains(searchString));
+                            if (!string.IsNullOrEmpty(term))
+                            {
+                                query = query.Where(data =>
+                                    (data.Id != null && data.Id.ToLower().Contains(term)) ||
+                                    (data.Name != null && data.Name.ToLower().Contains(term)));
+                            }
                             break;
                     }
 
