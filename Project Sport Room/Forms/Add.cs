@@ -9,14 +9,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
     public partial class Add : Form
-    {
+    { 
+        //Design
+        private void ApplyKpiCardStyles()
+        {
+            Panel[] kpiCards =
+            {
+             panel3,
+             panel4,
+             panel5
+         };
+
+            foreach (Panel card in kpiCards)
+            {
+                // Preserve existing background color
+                card.BorderStyle = BorderStyle.None;
+
+                // Rounded corners and floating shadow
+                ThemeManager.ApplyRoundedPanel(card, 16);
+
+                // Give the shadow some breathing room
+                card.Margin = new Padding(7);
+            }
+        }
+
+        //Design
         public Add()
         {
             InitializeComponent();
+            //Design
+            ApplyKpiCardStyles();
+            ThemeManager.StyleActionButton(addSupplierBtn1, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(addNewCategorybtn, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(addNewEquipmentbtn, ActionButtonVariant.Primary);
         }
 
         private async void Add_Load(object sender, EventArgs e)

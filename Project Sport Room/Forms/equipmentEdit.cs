@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room.Forms
 {
@@ -19,6 +20,8 @@ namespace Project_Sport_Room.Forms
         {
             InitializeComponent();
             SetupForm();
+            ThemeManager.StyleActionButton(cancelBtn, ActionButtonVariant.Secondary);
+            ThemeManager.StyleActionButton(saveBtn, ActionButtonVariant.Success);
         }
 
         // Main constructor used by InventoryForm when an equipment row is clicked
@@ -179,6 +182,11 @@ namespace Project_Sport_Room.Forms
         }
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void equipmentEdit_Load_1(object sender, EventArgs e)
         {
 
         }

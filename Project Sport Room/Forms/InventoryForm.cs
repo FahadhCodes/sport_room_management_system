@@ -6,11 +6,40 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
     public partial class InventoryForm : Form
     {
+
+        //Design
+
+        private void ApplyKpiCardStyles()
+        {
+            Panel[] kpiCards =
+            {
+             panel1,
+             panel2,
+             panel3,
+             panel4
+         };
+
+            foreach (Panel card in kpiCards)
+            {
+                // Preserve existing background color
+                card.BorderStyle = BorderStyle.None;
+
+                // Rounded corners and floating shadow
+                ThemeManager.ApplyRoundedPanel(card, 16);
+
+                // Give the shadow some breathing room
+                card.Margin = new Padding(7);
+            }
+        }
+
+        //Design
+
         public InventoryForm()
         {
             InitializeComponent();
@@ -24,6 +53,8 @@ namespace Project_Sport_Room
             // Wire events
             this.VisibleChanged += InventoryForm_VisibleChanged;
             this.EquipmentDataTable.CellClick += EquipmentDataTable_CellClick;
+            //design
+            ApplyKpiCardStyles();
         }
 
         // Leave empty to protect the designer

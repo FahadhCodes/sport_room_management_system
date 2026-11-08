@@ -83,5 +83,59 @@ namespace Project_Sport_Room.TestRunner.Modules
 
             Assert.NotNull(ex);
         }
+
+        [TestCase("TC-MOD8-004", "DB Integrity", "SQLite Online Backup VACUUM INTO Snapshot Integrity", "Functional / DB Integrity")]
+        public async Task Test_SQLite_OnlineBackup_Snapshot()
+        {
+            using var testDb = new IsolatedTestDatabase();
+            using var db = testDb.CreateContext();
+
+            var cat = new Category { CategoryName = "Archery" };
+            var eq = new Equipment { Name = "Recurve Bow", Quantity = 7, BrokenQty = 1, Category = cat };
+            db.Categories.Add(cat);
+            db.Equipments.Add(eq);
+            await db.SaveChangesAsync();
+
+            // Create temporary backup file path
+            string tempBackupPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"srms_test_backup_{Guid.NewGuid():N}.db");
+            try
+            {
+                string escapedPath = tempBackupPath.Replace("'", "''");
+#pragma warning disable EF1002
+                await db.Database.ExecuteSqlRawAsync($"VACUUM INTO '{escapedPath}';");
+#pragma warning restore EF1002
+
+                // Verify file exists and is not empty
+                Assert.True(System.IO.File.Exists(tempBackupPath), "Backup file should be created");
+                var fileInfo = new System.IO.FileInfo(tempBackupPath);
+                Assert.True(fileInfo.Length > 0, "Backup file should contain data");
+
+                // Verify SQLite 3 magic header
+                byte[] header = new byte[16];
+                using (var stream = new System.IO.FileStream(tempBackupPath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    await stream.ReadAsync(header, 0, 16);
+                }
+                string headerStr = System.Text.Encoding.ASCII.GetString(header);
+                Assert.True(headerStr.StartsWith("SQLite format 3"), "Snapshot must be valid SQLite 3 format");
+
+                // Open backup and verify data was preserved
+                using var backupContext = new TestSportRoomContext($"Data Source={tempBackupPath}");
+                var backedUpEq = await backupContext.Equipments.FirstOrDefaultAsync(e => e.Name == "Recurve Bow");
+                Assert.NotNull(backedUpEq);
+                if (backedUpEq != null)
+                {
+                    Assert.Equal(7, backedUpEq.Quantity);
+                    Assert.Equal(1, backedUpEq.BrokenQty);
+                }
+            }
+            finally
+            {
+                if (System.IO.File.Exists(tempBackupPath))
+                {
+                    try { System.IO.File.Delete(tempBackupPath); } catch { }
+                }
+            }
+        }
     }
 }

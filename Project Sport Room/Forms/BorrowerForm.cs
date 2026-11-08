@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
@@ -19,6 +20,9 @@ namespace Project_Sport_Room
         public BorrowerForm()
         {
             InitializeComponent();
+            ThemeManager.StyleActionButton(button2, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(applyButton, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(button1, ActionButtonVariant.Primary);
         }
 
         private async void BorrowerForm_Load(object sender, EventArgs e)

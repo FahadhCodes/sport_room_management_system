@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
@@ -24,22 +25,11 @@ namespace Project_Sport_Room
             public int DamagedQuantity { get; set; }
         }
         BindingList<IntakeRowDTO> currentIntakeList = new BindingList<IntakeRowDTO>();
-        /*
-         User selects "Supplier A".
-
-        User selects "Category 1", fills the textboxes, and clicks "Enter". {After press enter the supplier dropedown LOCKED}
-
-        Your code adds a new IntakeRowDTO to the currentIntakeList. The DataGridView updates instantly to show the row.
-
-        User selects "Category 2", clicks "Enter". Another row is added to the grid.
-
-        The "Runtime addings" list box is no longer needed because the main gray DataGridView is already showing them exactly what is in their current cart.
-
-        When they click "Supply", you just loop through the currentIntakeList one time, create a single Intake record for "Supplier A", and attach all the rows as IntakeItems.
-         */
         public addNewIntake()
         {
             InitializeComponent();
+            ThemeManager.StyleActionButton(supplyBtn, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(enterBtn, ActionButtonVariant.Primary);
         }
 
         private async void addNewIntake_Load(object sender, EventArgs e)

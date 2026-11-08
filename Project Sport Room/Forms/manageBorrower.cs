@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
@@ -20,6 +21,7 @@ namespace Project_Sport_Room
         public manageBorrower()
         {
             InitializeComponent();
+            ThemeManager.StyleActionButton(updateBtn, ActionButtonVariant.Primary);
         }
 
         // Constructor 2: Used by your app to pass the ID

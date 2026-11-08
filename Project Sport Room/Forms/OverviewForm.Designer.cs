@@ -90,7 +90,7 @@ namespace Project_Sport_Room
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(978, 142);
+            tableLayoutPanel1.Size = new Size(978, 146);
             tableLayoutPanel1.TabIndex = 10;
             // 
             // panel3
@@ -101,7 +101,7 @@ namespace Project_Sport_Room
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(3, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(238, 136);
+            panel3.Size = new Size(238, 140);
             panel3.TabIndex = 3;
             // 
             // totalEquipments
@@ -133,7 +133,7 @@ namespace Project_Sport_Room
             panel6.Dock = DockStyle.Fill;
             panel6.Location = new Point(735, 3);
             panel6.Name = "panel6";
-            panel6.Size = new Size(240, 136);
+            panel6.Size = new Size(240, 140);
             panel6.TabIndex = 7;
             // 
             // avalableEq
@@ -165,7 +165,7 @@ namespace Project_Sport_Room
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(247, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(238, 136);
+            panel4.Size = new Size(238, 140);
             panel4.TabIndex = 5;
             // 
             // newlyArrived
@@ -197,7 +197,7 @@ namespace Project_Sport_Room
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(491, 3);
             panel5.Name = "panel5";
-            panel5.Size = new Size(238, 136);
+            panel5.Size = new Size(238, 140);
             panel5.TabIndex = 6;
             // 
             // borrowedEq
@@ -249,11 +249,11 @@ namespace Project_Sport_Room
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.Brown;
-            dataGridView1.Location = new Point(3, 196);
+            dataGridView1.Location = new Point(3, 202);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(978, 347);
+            dataGridView1.Size = new Size(978, 358);
             dataGridView1.TabIndex = 11;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -315,7 +315,7 @@ namespace Project_Sport_Room
             label11.Location = new Point(227, 0);
             label11.Name = "label11";
             label11.Padding = new Padding(0, 7, 0, 0);
-            label11.Size = new Size(97, 39);
+            label11.Size = new Size(97, 41);
             label11.TabIndex = 22;
             label11.Text = "Department";
             label11.TextAlign = ContentAlignment.TopRight;
@@ -338,7 +338,7 @@ namespace Project_Sport_Room
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 7, 0, 0);
-            label1.Size = new Size(71, 39);
+            label1.Size = new Size(71, 41);
             label1.TabIndex = 20;
             label1.Text = "Search";
             label1.TextAlign = ContentAlignment.TopRight;
@@ -360,7 +360,7 @@ namespace Project_Sport_Room
             brrStatus.Location = new Point(674, 0);
             brrStatus.Name = "brrStatus";
             brrStatus.Padding = new Padding(0, 7, 0, 0);
-            brrStatus.Size = new Size(68, 39);
+            brrStatus.Size = new Size(68, 41);
             brrStatus.TabIndex = 24;
             brrStatus.Text = "Status";
             brrStatus.TextAlign = ContentAlignment.TopRight;
@@ -383,11 +383,11 @@ namespace Project_Sport_Room
             tableLayoutPanel2.Controls.Add(departmentComboBox, 3, 0);
             tableLayoutPanel2.Controls.Add(adorableFilter, 6, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 151);
+            tableLayoutPanel2.Location = new Point(3, 155);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(978, 39);
+            tableLayoutPanel2.Size = new Size(978, 41);
             tableLayoutPanel2.TabIndex = 26;
             // 
             // statusComboBox
@@ -407,7 +407,7 @@ namespace Project_Sport_Room
             adorableFilter.Font = new Font("Montserrat", 9F);
             adorableFilter.Location = new Point(875, 3);
             adorableFilter.Name = "adorableFilter";
-            adorableFilter.Size = new Size(100, 28);
+            adorableFilter.Size = new Size(100, 33);
             adorableFilter.TabIndex = 26;
             adorableFilter.Text = "Apply";
             adorableFilter.UseVisualStyleBackColor = true;
@@ -427,7 +427,7 @@ namespace Project_Sport_Room
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 27.130434F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 8.424909F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 64.4688644F));
-            tableLayoutPanel3.Size = new Size(984, 546);
+            tableLayoutPanel3.Size = new Size(984, 563);
             tableLayoutPanel3.TabIndex = 27;
             // 
             // groupBox1
@@ -437,7 +437,7 @@ namespace Project_Sport_Room
             groupBox1.Font = new Font("Montserrat SemiBold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(990, 571);
+            groupBox1.Size = new Size(990, 588);
             groupBox1.TabIndex = 28;
             groupBox1.TabStop = false;
             groupBox1.Text = "Overview";
@@ -447,7 +447,7 @@ namespace Project_Sport_Room
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(990, 571);
+            ClientSize = new Size(990, 588);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "OverviewForm";

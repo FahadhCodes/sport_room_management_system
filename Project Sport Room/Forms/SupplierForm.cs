@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
@@ -21,6 +22,9 @@ namespace Project_Sport_Room
             InitializeComponent();
             // Tells the form to refresh every time the sidebar button clicks it into view
             this.VisibleChanged += SupplierForm_VisibleChanged;
+            ThemeManager.StyleActionButton(applyDateFilterBtn, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(button1, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(button2, ActionButtonVariant.Primary);
         }
 
         private async void SupplierForm_Load(object sender, EventArgs e)

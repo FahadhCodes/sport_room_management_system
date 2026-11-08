@@ -431,9 +431,9 @@
             // 
             button2.Dock = DockStyle.Right;
             button2.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(887, 79);
+            button2.Location = new Point(846, 79);
             button2.Name = "button2";
-            button2.Size = new Size(51, 31);
+            button2.Size = new Size(92, 31);
             button2.TabIndex = 14;
             button2.Text = "Edit";
             button2.UseVisualStyleBackColor = true;
@@ -498,14 +498,16 @@
             // 
             // button1
             // 
+            button1.BackColor = SystemColors.Control;
             button1.Dock = DockStyle.Fill;
             button1.Font = new Font("Montserrat", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.Black;
             button1.Location = new Point(3, 535);
             button1.Name = "button1";
             button1.Size = new Size(227, 28);
             button1.TabIndex = 18;
             button1.Text = "Add New Supplier";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // suppliersTb

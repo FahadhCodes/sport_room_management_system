@@ -47,6 +47,9 @@
             status = new DataGridViewTextBoxColumn();
             BorrowReceipt = new DataGridViewTextBoxColumn();
             tableLayoutPanel3 = new TableLayoutPanel();
+            tableLayoutPanel14 = new TableLayoutPanel();
+            ItemsToReturn = new Label();
+            label3 = new Label();
             brrDept = new Label();
             tableLayoutPanel9 = new TableLayoutPanel();
             label1 = new Label();
@@ -84,13 +87,11 @@
             label12 = new Label();
             button1 = new Button();
             groupBox1 = new GroupBox();
-            tableLayoutPanel14 = new TableLayoutPanel();
-            ItemsToReturn = new Label();
-            label3 = new Label();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)borrowerInfoTB).BeginInit();
             tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanel14.SuspendLayout();
             tableLayoutPanel9.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel7.SuspendLayout();
@@ -105,7 +106,6 @@
             ((System.ComponentModel.ISupportInitialize)borrList).BeginInit();
             tableLayoutPanel10.SuspendLayout();
             groupBox1.SuspendLayout();
-            tableLayoutPanel14.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -259,6 +259,48 @@
             tableLayoutPanel3.Size = new Size(911, 106);
             tableLayoutPanel3.TabIndex = 0;
             // 
+            // tableLayoutPanel14
+            // 
+            tableLayoutPanel14.ColumnCount = 2;
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45.27027F));
+            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 54.72973F));
+            tableLayoutPanel14.Controls.Add(ItemsToReturn, 1, 0);
+            tableLayoutPanel14.Controls.Add(label3, 0, 0);
+            tableLayoutPanel14.Dock = DockStyle.Fill;
+            tableLayoutPanel14.Location = new Point(307, 38);
+            tableLayoutPanel14.Name = "tableLayoutPanel14";
+            tableLayoutPanel14.RowCount = 1;
+            tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel14.Size = new Size(296, 27);
+            tableLayoutPanel14.TabIndex = 21;
+            // 
+            // ItemsToReturn
+            // 
+            ItemsToReturn.AutoSize = true;
+            ItemsToReturn.Dock = DockStyle.Fill;
+            ItemsToReturn.Font = new Font("Montserrat", 8F);
+            ItemsToReturn.ForeColor = Color.Black;
+            ItemsToReturn.Location = new Point(137, 0);
+            ItemsToReturn.Name = "ItemsToReturn";
+            ItemsToReturn.Size = new Size(156, 27);
+            ItemsToReturn.TabIndex = 3;
+            ItemsToReturn.Text = "0";
+            ItemsToReturn.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Brown;
+            label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(128, 27);
+            label3.TabIndex = 2;
+            label3.Text = "Borrowed Items";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // brrDept
             // 
             brrDept.AutoSize = true;
@@ -329,9 +371,9 @@
             // 
             button2.Dock = DockStyle.Right;
             button2.Font = new Font("Montserrat", 7.79999971F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(209, 0);
+            button2.Location = new Point(174, 0);
             button2.Name = "button2";
-            button2.Size = new Size(88, 27);
+            button2.Size = new Size(123, 27);
             button2.TabIndex = 12;
             button2.Text = "Edit";
             button2.UseVisualStyleBackColor = true;
@@ -782,48 +824,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Borrowers";
             // 
-            // tableLayoutPanel14
-            // 
-            tableLayoutPanel14.ColumnCount = 2;
-            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45.27027F));
-            tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 54.72973F));
-            tableLayoutPanel14.Controls.Add(ItemsToReturn, 1, 0);
-            tableLayoutPanel14.Controls.Add(label3, 0, 0);
-            tableLayoutPanel14.Dock = DockStyle.Fill;
-            tableLayoutPanel14.Location = new Point(307, 38);
-            tableLayoutPanel14.Name = "tableLayoutPanel14";
-            tableLayoutPanel14.RowCount = 1;
-            tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel14.Size = new Size(296, 27);
-            tableLayoutPanel14.TabIndex = 21;
-            // 
-            // ItemsToReturn
-            // 
-            ItemsToReturn.AutoSize = true;
-            ItemsToReturn.Dock = DockStyle.Fill;
-            ItemsToReturn.Font = new Font("Montserrat", 8F);
-            ItemsToReturn.ForeColor = Color.Black;
-            ItemsToReturn.Location = new Point(137, 0);
-            ItemsToReturn.Name = "ItemsToReturn";
-            ItemsToReturn.Size = new Size(156, 27);
-            ItemsToReturn.TabIndex = 3;
-            ItemsToReturn.Text = "0";
-            ItemsToReturn.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Brown;
-            label3.Dock = DockStyle.Fill;
-            label3.Font = new Font("Montserrat SemiBold", 8F, FontStyle.Bold);
-            label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(128, 27);
-            label3.TabIndex = 2;
-            label3.Text = "Borrowed Items";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // BorrowerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -839,6 +839,8 @@
             ((System.ComponentModel.ISupportInitialize)borrowerInfoTB).EndInit();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
+            tableLayoutPanel14.ResumeLayout(false);
+            tableLayoutPanel14.PerformLayout();
             tableLayoutPanel9.ResumeLayout(false);
             tableLayoutPanel9.PerformLayout();
             panel1.ResumeLayout(false);
@@ -859,8 +861,6 @@
             tableLayoutPanel10.ResumeLayout(false);
             tableLayoutPanel10.PerformLayout();
             groupBox1.ResumeLayout(false);
-            tableLayoutPanel14.ResumeLayout(false);
-            tableLayoutPanel14.PerformLayout();
             ResumeLayout(false);
         }
 

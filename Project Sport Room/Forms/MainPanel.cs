@@ -11,11 +11,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room.Forms
 {
     public partial class MainPanel : Form
     {
+        //Design
+
+        private void ApplyKpiCardStyles()
+        {
+            Panel[] kpiCards =
+            {
+                panel1,
+                panel2,
+                panel3,
+                panel4,
+                panel5,
+                panel6,
+                panel7,
+                panel8
+            };
+
+            foreach (Panel card in kpiCards)
+            {
+                // Preserve existing background color
+                card.BorderStyle = BorderStyle.None;
+
+                // Rounded corners and floating shadow
+                ThemeManager.ApplyRoundedPanel(card, 16);
+
+                // Give the shadow some breathing room
+                card.Margin = new Padding(7);
+            }
+        }
+
+        //Design
+
+
         private bool _isLoaded = false;
         private static string? _cachedLogoBase64;
 
@@ -62,6 +95,8 @@ namespace Project_Sport_Room.Forms
         {
             InitializeComponent();
             SetupForm();
+            ApplyKpiCardStyles();
+            ThemeManager.StyleActionButton(reportGen, ActionButtonVariant.Primary);
         }
 
         private void SetupForm()
@@ -952,5 +987,6 @@ namespace Project_Sport_Room.Forms
                 Cursor.Current = Cursors.Default;
             }
         }
+        
     }
 }

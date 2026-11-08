@@ -10,11 +10,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
     public partial class manageSupplier : Form
     {
+        //Design
+
+        private void ApplyKpiCardStyles()
+        {
+            Panel[] kpiCards =
+            {
+             panel3,
+             panel4,
+             panel5,
+         };
+
+            foreach (Panel card in kpiCards)
+            {
+                // Preserve existing background color
+                card.BorderStyle = BorderStyle.None;
+
+                // Rounded corners and floating shadow
+                ThemeManager.ApplyRoundedPanel(card, 16);
+
+                // Give the shadow some breathing room
+                card.Margin = new Padding(7);
+            }
+        }
+
+        //Design
         private class IntakeRowDTO
         {
             public string intakeId { get; set; }
@@ -32,6 +58,10 @@ namespace Project_Sport_Room
         public manageSupplier()
         {
             InitializeComponent();
+            ApplyKpiCardStyles();
+            ThemeManager.StyleActionButton(updateBtn, ActionButtonVariant.Primary);
+            ThemeManager.StyleActionButton(bottomDeleteBtn, ActionButtonVariant.Danger);
+            ThemeManager.StyleActionButton(filterBtn, ActionButtonVariant.Primary);
         }
         // Constructor 2: To receive the ID from the parent
         public manageSupplier(string selectedSupplierId) : this()

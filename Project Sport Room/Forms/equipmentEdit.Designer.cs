@@ -61,7 +61,7 @@
             groupBox1.Font = new Font("Montserrat", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(627, 256);
+            groupBox1.Size = new Size(627, 282);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Edit Equipment Quantity";
@@ -80,7 +80,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 37.22944F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 45.4545441F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.7489185F));
-            tableLayoutPanel1.Size = new Size(621, 231);
+            tableLayoutPanel1.Size = new Size(621, 257);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -97,7 +97,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(615, 79);
+            tableLayoutPanel2.Size = new Size(615, 89);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // equipmentCate
@@ -108,7 +108,7 @@
             equipmentCate.ForeColor = Color.Brown;
             equipmentCate.Location = new Point(413, 0);
             equipmentCate.Name = "equipmentCate";
-            equipmentCate.Size = new Size(199, 79);
+            equipmentCate.Size = new Size(199, 89);
             equipmentCate.TabIndex = 2;
             equipmentCate.Text = "Equipment Category";
             equipmentCate.TextAlign = ContentAlignment.MiddleCenter;
@@ -121,7 +121,7 @@
             equipmentName.ForeColor = Color.Brown;
             equipmentName.Location = new Point(208, 0);
             equipmentName.Name = "equipmentName";
-            equipmentName.Size = new Size(199, 79);
+            equipmentName.Size = new Size(199, 89);
             equipmentName.TabIndex = 1;
             equipmentName.Text = "Equipment Name";
             equipmentName.TextAlign = ContentAlignment.MiddleCenter;
@@ -134,7 +134,7 @@
             equipmentId.ForeColor = Color.Brown;
             equipmentId.Location = new Point(3, 0);
             equipmentId.Name = "equipmentId";
-            equipmentId.Size = new Size(199, 79);
+            equipmentId.Size = new Size(199, 89);
             equipmentId.TabIndex = 0;
             equipmentId.Text = "Equipment Id";
             equipmentId.TextAlign = ContentAlignment.MiddleCenter;
@@ -151,11 +151,11 @@
             tableLayoutPanel3.Controls.Add(label1, 0, 0);
             tableLayoutPanel3.Controls.Add(healthyQty, 1, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 88);
+            tableLayoutPanel3.Location = new Point(3, 98);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(615, 98);
+            tableLayoutPanel3.Size = new Size(615, 110);
             tableLayoutPanel3.TabIndex = 1;
             tableLayoutPanel3.Paint += tableLayoutPanel3_Paint;
             // 
@@ -168,7 +168,7 @@
             label2.Location = new Point(309, 0);
             label2.Name = "label2";
             label2.Padding = new Padding(0, 0, 0, 7);
-            label2.Size = new Size(147, 98);
+            label2.Size = new Size(147, 110);
             label2.TabIndex = 3;
             label2.Text = "Damage";
             label2.TextAlign = ContentAlignment.BottomRight;
@@ -177,7 +177,7 @@
             // 
             dmg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dmg.Font = new Font("Montserrat", 9F);
-            dmg.Location = new Point(462, 69);
+            dmg.Location = new Point(462, 81);
             dmg.Name = "dmg";
             dmg.Size = new Size(150, 26);
             dmg.TabIndex = 4;
@@ -191,7 +191,7 @@
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(0, 0, 0, 7);
-            label1.Size = new Size(147, 98);
+            label1.Size = new Size(147, 110);
             label1.TabIndex = 1;
             label1.Text = "Healthy";
             label1.TextAlign = ContentAlignment.BottomRight;
@@ -200,7 +200,7 @@
             // 
             healthyQty.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             healthyQty.Font = new Font("Montserrat", 9F);
-            healthyQty.Location = new Point(156, 69);
+            healthyQty.Location = new Point(156, 81);
             healthyQty.Name = "healthyQty";
             healthyQty.Size = new Size(147, 26);
             healthyQty.TabIndex = 2;
@@ -217,11 +217,11 @@
             tableLayoutPanel4.Controls.Add(totQty, 1, 0);
             tableLayoutPanel4.Controls.Add(saveBtn, 2, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(3, 192);
+            tableLayoutPanel4.Location = new Point(3, 214);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(615, 36);
+            tableLayoutPanel4.Size = new Size(615, 40);
             tableLayoutPanel4.TabIndex = 2;
             // 
             // cancelBtn
@@ -230,7 +230,7 @@
             cancelBtn.Font = new Font("Montserrat", 9F);
             cancelBtn.Location = new Point(462, 3);
             cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(150, 30);
+            cancelBtn.Size = new Size(150, 34);
             cancelBtn.TabIndex = 4;
             cancelBtn.Text = "Cancel";
             cancelBtn.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@
             label3.ForeColor = Color.Brown;
             label3.Location = new Point(3, 0);
             label3.Name = "label3";
-            label3.Size = new Size(147, 36);
+            label3.Size = new Size(147, 40);
             label3.TabIndex = 1;
             label3.Text = "Total Quantity";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -255,7 +255,7 @@
             totQty.Font = new Font("Montserrat", 9F);
             totQty.Location = new Point(156, 0);
             totQty.Name = "totQty";
-            totQty.Size = new Size(147, 36);
+            totQty.Size = new Size(147, 40);
             totQty.TabIndex = 2;
             totQty.Text = "0";
             totQty.TextAlign = ContentAlignment.MiddleLeft;
@@ -266,7 +266,7 @@
             saveBtn.Font = new Font("Montserrat", 9F);
             saveBtn.Location = new Point(309, 3);
             saveBtn.Name = "saveBtn";
-            saveBtn.Size = new Size(147, 30);
+            saveBtn.Size = new Size(147, 34);
             saveBtn.TabIndex = 3;
             saveBtn.Text = "Save";
             saveBtn.UseVisualStyleBackColor = true;
@@ -275,11 +275,12 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(627, 256);
+            ClientSize = new Size(627, 282);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "equipmentEdit";
             Text = "Equipment Edit";
+            Load += equipmentEdit_Load_1;
             groupBox1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);

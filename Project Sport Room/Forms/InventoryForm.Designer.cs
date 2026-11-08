@@ -39,16 +39,16 @@
             Qty_healthy = new DataGridViewTextBoxColumn();
             Qty_damaged = new DataGridViewTextBoxColumn();
             tableLayoutPanel1 = new TableLayoutPanel();
-            panel5 = new Panel();
+            panel4 = new Panel();
             damagedEquipments = new Label();
             label8 = new Label();
-            panel3 = new Panel();
+            panel1 = new Panel();
             totalEquipmentTypes = new Label();
             label3 = new Label();
-            panel6 = new Panel();
+            panel2 = new Panel();
             TotQuantity = new Label();
             label10 = new Label();
-            panel4 = new Panel();
+            panel3 = new Panel();
             healthyEquipments = new Label();
             label6 = new Label();
             textBox1 = new TextBox();
@@ -60,10 +60,10 @@
             groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)EquipmentDataTable).BeginInit();
             tableLayoutPanel1.SuspendLayout();
-            panel5.SuspendLayout();
-            panel3.SuspendLayout();
-            panel6.SuspendLayout();
             panel4.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -149,10 +149,10 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.Controls.Add(panel5, 3, 0);
-            tableLayoutPanel1.Controls.Add(panel3, 0, 0);
-            tableLayoutPanel1.Controls.Add(panel6, 1, 0);
-            tableLayoutPanel1.Controls.Add(panel4, 2, 0);
+            tableLayoutPanel1.Controls.Add(panel4, 3, 0);
+            tableLayoutPanel1.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel2, 1, 0);
+            tableLayoutPanel1.Controls.Add(panel3, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -162,16 +162,16 @@
             tableLayoutPanel1.Size = new Size(990, 144);
             tableLayoutPanel1.TabIndex = 13;
             // 
-            // panel5
+            // panel4
             // 
-            panel5.BackColor = SystemColors.ControlLightLight;
-            panel5.Controls.Add(damagedEquipments);
-            panel5.Controls.Add(label8);
-            panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(744, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(243, 138);
-            panel5.TabIndex = 9;
+            panel4.BackColor = SystemColors.ControlLightLight;
+            panel4.Controls.Add(damagedEquipments);
+            panel4.Controls.Add(label8);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(744, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(243, 138);
+            panel4.TabIndex = 9;
             // 
             // damagedEquipments
             // 
@@ -194,16 +194,16 @@
             label8.TabIndex = 4;
             label8.Text = "Damaged Equipments";
             // 
-            // panel3
+            // panel1
             // 
-            panel3.BackColor = SystemColors.ControlLightLight;
-            panel3.Controls.Add(totalEquipmentTypes);
-            panel3.Controls.Add(label3);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(3, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(241, 138);
-            panel3.TabIndex = 3;
+            panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(totalEquipmentTypes);
+            panel1.Controls.Add(label3);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(241, 138);
+            panel1.TabIndex = 3;
             // 
             // totalEquipmentTypes
             // 
@@ -226,16 +226,16 @@
             label3.TabIndex = 4;
             label3.Text = "Equipment Types";
             // 
-            // panel6
+            // panel2
             // 
-            panel6.BackColor = SystemColors.ControlLightLight;
-            panel6.Controls.Add(TotQuantity);
-            panel6.Controls.Add(label10);
-            panel6.Dock = DockStyle.Fill;
-            panel6.Location = new Point(250, 3);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(241, 138);
-            panel6.TabIndex = 7;
+            panel2.BackColor = SystemColors.ControlLightLight;
+            panel2.Controls.Add(TotQuantity);
+            panel2.Controls.Add(label10);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(250, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(241, 138);
+            panel2.TabIndex = 7;
             // 
             // TotQuantity
             // 
@@ -258,16 +258,16 @@
             label10.TabIndex = 4;
             label10.Text = "Total Equipments Quantity";
             // 
-            // panel4
+            // panel3
             // 
-            panel4.BackColor = SystemColors.ControlLightLight;
-            panel4.Controls.Add(healthyEquipments);
-            panel4.Controls.Add(label6);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(497, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(241, 138);
-            panel4.TabIndex = 8;
+            panel3.BackColor = SystemColors.ControlLightLight;
+            panel3.Controls.Add(healthyEquipments);
+            panel3.Controls.Add(label6);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(497, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(241, 138);
+            panel3.TabIndex = 8;
             // 
             // healthyEquipments
             // 
@@ -402,14 +402,14 @@
             Load += InventoryForm_Load;
             ((System.ComponentModel.ISupportInitialize)EquipmentDataTable).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
@@ -421,10 +421,10 @@
 
         private DataGridView EquipmentDataTable;
         private TableLayoutPanel tableLayoutPanel1;
-        private Panel panel3;
+        private Panel panel1;
         private Label totalEquipmentTypes;
         private Label label3;
-        private Panel panel6;
+        private Panel panel2;
         private Label TotQuantity;
         private Label label10;
         private TextBox textBox1;
@@ -439,10 +439,10 @@
         private DataGridViewTextBoxColumn Equipment_Category;
         private DataGridViewTextBoxColumn Qty_healthy;
         private DataGridViewTextBoxColumn Qty_damaged;
-        private Panel panel5;
+        private Panel panel4;
         private Label damagedEquipments;
         private Label label8;
-        private Panel panel4;
+        private Panel panel3;
         private Label healthyEquipments;
         private Label label6;
     }

@@ -1,22 +1,53 @@
 using Microsoft.EntityFrameworkCore;
 using Project_Sport_Room.Models;
+using Project_Sport_Room.Theme;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project_Sport_Room.Theme;
 
 namespace Project_Sport_Room
 {
     public partial class OverviewForm : Form
     {
+
+
+        //Design
+        private void ApplyKpiCardStyles()
+        {
+            Panel[] kpiCards =
+            {
+                panel3,
+                panel4,
+                panel5,
+                panel6
+            };
+
+            foreach (Panel card in kpiCards)
+            {
+                // Preserve existing background color
+                card.BorderStyle = BorderStyle.None;
+
+                // Rounded corners and floating shadow
+                ThemeManager.ApplyRoundedPanel(card, 16);
+
+                // Give the shadow some breathing room
+                card.Margin = new Padding(7);
+            }
+        }
+        //Design
+
         private bool isOverviewLoaded = false;
         public OverviewForm()
         {
             InitializeComponent();
             // CRITICAL FIX: Use VisibleChanged instead of Activated for Panel-hosted forms!
             this.VisibleChanged += OverviewForm_VisibleChanged;
+            ApplyKpiCardStyles();
+            ThemeManager.StyleActionButton(adorableFilter, ActionButtonVariant.Primary);
         }
 
         // 2. Leave this empty so the Visual Studio Designer doesn't crash!
